@@ -13,5 +13,15 @@ namespace EECS_448___Project_1 {
         public SetupPage() {
             InitializeComponent();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
