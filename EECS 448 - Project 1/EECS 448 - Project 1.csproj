@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="WinPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinPage.Designer.cs">
+      <DependentUpon>WinPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Landing Page.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,9 @@
     </Compile>
     <EmbeddedResource Include="SetupPage.resx">
       <DependentUpon>SetupPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinPage.resx">
+      <DependentUpon>WinPage.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
