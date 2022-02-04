@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Landing Page.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Landing Page.Designer.cs">
+      <DependentUpon>Landing Page.cs</DependentUpon>
+    </Compile>
     <Compile Include="SetupPage.cs">
       <SubType>Form</SubType>
     </Compile>
