@@ -12,8 +12,8 @@ namespace EECS_448___Project_1
         public string playerOneName;
         public string playerTwoName;
 
-        public List<int[,]> playerOneShips;
-        public List<int[,]> playerTwoShips;
+        public List<int[][]> playerOneShips;
+        public List<int[][]> playerTwoShips;
 
         public List<int[]> playerOneHits;
         public List<int[]> playerTwoHits;
@@ -33,22 +33,34 @@ namespace EECS_448___Project_1
             switch (turn)
             {
                 case 1:
-                    foreach (int[,] in playerTwoShips)
+                    foreach (int[][] i in playerTwoShips)
                     {
+                        foreach(int[] space in i)
 
+                            if (space.SequenceEqual(guess))
+                                return true;
                     }
                     break;
                 case 2:
-                    foreach (int[,] in playerTwoShips)
+                    foreach (int[][] i in playerOneShips)
                     {
-
+                        foreach (int[] space in i)
+                            if (space.SequenceEqual(guess))
+                                return true;
                     }
                     break;
-
+                    return false;
             }
 
             return true;
             
+        }
+
+        public bool isSunk(int[] guess)
+        {
+
+
+            return false;
         }
 
 
