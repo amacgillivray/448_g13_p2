@@ -59,6 +59,7 @@
     <Compile Include="Landing Page.Designer.cs">
       <DependentUpon>Landing Page.cs</DependentUpon>
     </Compile>
+    <Compile Include="Player.cs" />
     <Compile Include="SetupPage.cs">
       <SubType>Form</SubType>
     </Compile>

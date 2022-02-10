@@ -36,49 +36,66 @@ namespace EECS_448___Project_1 {
         public string getName() {
             return name;
         }
-        
+
         #endregion
 
         #region ship methods
 
         //add ship
         public void addShip(int[,] ship) {
-            if (ship.Rank == 2) { 
-                ships.Add(ship); 
+            if (ship.Rank == 2) {
+                ships.Add(ship);
             } else {
                 throw new Exception("Ship has invalid dimensions!");
             }
-         }
+        }
+
+        //get all ships
+        public List<int[,]> getShips() {
+            return ships;
+        }
 
         //get ship
         public int[,] getShip(int index) {
-            if(index < ships.Count) {
+            if (index < ships.Count) {
                 return ships[index];
             } else {
                 throw new Exception("Index out of bounds! There is no " + index + " index in ship list!");
             }
         }
-        
+
         #endregion
+
+
 
         #region hit & miss methods
 
         //addHit
-        public void addHit(int[] hit) { 
-            if(hit.Length == 2) {
+        public void addHit(int[] hit) {
+            if (hit.Length == 2) {
                 hits.Add(hit);
             } else {
                 throw new Exception("Passed in hit has invalid coordinates!");
             }
         }
 
+        //get hits
+        public List<int[]> getHits() {
+            return hits;
+        }
+
         //add miss
         public void addMiss(int[] miss) {
-            if(miss.Length == 2) {
+            if (miss.Length == 2) {
                 misses.Add(miss);
             } else {
                 throw new Exception("Passed in miss has invalid coordinates");
             }
+        }
+
+        //get misses
+        public List<int[]> getMisses() {
+            return misses;
         }
         #endregion
     }
