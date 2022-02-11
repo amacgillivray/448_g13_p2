@@ -10,21 +10,21 @@ namespace EECS_448___Project_1 {
         private string name;
         private List<int[]> hits; //list of 2 element int arrays, representing coordinates of hits this player guess
         private List<int[]> misses; //list of 2 element in arrays, representing coordinates of misses this player guessed
-        private List<int[,]> ships; //list of players ship coordinates. ships are listed as 2 dimensional array of 2 element arrays representing coordinates
+        private List<int[][]> ships; //list of players ship coordinates. ships are listed as 2 dimensional array of 2 element arrays representing coordinates [list index][ship square][square coordinates]
 
         //Constructors
         public Player() {
             name = "";
             hits = new List<int[]>();
             misses = new List<int[]>();
-            ships = new List<int[,]>();
+            ships = new List<int[][]>();
         }
 
         public Player(string _name) {
             name = _name;
             hits = new List<int[]>();
             misses = new List<int[]>();
-            ships = new List<int[,]>();
+            ships = new List<int[][]>();
         }
 
         #region name methods
@@ -39,29 +39,28 @@ namespace EECS_448___Project_1 {
 
         #endregion
 
+
+
         #region ship methods
 
         //add ship
-        public void addShip(int[,] ship) {
-            if (ship.Rank == 2) {
+        public void addShip(int[][] ship) {
+            try {
                 ships.Add(ship);
-            } else {
+            } 
+            catch {
                 throw new Exception("Ship has invalid dimensions!");
             }
         }
 
-        //get all ships
-        public List<int[,]> getShips() {
-            return ships;
+        //remove ships
+        public void removeShip(int index) {
+
         }
 
-        //get ship
-        public int[,] getShip(int index) {
-            if (index < ships.Count) {
-                return ships[index];
-            } else {
-                throw new Exception("Index out of bounds! There is no " + index + " index in ship list!");
-            }
+        //get all ships
+        public List<int[][]> getShips() {
+            return ships;
         }
 
         #endregion
