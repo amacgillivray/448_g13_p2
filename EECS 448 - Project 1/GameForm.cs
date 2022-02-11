@@ -341,5 +341,10 @@ namespace EECS_448___Project_1 {
 
             }
         }
+
+        private void label40_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
