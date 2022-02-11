@@ -13,5 +13,10 @@ namespace EECS_448___Project_1 {
         public Form2() {
             InitializeComponent();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
