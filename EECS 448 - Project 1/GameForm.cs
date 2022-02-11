@@ -40,7 +40,6 @@ namespace EECS_448___Project_1 {
         #region drawing methods
 
         private void drawGridLines(object sender, PaintEventArgs e, PictureBox pictureBox) {
-            Console.WriteLine("Drawing grid lines");
             //pen
             Pen pen = new Pen(Color.White, 1);
             Point start = new Point();
@@ -78,7 +77,6 @@ namespace EECS_448___Project_1 {
 
 
         private void drawHits(object sender, PaintEventArgs e, List<int[]>hits, PictureBox pictureBox) { //takes list of coordinates of hits and the picture box to draw them on
-            Console.WriteLine("Draw hits");
             int penThickness = 3;
             int offset = 3;
             Pen pen = new Pen(Color.Red, penThickness);
@@ -105,7 +103,6 @@ namespace EECS_448___Project_1 {
         }
 
         private void drawMisses(object sender, PaintEventArgs e, List<int[]>misses, PictureBox pictureBox) {
-            Console.WriteLine("Drawing misses");
             SolidBrush brush = new SolidBrush(Color.WhiteSmoke);
             int offset = 3;
             
@@ -122,19 +119,18 @@ namespace EECS_448___Project_1 {
             }
         }
 
-        private void drawShips(object sender, PaintEventArgs e, List<int[,]>ships, PictureBox pictureBox) {
-            Console.WriteLine("Drawing ships");
+        private void drawShips(object sender, PaintEventArgs e, List<int[][]>ships, PictureBox pictureBox) {
             SolidBrush brush = new SolidBrush(Color.Gray);
             int offset = 3;
 
-            foreach (int[,] ship in ships) {
+            foreach (int[][] ship in ships) {
                 //get starting coordinates
-                int startingCol = ship[0, 0];
-                int startingRow = ship[0, 1];
+                int startingCol = ship[0][0];
+                int startingRow = ship[0][1];
 
                 //get ending coordinates
-                int endingCol = ship[ship.Length / 2 - 1, 0];
-                int endingRow = ship[ship.Length / 2 - 1, 1];
+                int endingCol = ship[ship.Length - 1][0];
+                int endingRow = ship[ship.Length - 1][1];
 
                 //ship dimensions in squares
                 int squareWidth = Math.Abs(endingCol - startingCol + 1);
@@ -142,34 +138,23 @@ namespace EECS_448___Project_1 {
                 if (squareWidth < 1) squareWidth = 1;
                 if (squareHeight < 1) squareHeight = 1;
 
-                Console.WriteLine(squareWidth + " " + squareHeight);
-
                 //ship dimensions in pixels
                 int shipWidth = squareWidth * pictureBox.Width / 10 - 2 * offset;
                 int shipHeight = squareHeight * pictureBox.Height / 10 - 2 * offset;
 
                 //rectangle
-                Rectangle rect = new Rectangle(startingCol * pictureBox.Width / 10 + offset, (startingRow + 1) * pictureBox.Height / 10 + offset, shipWidth, shipHeight);
-
-                Console.WriteLine(rect.X + " " + rect.Y + " " + shipHeight + " " + shipWidth);
+                Rectangle rect = new Rectangle(startingCol * pictureBox.Width / 10 + offset, startingRow * pictureBox.Height / 10 + offset, shipWidth, shipHeight);
 
                 //draw rectangle
                 e.Graphics.FillRectangle(brush, rect);
-
-                Console.Write("Ship drawn");
             }
         }
 
 
         private void drawTargetSquare(object sender, PaintEventArgs e, int[] target) {
-            Console.WriteLine("Drawing target square");
             if (targeted) {
                 //Pen
                 Pen pen = new Pen(Color.Orange, 3);
-
-                //starting 
-                Point start = new Point();
-                Point end = new Point();
 
                 //draw top line
                 e.Graphics.DrawLine(pen, target[0] * oppBoardPictureBox.Width / 10, target[1] * oppBoardPictureBox.Height / 10,
@@ -194,7 +179,6 @@ namespace EECS_448___Project_1 {
         private void myBoardPictureBox_Paint(object sender, PaintEventArgs e) {
             drawGridLines(sender, e,this.myBoardPictureBox);
 
-            Player player; //current player
 
             /*List<int[]> hits = new List<int[]>();
             for(int i = 0; i < 10; i ++) {
@@ -210,21 +194,15 @@ namespace EECS_448___Project_1 {
             int[,] ship = { { 1, 2 }, { 1, 3 }, { 1, 4 }, { 1, 5 } };
             ships.Add(ship);*/
 
-            //determine whos turn it is
-            if(game.getPlayerTurn() == 1) {
-                player = game.getPlayerOne();
-            } else {
-                player = game.getPlayerOne();
-            }
 
             //draw ships
-            drawShips(sender, e, player.getShips(), myBoardPictureBox);
+            drawShips(sender, e, game.getCurrentPlayer().getShips(), myBoardPictureBox);
 
             //draw hits
-            drawHits(sender, e, player.getHits(), myBoardPictureBox);
+            drawHits(sender, e, game.getCurrentOpponent().getHits(), myBoardPictureBox);
 
             //draw missses
-            drawMisses(sender, e, player.getMisses(), myBoardPictureBox);
+            drawMisses(sender, e, game.getCurrentOpponent().getMisses(), myBoardPictureBox);
         }
 
 
@@ -245,7 +223,18 @@ namespace EECS_448___Project_1 {
         private void oppBoardPictureBox_MouseDown(object sender, MouseEventArgs e) {
             //check if mouse is already down
             if (!mouseDown) {
-                Console.WriteLine("Mouse Down");
+                Console.WriteLine("===EVENT: Mouse Down====");
+                mouseDown = true;
+            }
+            else {
+                mouseDown = true;
+            }
+        }
+
+        //mouse up
+        private void oppBoardPictureBox_MouseUp(object sender, MouseEventArgs e) {
+            if(mouseDown) {
+                Console.WriteLine("===EVENT: Mouse Up====");
                 mouseDown = true;
                 targeted = true;
 
@@ -256,11 +245,10 @@ namespace EECS_448___Project_1 {
                 targetSquare[1] = row;
 
                 //check if target is legal
-                for(int i = 0; i < game.getCurrentOpponent().getHits().Count; i++) {  //check 
+                for (int i = 0; i < game.getCurrentOpponent().getHits().Count; i++) {  //check 
                     if (targetSquare.SequenceEqual(game.getCurrentOpponent().getHits()[i])) targeted = false;
                 }
-                for(int i = 0; i < game.getCurrentOpponent().getMisses().Count; i++) {
-                    Console.WriteLine("miss " + game.getCurrentOpponent().getMisses()[i][0] + " " + game.getCurrentOpponent().getMisses()[i][1] + " target: " + targetSquare[0] + " " + targetSquare[1]);
+                for (int i = 0; i < game.getCurrentOpponent().getMisses().Count; i++) {
                     if (targetSquare.SequenceEqual(game.getCurrentOpponent().getMisses()[i])) targeted = false;
                 }
 
@@ -269,22 +257,50 @@ namespace EECS_448___Project_1 {
                 targetingLabel.Text = "Targeting: " + colAlpha + (row + 1);
 
                 //paint
-                targetingLabel.Text = targeted.ToString();
                 this.Refresh();
+                mouseDown = false;
             }
         }
 
-        //mouse up
-        private void oppBoardPictureBox_MouseUp(object sender, MouseEventArgs e) {
-            mouseDown = false;
-        }
-
+        
 
         //paint
         private void oppBoardPictureBox_Paint(object sender, PaintEventArgs e) {
-            Console.WriteLine("Called");
             drawGridLines(sender, e, oppBoardPictureBox);
 
+
+            //draw ships
+            ///drawShips(sender, e, game.getCurrentOpponent().getShips(), oppBoardPictureBox);
+
+            //draw hits
+            drawHits(sender, e, game.getCurrentPlayer().getHits(), oppBoardPictureBox);
+
+            //draw missses
+            drawMisses(sender, e, game.getCurrentPlayer().getMisses(), oppBoardPictureBox);
+
+            //draw target outline
+            if (targeted) drawTargetSquare(sender, e, targetSquare);
+
+            hitListLabel.Text = "";
+            for(int i = 0; i < game.getCurrentPlayer().getHits().Count; i++) {
+                hitListLabel.Text += "hit: " + game.getCurrentPlayer().getHits()[i][0] + " " + game.getCurrentPlayer().getHits()[i][1];
+            }
+        }
+
+
+
+        #endregion
+
+        private void fireButton_Click(object sender, EventArgs e) {
+            Console.WriteLine("Firing");
+            if (targeted) game.fire(targetSquare);
+            targeted = false;
+            oppBoardPictureBox.Refresh();
+            Console.WriteLine("targeted " + targeted);
+
+        }
+
+        private void resetButton_Click(object sender, EventArgs e) {
             List<int[]> hits = new List<int[]>();
             for (int i = 0; i < 10; i++) {
                 int[] hit = { 3, i };
@@ -295,32 +311,11 @@ namespace EECS_448___Project_1 {
             int[] miss = { 7, 5 };
             game.getPlayerTwo().addMiss(miss);
 
-            List<int[,]> ships = new List<int[,]>();
-            int[,] ship = { { 1, 2 }, { 1, 3 }, { 1, 4 }, { 1, 5 } };
+            List<int[][]> ships = new List<int[][]>();
+            int[][] ship = { new int[] { 1, 2, 0 }, new int[] { 1, 3, 0 }, new int[] { 1, 4, 0 }, new int[] { 1, 5, 0 }, new int[] { 1, 6, 0 } };
             game.getPlayerTwo().addShip(ship);
 
-
-            //draw ships
-            drawShips(sender, e, game.getPlayerTwo().getShips(), oppBoardPictureBox);
-
-            //draw hits
-            drawHits(sender, e, game.getPlayerTwo().getHits(), oppBoardPictureBox);
-
-            //draw missses
-            drawMisses(sender, e, game.getPlayerTwo().getMisses(), oppBoardPictureBox);
-
-            //draw target outline
-            Console.WriteLine("Targeted: " + targeted);
-            if (targeted) drawTargetSquare(sender, e, targetSquare);
-        }
-
-
-
-        #endregion
-
-        private void GameForm_Load(object sender, EventArgs e)
-        {
-
+            this.Refresh();
         }
     }
 }

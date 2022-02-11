@@ -73,6 +73,8 @@ namespace EECS_448___Project_1 {
             this.label38 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
             this.oppBoardPictureBox = new System.Windows.Forms.PictureBox();
+            this.hitListLabel = new System.Windows.Forms.Label();
+            this.resetButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.myBoardPictureBox)).BeginInit();
             this.xAxisPanel.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -229,6 +231,7 @@ namespace EECS_448___Project_1 {
             this.fireButton.TabIndex = 2;
             this.fireButton.Text = "Fire!";
             this.fireButton.UseVisualStyleBackColor = true;
+            this.fireButton.Click += new System.EventHandler(this.fireButton_Click);
             // 
             // panel1
             // 
@@ -664,12 +667,33 @@ namespace EECS_448___Project_1 {
             this.oppBoardPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.oppBoardPictureBox_MouseMove);
             this.oppBoardPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.oppBoardPictureBox_MouseUp);
             // 
+            // hitListLabel
+            // 
+            this.hitListLabel.AutoSize = true;
+            this.hitListLabel.Location = new System.Drawing.Point(453, 355);
+            this.hitListLabel.Name = "hitListLabel";
+            this.hitListLabel.Size = new System.Drawing.Size(41, 13);
+            this.hitListLabel.TabIndex = 8;
+            this.hitListLabel.Text = "label40";
+            // 
+            // resetButton
+            // 
+            this.resetButton.Location = new System.Drawing.Point(701, 385);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(75, 23);
+            this.resetButton.TabIndex = 9;
+            this.resetButton.Text = "Reset";
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HotTrack;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.resetButton);
+            this.Controls.Add(this.hitListLabel);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.oppBoardPictureBox);
@@ -693,6 +717,7 @@ namespace EECS_448___Project_1 {
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.oppBoardPictureBox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -747,5 +772,7 @@ namespace EECS_448___Project_1 {
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.PictureBox oppBoardPictureBox;
+        private System.Windows.Forms.Label hitListLabel;
+        private System.Windows.Forms.Button resetButton;
     }
 }
