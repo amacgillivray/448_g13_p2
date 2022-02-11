@@ -315,8 +315,12 @@ namespace EECS_448___Project_1 {
         }
 
 
+
         #endregion
 
-       
+        private void GameForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

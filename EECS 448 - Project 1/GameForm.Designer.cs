@@ -668,6 +668,7 @@ namespace EECS_448___Project_1 {
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.HotTrack;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel4);
@@ -677,7 +678,8 @@ namespace EECS_448___Project_1 {
             this.Controls.Add(this.xAxisPanel);
             this.Controls.Add(this.myBoardPictureBox);
             this.Name = "GameForm";
-            this.Text = "GameForm";
+            this.Text = "Battleship";
+            this.Load += new System.EventHandler(this.GameForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.myBoardPictureBox)).EndInit();
             this.xAxisPanel.ResumeLayout(false);
             this.xAxisPanel.PerformLayout();
