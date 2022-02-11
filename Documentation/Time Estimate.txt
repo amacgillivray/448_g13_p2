@@ -1,0 +1,4 @@
+We have estimated based on previous
+ work we have done along with a simple 
+design outline that this project should 
+take us around 25 hours.
