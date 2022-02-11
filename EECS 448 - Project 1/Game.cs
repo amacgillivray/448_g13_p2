@@ -28,9 +28,9 @@ namespace EECS_448___Project_1
 
         }
 
-        public bool isHit(int[] guess, int turn)
+        public bool isHit(int[] guess)
         {
-            switch (turn)
+            switch (playerTurn)
             {
                 case 1:
                     foreach (int[][] i in playerTwoShips)
@@ -49,20 +49,37 @@ namespace EECS_448___Project_1
                                 return true;
                     }
                     break;
-                    return false;
             }
 
-            return true;
+            return false;
             
         }
 
-        public bool isSunk(int[] guess)
+        private bool isSunk(int[] guess)
         {
-
-
             return false;
         }
 
+        private void markHit(int[] hit)
+        {
+            if (playerTurn == 1) playerOneHits.Add(hit);
+            else playerTwoHits.Add(hit);
+        }
+
+        public void doTurn(int[] guess)
+        {
+            if (isHit(guess))
+            {
+
+            }
+
+
+
+
+
+            if (playerTurn == 1) playerTurn = 2;
+            else playerTurn = 1;
+        }
 
 
 
