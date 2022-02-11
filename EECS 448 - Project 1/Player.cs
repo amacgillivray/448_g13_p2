@@ -10,7 +10,7 @@ namespace EECS_448___Project_1 {
         private string name;
         private List<int[]> hits; //list of 2 element int arrays, representing coordinates of hits this player guess
         private List<int[]> misses; //list of 2 element in arrays, representing coordinates of misses this player guessed
-        private List<int[][]> ships; //list of players ship coordinates. ships are listed as 2 dimensional array of 2 element arrays representing coordinates [list index][ship square][square coordinates]
+        private List<int[][]> ships; //list of players ship coordinates. ships are listed as 2 dimensional array of 3 element arrays representing coordinates [list index][ship square][square coordinates]
 
         //Constructors
         public Player() {

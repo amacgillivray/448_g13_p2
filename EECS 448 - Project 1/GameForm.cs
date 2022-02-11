@@ -317,5 +317,29 @@ namespace EECS_448___Project_1 {
 
             this.Refresh();
         }
+
+        private void GameForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Right:
+                    break;
+
+                case Keys.Left:
+                    break;
+
+                case Keys.Up:
+                    break;
+
+                case Keys.Down:
+                    break;
+
+                case Keys.Enter:
+                    break;
+
+
+
+            }
+        }
     }
 }
