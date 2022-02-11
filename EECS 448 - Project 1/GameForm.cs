@@ -28,7 +28,7 @@ namespace EECS_448___Project_1 {
 
             game.setPlayerOne(one);
             game.setPlayerTwo(two);
-            game.setCurrentPlayer(1);
+            game.setPlayerTurn(1);
                        
         }
 
@@ -291,13 +291,18 @@ namespace EECS_448___Project_1 {
 
         #endregion
 
-        private void fireButton_Click(object sender, EventArgs e) {
+        private void fireButton_Click(object sender, EventArgs e)
+        {
+            fire();    
+        }
+
+        private void fire()
+        {
             Console.WriteLine("Firing");
             if (targeted) game.fire(targetSquare);
             targeted = false;
             oppBoardPictureBox.Refresh();
             Console.WriteLine("targeted " + targeted);
-
         }
 
         private void resetButton_Click(object sender, EventArgs e) {
@@ -334,8 +339,7 @@ namespace EECS_448___Project_1 {
                 case Keys.Down:
                     break;
 
-                case Keys.Enter:
-                    break;
+                case Keys.Enter: fire(); break;
 
 
 
