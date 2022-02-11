@@ -7,33 +7,32 @@ using System.Threading.Tasks;
 namespace EECS_448___Project_1
 {
     public class Game {
-        #region varibales 
+        #region variables 
         private int playerTurn;
-        private Player currentPlayer;
-        private Player currentOpponent;
         private Player playerOne;
         private Player playerTwo;
         #endregion
 
         #region getters & setters
         public int getPlayerTurn() { return playerTurn; }
-        public Player getCurrentPlayer() { return currentPlayer; }
-        public Player getCurrentOpponent() { return currentOpponent; }
+
+        public void setPlayerTurn(int player)
+        {
+            if (player > 2 || player < 1) throw new Exception("Invalid player number!");
+            else playerTurn = player;
+        }
+        public ref Player getCurrentPlayer() {
+            if (playerTurn == 1) return ref playerOne;
+            else return ref playerTwo;
+        }
+        public ref Player getCurrentOpponent() {
+            if (playerTurn == 2) return ref playerOne;
+            else return ref playerTwo;
+        }
         public Player getPlayerOne() { return playerOne; }
         public Player getPlayerTwo() { return playerTwo; }
-        public void setPlayerTurn(int turn) { playerTurn = turn; }
         
-        //set 
-        public void setCurrentPlayer(int player) {
-            if (player == 1) currentPlayer = playerOne;
-            else if (player == 2) currentPlayer = playerTwo;
-            else throw new Exception("Invalid player number!");
-            setCurrentOpponent();
-        }
-        public void setCurrentOpponent() {
-            if (currentPlayer == playerOne) currentOpponent = playerTwo;
-            else currentOpponent = playerOne;
-        }
+        //Sets the current player value to the passed value
 
         public void setPlayerOne(Player one) { playerOne = one; }
         public void setPlayerTwo(Player two) { playerTwo = two; }
@@ -103,10 +102,6 @@ namespace EECS_448___Project_1
         }*/
         #endregion
 
-        public bool isSunk(int[] guess) { 
-            return false;
-        }
-
 
         #region methods
 
@@ -122,7 +117,7 @@ namespace EECS_448___Project_1
 
             //determine starting player
             Random rand = new Random();
-            setCurrentPlayer(rand.Next(1, 2));       
+            setPlayerTurn(rand.Next(1, 2));       
         }
 
         //game turn
@@ -144,7 +139,7 @@ namespace EECS_448___Project_1
                 Console.WriteLine("Hit");
 
                 //add hit to list
-                currentPlayer.addHit(shot);
+                getCurrentPlayer().addHit(shot);
 
                 //check if sunk
                 if (isSunk(shot, hitShip)) {
@@ -152,12 +147,12 @@ namespace EECS_448___Project_1
                     Console.WriteLine("You sunk a ship");
 
                     //remove ship from opponents list of ships. 
-                    currentOpponent.removeShip(hitShip.Length - 1);
+                    getCurrentOpponent().removeShip(hitShip.Length - 1);
                 }
 
             } else {
-                currentPlayer.addMiss(shot);
-                Console.WriteLine("miss");
+                getCurrentPlayer().addMiss(shot);
+                Console.WriteLine("Miss");
             }
 
         }
@@ -165,10 +160,10 @@ namespace EECS_448___Project_1
         //check hit
         private int[][] shipHit(int[] shot) {
             //loop through each of the current players unsunk ships
-            for (int i = 0; i < currentOpponent.getShips().Count; i++) {
+            for (int i = 0; i < getCurrentOpponent().getShips().Count; i++) {
 
                 //create copy of indexed ship 
-                int[][] ship = currentOpponent.getShips()[i];
+                int[][] ship = getCurrentOpponent().getShips()[i];
 
                 //loop through each square in ship and see if the matches any of those spots
                 for (int j = 0; j < ship.Length; j++) {
@@ -183,6 +178,13 @@ namespace EECS_448___Project_1
             }
             //miss
             return null;
+        }
+
+        //Returns the index of the ship that is hit; -1 if no ship is hit
+        private int shipHit2(int[] shot) { 
+            
+
+
         }
         
         //check sunk
