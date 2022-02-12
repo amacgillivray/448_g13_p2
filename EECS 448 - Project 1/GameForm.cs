@@ -226,16 +226,12 @@ namespace EECS_448___Project_1 {
                 Console.WriteLine("===EVENT: Mouse Down====");
                 mouseDown = true;
             }
-            else {
-                mouseDown = true;
-            }
         }
 
         //mouse up
         private void oppBoardPictureBox_MouseUp(object sender, MouseEventArgs e) {
-            if(mouseDown) {
+            if (mouseDown) {
                 Console.WriteLine("===EVENT: Mouse Up====");
-                mouseDown = true;
                 targeted = true;
 
                 //set targeted square
@@ -244,12 +240,19 @@ namespace EECS_448___Project_1 {
                 targetSquare[0] = col;
                 targetSquare[1] = row;
 
-                //check if target is legal
-                for (int i = 0; i < game.getCurrentOpponent().getHits().Count; i++) {  //check 
-                    if (targetSquare.SequenceEqual(game.getCurrentOpponent().getHits()[i])) targeted = false;
+                for(int i = 0; i < game.getCurrentPlayer().getHits().Count; i++ ) {
+                    Console.WriteLine("\t\t" + game.getCurrentPlayer().getHits()[i][0] + " " + game.getCurrentPlayer().getHits()[i][1]);
                 }
-                for (int i = 0; i < game.getCurrentOpponent().getMisses().Count; i++) {
-                    if (targetSquare.SequenceEqual(game.getCurrentOpponent().getMisses()[i])) targeted = false;
+
+                Console.WriteLine("\tTargeted: " + col + " " + row);
+
+                //check if target is legal
+                for (int i = 0; i < game.getCurrentPlayer().getHits().Count; i++) {  //check 
+                    Console.WriteLine("\t\t" + game.getCurrentPlayer().getHits()[i][0] + " " + game.getCurrentPlayer().getHits()[i][1]);
+                    if (targetSquare.SequenceEqual(game.getCurrentPlayer().getHits()[i])) targeted = false;
+                }
+                for (int i = 0; i < game.getCurrentPlayer().getMisses().Count; i++) {
+                    if (targetSquare.SequenceEqual(game.getCurrentPlayer().getMisses()[i])) targeted = false;
                 }
 
                 //update label
@@ -270,7 +273,7 @@ namespace EECS_448___Project_1 {
 
 
             //draw ships
-            ///drawShips(sender, e, game.getCurrentOpponent().getShips(), oppBoardPictureBox);
+            drawShips(sender, e, game.getCurrentOpponent().getShips(), oppBoardPictureBox);
 
             //draw hits
             drawHits(sender, e, game.getCurrentPlayer().getHits(), oppBoardPictureBox);
@@ -281,9 +284,9 @@ namespace EECS_448___Project_1 {
             //draw target outline
             if (targeted) drawTargetSquare(sender, e, targetSquare);
 
-            hitListLabel.Text = "";
+            hitListLabel.Text = game.getCurrentPlayer().getHits().Count.ToString();
             for(int i = 0; i < game.getCurrentPlayer().getHits().Count; i++) {
-                hitListLabel.Text += "hit: " + game.getCurrentPlayer().getHits()[i][0] + " " + game.getCurrentPlayer().getHits()[i][1];
+               // hitListLabel.Text += "hit: " + game.getCurrentPlayer().getHits()[i][0] + " " + game.getCurrentPlayer().getHits()[i][1];
             }
         }
 
