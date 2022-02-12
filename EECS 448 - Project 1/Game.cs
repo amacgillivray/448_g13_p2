@@ -97,7 +97,13 @@ namespace EECS_448___Project_1
                     if (gameOver()) {
                         
                     
-                    } 
+                    }
+
+                    //if game is not over switches which player is playing
+                    if (playerTurn == 1)
+                        setPlayerTurn(2);
+                    else
+                        setPlayerTurn(1);
                 }
             }
 

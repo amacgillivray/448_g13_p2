@@ -21,6 +21,7 @@ namespace EECS_448___Project_1 {
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Game game = new Game();
             GameForm gameForm = new GameForm();
             gameForm.Show();
             this.Close();
@@ -28,6 +29,7 @@ namespace EECS_448___Project_1 {
 
         private void button2_Click(object sender, EventArgs e)
         {
+            Game game = new Game();
             GameForm gameForm = new GameForm();
             gameForm.Show();
             this.Close();
@@ -35,6 +37,7 @@ namespace EECS_448___Project_1 {
 
         private void button3_Click(object sender, EventArgs e)
         {
+            Game game = new Game();
             GameForm gameForm = new GameForm();
             gameForm.Show();
             this.Close();
@@ -42,6 +45,7 @@ namespace EECS_448___Project_1 {
 
         private void button4_Click(object sender, EventArgs e)
         {
+            Game game = new Game();
             GameForm gameForm = new GameForm();
             gameForm.Show();
             this.Close();
@@ -49,9 +53,11 @@ namespace EECS_448___Project_1 {
 
         private void button5_Click(object sender, EventArgs e)
         {
+            Game game = new Game();
             GameForm gameForm = new GameForm();
-            gameForm.Close();
-            this.Hide();
+            gameForm.Show();
+
+            this.Close();
         }
     }
 }
