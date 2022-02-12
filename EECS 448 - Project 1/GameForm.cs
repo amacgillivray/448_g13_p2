@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Threading;
 
 namespace EECS_448___Project_1 {
     public partial class GameForm : Form {
@@ -227,16 +226,12 @@ namespace EECS_448___Project_1 {
                 Console.WriteLine("===EVENT: Mouse Down====");
                 mouseDown = true;
             }
-            else {
-                mouseDown = true;
-            }
         }
 
         //mouse up
         private void oppBoardPictureBox_MouseUp(object sender, MouseEventArgs e) {
-            if(mouseDown) {
+            if (mouseDown) {
                 Console.WriteLine("===EVENT: Mouse Up====");
-                mouseDown = true;
                 targeted = true;
 
                 //set targeted square
@@ -245,8 +240,15 @@ namespace EECS_448___Project_1 {
                 targetSquare[0] = col;
                 targetSquare[1] = row;
 
+                for(int i = 0; i < game.getCurrentPlayer().getHits().Count; i++ ) {
+                    Console.WriteLine("\t\t" + game.getCurrentPlayer().getHits()[i][0] + " " + game.getCurrentPlayer().getHits()[i][1]);
+                }
+
+                Console.WriteLine("\tTargeted: " + col + " " + row);
+
                 //check if target is legal
                 for (int i = 0; i < game.getCurrentPlayer().getHits().Count; i++) {  //check 
+                    Console.WriteLine("\t\t" + game.getCurrentPlayer().getHits()[i][0] + " " + game.getCurrentPlayer().getHits()[i][1]);
                     if (targetSquare.SequenceEqual(game.getCurrentPlayer().getHits()[i])) targeted = false;
                 }
                 for (int i = 0; i < game.getCurrentPlayer().getMisses().Count; i++) {
@@ -271,7 +273,7 @@ namespace EECS_448___Project_1 {
 
 
             //draw ships
-            ///drawShips(sender, e, game.getCurrentOpponent().getShips(), oppBoardPictureBox);
+            drawShips(sender, e, game.getCurrentOpponent().getShips(), oppBoardPictureBox);
 
             //draw hits
             drawHits(sender, e, game.getCurrentPlayer().getHits(), oppBoardPictureBox);
@@ -282,9 +284,9 @@ namespace EECS_448___Project_1 {
             //draw target outline
             if (targeted) drawTargetSquare(sender, e, targetSquare);
 
-            hitListLabel.Text = "";
+            hitListLabel.Text = game.getCurrentPlayer().getHits().Count.ToString();
             for(int i = 0; i < game.getCurrentPlayer().getHits().Count; i++) {
-                hitListLabel.Text += "hit: " + game.getCurrentPlayer().getHits()[i][0] + " " + game.getCurrentPlayer().getHits()[i][1];
+               // hitListLabel.Text += "hit: " + game.getCurrentPlayer().getHits()[i][0] + " " + game.getCurrentPlayer().getHits()[i][1];
             }
         }
 
@@ -294,20 +296,12 @@ namespace EECS_448___Project_1 {
 
         private void fireButton_Click(object sender, EventArgs e)
         {
-            fire();
-            int delay = 2000;
-            Thread.Sleep(delay);
-            this.Hide();
-            Form2 landing = new Form2();
-            landing.Show();
-
+            fire();    
         }
 
         private void fire()
         {
             Console.WriteLine("Firing");
-            int delay = 1000;
-            Thread.Sleep(delay);
             if (targeted) game.fire(targetSquare);
             targeted = false;
             oppBoardPictureBox.Refresh();
