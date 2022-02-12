@@ -77,7 +77,91 @@ namespace EECS_448___Project_1
          *  4. Call again
          */
 
-        //fire
+        
+
+        //Called when a position is chosen by a player
+        public void fire(int[] shot) {
+            int shipIndex = shipHit(shot);
+
+            //Checks if the shot was a hit
+            if (shipIndex > -1) {
+                Console.WriteLine("Hit");
+                getCurrentPlayer().addHit(shot);
+                if (isSunk(shipIndex)) Console.WriteLine("You sunk a ship");
+            }
+
+            //Called if the shot is a miss
+            else getCurrentPlayer().addMiss(shot);
+        }
+
+        
+
+        //Checks if the ship of a given index has been hit on every position
+        private bool isSunk(int shipIndex) {
+            //Loops through each position of the given ship
+            for (int i = 0; i < getCurrentOpponent().getShips()[shipIndex].Length; i++) {
+
+                //Checks if each position is hit and returns false if any are not
+                if (getCurrentOpponent().getShips()[shipIndex][i][2] == 0) return false;
+            }
+            //Returns true if every position on the ship has been hit
+            return true;
+        }
+
+        //Returns the index of the ship that is hit; -1 if no ship is hit
+        private int shipHit(int[] shot)
+        {
+            //Loops through each of the opponents ships
+            for (int i = 0; i < getCurrentOpponent().getShips().Count; i++) {
+
+                //Loops through each position on the ship
+                for (int j = 0; j < getCurrentOpponent().getShips()[i].Length; j++) {
+
+                    //Checks if the ship position matches the shot position; if it does, returns the index of the ship
+                    if (shot.SequenceEqual(getCurrentOpponent().getShips()[i][j])) return i;
+                }
+            }
+
+            //Returns -1 if the shot does not match any ship position
+            return -1;
+        }
+
+
+        /*//check sunk
+        private bool isSunk(int[] shot, int[][] ship) {
+            //check if any square is not hit (index 2 in each square) ship[sqaure][index 0: col, index 1: row, index 2: hit? (0  = no)
+            for(int i = 0; i < ship.Length; i++) {
+                if (ship[i][2] == 0) return false;
+            }
+
+            //if no square is un-hit, return true (the ship is sunk)
+            return true;
+        }*/
+
+        /*//check hit
+        private int[][] shipHit(int[] shot) {
+            //loop through each of the current players unsunk ships
+            for (int i = 0; i < getCurrentOpponent().getShips().Count; i++) {
+
+                //create copy of indexed ship 
+                int[][] ship = getCurrentOpponent().getShips()[i];
+
+                //loop through each square in ship and see if the matches any of those spots
+                for (int j = 0; j < ship.Length; j++) {
+                    //get ship square coordinates
+                    int[] shipSquare = { ship[j][0], ship[j][1] }; 
+
+                    //compare coordinates
+                    if (shot.SequenceEqual(shipSquare)) {
+                        return ship;
+                    }
+                }
+            }
+            //miss
+            return null;
+        }*/
+
+        /*//fire
         public void fire(int[] shot) {
             //create ship object of the ship that is hit by the guessed shot (returns null if miss)
             int[][] hitShip = shipHit(shot);
@@ -103,60 +187,7 @@ namespace EECS_448___Project_1
                 Console.WriteLine("Miss");
             }
 
-        }
-
-        //check hit
-        private int[][] shipHit(int[] shot) {
-            //loop through each of the current players unsunk ships
-            for (int i = 0; i < getCurrentOpponent().getShips().Count; i++) {
-
-                //create copy of indexed ship 
-                int[][] ship = getCurrentOpponent().getShips()[i];
-
-                //loop through each square in ship and see if the matches any of those spots
-                for (int j = 0; j < ship.Length; j++) {
-                    //get ship square coordinates
-                    int[] shipSquare = { ship[j][0], ship[j][1] }; 
-
-                    //compare coordinates
-                    if (shot.SequenceEqual(shipSquare)) {
-                        return ship;
-                    }
-                }
-            }
-            //miss
-            return null;
-        }
-
-        //Returns the index of the ship that is hit; -1 if no ship is hit
-        private int shipHit2(int[] shot)
-        {
-            //Loops through each of the opponents ships
-            for (int i = 0; i < getCurrentOpponent().getShips().Count; i++) {
-
-                //Loops through each position on the ship
-                for (int j = 0; j < getCurrentOpponent().getShips()[i].Length; j++) {
-
-                    //Checks if the ship position matches the shot position; returns the index of the ship if it does
-                    if (shot.SequenceEqual(getCurrentOpponent().getShips()[i][j])) return i;
-                }
-            }
-
-            //Returns -1 if the shot does not match any ship position
-            return -1;
-        }
-
-
-        //check sunk
-        private bool isSunk(int[] shot, int[][] ship) {
-            //check if any square is not hit (index 2 in each square) ship[sqaure][index 0: col, index 1: row, index 2: hit? (0  = no)
-            for(int i = 0; i < ship.Length; i++) {
-                if (ship[i][2] == 0) return false;
-            }
-
-            //if no square is un-hit, return true (the ship is sunk)
-            return true;
-        }
+        }*/
 
         #endregion
 

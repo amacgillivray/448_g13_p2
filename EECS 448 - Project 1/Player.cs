@@ -8,9 +8,9 @@ namespace EECS_448___Project_1 {
     public class Player {
         //variables
         private string name;
-        private List<int[]> hits; //list of 2 element int arrays, representing coordinates of hits this player guess
+        private List<int[]> hits; //list of 2 element int arrays, representing coordinates of hits this player guessed
         private List<int[]> misses; //list of 2 element in arrays, representing coordinates of misses this player guessed
-        private List<int[][]> ships; //list of players ship coordinates. ships are listed as 2 dimensional array of 3 element arrays representing coordinates [list index][ship square][square coordinates]
+        private List<int[][]> ships; //list of ships placed by the player. each ship is an array of 3-element int arrays with the form { horizontal pos, vertical pos, is hit (0 false, 1 if true) }
 
         //Constructors
         public Player() {
@@ -50,7 +50,7 @@ namespace EECS_448___Project_1 {
 
         //remove ships
         public void removeShip(int index) {
-
+            ships.RemoveAt(index);
         }
 
         //get all ships
@@ -66,11 +66,8 @@ namespace EECS_448___Project_1 {
 
         //addHit
         public void addHit(int[] hit) {
-            if (hit.Length == 2) {
-                hits.Add(hit);
-            } else {
-                throw new Exception("Passed in hit has invalid coordinates!");
-            }
+            if (hit.Length == 2) hits.Add(hit);
+            else throw new Exception("Passed in hit has invalid coordinates!");
         }
 
         //get hits
@@ -80,11 +77,8 @@ namespace EECS_448___Project_1 {
 
         //add miss
         public void addMiss(int[] miss) {
-            if (miss.Length == 2) {
-                misses.Add(miss);
-            } else {
-                throw new Exception("Passed in miss has invalid coordinates");
-            }
+            if (miss.Length == 2) misses.Add(miss);
+            else throw new Exception("Passed in miss has invalid coordinates");
         }
 
         //get misses
