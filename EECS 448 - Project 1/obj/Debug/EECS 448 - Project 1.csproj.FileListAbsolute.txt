@@ -8,3 +8,16 @@ C:\Users\james\source\repos\EECS 448 - Project 1\EECS 448 - Project 1\obj\Debug\
 C:\Users\james\source\repos\EECS 448 - Project 1\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.csproj.CoreCompileInputs.cache
 C:\Users\james\source\repos\EECS 448 - Project 1\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.exe
 C:\Users\james\source\repos\EECS 448 - Project 1\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.pdb
+C:\Users\Administrator\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.csproj.AssemblyReference.cache
+C:\Users\Administrator\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.csproj.SuggestedBindingRedirects.cache
+C:\Users\Administrator\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.Form1.resources
+C:\Users\Administrator\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.Properties.Resources.resources
+C:\Users\Administrator\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.SetupPage.resources
+C:\Users\Administrator\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.csproj.GenerateResource.cache
+C:\Users\Administrator\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.exe
+C:\Users\Administrator\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.pdb
+C:\Users\Administrator\Source\Repos\eecs448-project-1\EECS 448 - Project 1\bin\Debug\EECS 448 - Project 1.exe.config
+C:\Users\Administrator\Source\Repos\eecs448-project-1\EECS 448 - Project 1\bin\Debug\EECS 448 - Project 1.exe
+C:\Users\Administrator\Source\Repos\eecs448-project-1\EECS 448 - Project 1\bin\Debug\EECS 448 - Project 1.pdb
+C:\Users\Administrator\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.GameChoice.resources

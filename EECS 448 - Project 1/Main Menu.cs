@@ -15,8 +15,10 @@ namespace EECS_448___Project_1 {
         }
 
         private void LocalGameButton_Click(object sender, EventArgs e) {
-            SetupPage setup = new SetupPage();
-            setup.Show();
+            GameChoice game = new GameChoice();
+            game.Show();
+            //SetupPage setup = new SetupPage();
+            //setup.Show();
             this.Hide();
         }
     }
