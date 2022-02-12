@@ -15,11 +15,9 @@ namespace EECS_448___Project_1 {
         }
 
         private void LocalGameButton_Click(object sender, EventArgs e) {
-            GameForm gameForm = new GameForm();
-            gameForm.Show();
-            
-            //SetupPage setup = new SetupPage();
-            //setup.Show();
+
+            SetupPage setup = new SetupPage();
+            setup.Show();
             this.Hide();
         }
 
@@ -32,12 +30,14 @@ namespace EECS_448___Project_1 {
         {
             CreditsPage credits = new CreditsPage();
             credits.Show();
+            this.Hide();
         }
 
         private void NetworkGameButton_Click(object sender, EventArgs e)
         {
             ConstructionPage constructionPage = new ConstructionPage();
-            constructionPage.Show();   
+            constructionPage.Show();
+            this.Hide();
         }
     }
 }

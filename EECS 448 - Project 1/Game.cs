@@ -88,16 +88,24 @@ namespace EECS_448___Project_1
 
             //Checks if the shot was a hit
             if (shipIndex > -1) {
+
                 Console.WriteLine("Hit");
                 getCurrentPlayer().addHit(shot);
 
                 if (isSunk(shipIndex)) {
+
                     Console.WriteLine("You sunk a ship");
 
                     if (gameOver()) {
                         
                     
-                    } 
+                    }
+
+                    //if game is not over switches which player is playing
+                    if (playerTurn == 1)
+                        setPlayerTurn(2);
+                    else
+                        setPlayerTurn(1);
                 }
             }
 

@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="Coordinates.cs" />
     <Compile Include="CreditsPage.cs">
       <SubType>Form</SubType>
@@ -72,13 +73,21 @@
     <Compile Include="GameForm.Designer.cs">
       <DependentUpon>GameForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Landing Page.cs">
+    <Compile Include="LandingPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Landing Page.Designer.cs">
-      <DependentUpon>Landing Page.cs</DependentUpon>
+    <Compile Include="LandingPage.Designer.cs">
+      <DependentUpon>LandingPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Player.cs" />
+=======
+    <Compile Include="GameChoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameChoice.Designer.cs">
+      <DependentUpon>GameChoice.cs</DependentUpon>
+    </Compile>
+>>>>>>> origin/Drake
     <Compile Include="SetupPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +102,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
     <EmbeddedResource Include="ConstructionPage.resx">
       <DependentUpon>ConstructionPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -102,11 +112,18 @@
     <EmbeddedResource Include="GameForm.resx">
       <DependentUpon>GameForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Landing Page.resx">
-      <DependentUpon>Landing Page.cs</DependentUpon>
+    <EmbeddedResource Include="LandingPage.resx">
+      <DependentUpon>LandingPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="GameChoice.resx">
+      <DependentUpon>GameChoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main Menu.resx">
+      <DependentUpon>Main Menu.cs</DependentUpon>
+>>>>>>> origin/Drake
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
