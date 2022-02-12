@@ -24,7 +24,9 @@ namespace EECS_448___Project_1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Form1 mainmenu = new Form1();
+            mainmenu.Show();
+            this.Close();
         }
     }
 }

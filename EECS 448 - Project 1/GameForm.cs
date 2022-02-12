@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace EECS_448___Project_1 {
     public partial class GameForm : Form {
@@ -293,7 +294,13 @@ namespace EECS_448___Project_1 {
 
         private void fireButton_Click(object sender, EventArgs e)
         {
-            fire();    
+            fire();
+            int delay = 3000;
+            Thread.Sleep(delay);
+            this.Hide();
+            Form2 landing = new Form2();
+            landing.Show();
+
         }
 
         private void fire()
