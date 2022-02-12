@@ -348,7 +348,8 @@ namespace EECS_448___Project_1 {
                 case Keys.Down:
                     break;
 
-                case Keys.Enter: fire(); break;
+                case Keys.Enter:
+                    fire(); break;
 
 
 
