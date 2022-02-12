@@ -51,58 +51,6 @@ namespace EECS_448___Project_1
             playerTwo = two;
         }
 
-        #region previous Version
-        /*public int playerTurn = 1;
-        public string playerOneName;
-        public string playerTwoName;
-
-        public List<int[][]> playerOneShips;
-        public List<int[][]> playerTwoShips;
-
-        public List<int[]> playerOneHits;
-        public List<int[]> playerTwoHits;
-
-        public List<int[]> playerOneMisses;
-        public List<int[]> playerTwoMisses;
-
-        public Game(string playerOneName, string playerTwoName)
-        {
-            this.playerOneName = playerOneName;
-            this.playerTwoName = playerTwoName;
-
-        }*/
-
-
-        /*public bool isHit(int[] guess, int turn)
-        {
-            switch (turn)
-            {
-                case 1:
-                    foreach (int[][] i in playerTwoShips)
-                    {
-                        foreach(int[] space in i)
-
-                            if (space.SequenceEqual(guess))
-                                return true;
-                    }
-                    break;
-                case 2:
-                    foreach (int[][] i in playerOneShips)
-                    {
-                        foreach (int[] space in i)
-                            if (space.SequenceEqual(guess))
-                                return true;
-                    }
-                    break;
-                    return false;
-            }
-
-            return true;
-            
-        }*/
-        #endregion
-
-
         #region methods
 
         //start game
@@ -194,7 +142,7 @@ namespace EECS_448___Project_1
                 }
             }
 
-            //Returns -1 if the shot does not match any ship positions
+            //Returns -1 if the shot does not match any ship position
             return -1;
         }
 
