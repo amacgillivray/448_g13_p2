@@ -181,12 +181,24 @@ namespace EECS_448___Project_1
         }
 
         //Returns the index of the ship that is hit; -1 if no ship is hit
-        private int shipHit2(int[] shot) { 
-            
+        private int shipHit2(int[] shot)
+        {
+            //Loops through each of the opponents ships
+            for (int i = 0; i < getCurrentOpponent().getShips().Count; i++) {
 
+                //Loops through each position on the ship
+                for (int j = 0; j < getCurrentOpponent().getShips()[i].Length; j++) {
 
+                    //Checks if the ship position matches the shot position; returns the index of the ship if it does
+                    if (shot.SequenceEqual(getCurrentOpponent().getShips()[i][j])) return i;
+                }
+            }
+
+            //Returns -1 if the shot does not match any ship positions
+            return -1;
         }
-        
+
+
         //check sunk
         private bool isSunk(int[] shot, int[][] ship) {
             //check if any square is not hit (index 2 in each square) ship[sqaure][index 0: col, index 1: row, index 2: hit? (0  = no)

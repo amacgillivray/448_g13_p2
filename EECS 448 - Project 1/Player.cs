@@ -45,12 +45,7 @@ namespace EECS_448___Project_1 {
 
         //add ship
         public void addShip(int[][] ship) {
-            try {
-                ships.Add(ship);
-            } 
-            catch {
-                throw new Exception("Ship has invalid dimensions!");
-            }
+            ships.Add(ship);
         }
 
         //remove ships
