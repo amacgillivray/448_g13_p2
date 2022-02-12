@@ -25,15 +25,17 @@ namespace EECS_448___Project_1
             if (playerTurn == 1) return ref playerOne;
             else return ref playerTwo;
         }
+
         public ref Player getCurrentOpponent() {
             if (playerTurn == 2) return ref playerOne;
             else return ref playerTwo;
         }
+
         public Player getPlayerOne() { return playerOne; }
         public Player getPlayerTwo() { return playerTwo; }
         
-        //Sets the current player value to the passed value
 
+        //Sets the current player value to the passed value
         public void setPlayerOne(Player one) { playerOne = one; }
         public void setPlayerTwo(Player two) { playerTwo = two; }
 
@@ -45,6 +47,7 @@ namespace EECS_448___Project_1
             playerTwo = new Player();
             playerTurn = 0;
         }
+
 
         public Game(Player one, Player two) {
             playerOne = one;
@@ -68,6 +71,7 @@ namespace EECS_448___Project_1
             setPlayerTurn(rand.Next(1, 2));       
         }
 
+
         //game turn
         /*  1. Current player guesses (on game form)   
          *  2. Determine hit or miss
@@ -78,7 +82,6 @@ namespace EECS_448___Project_1
          */
 
         
-
         //Called when a position is chosen by a player
         public void fire(int[] shot) {
             int shipIndex = shipHit(shot);
@@ -87,14 +90,21 @@ namespace EECS_448___Project_1
             if (shipIndex > -1) {
                 Console.WriteLine("Hit");
                 getCurrentPlayer().addHit(shot);
-                if (isSunk(shipIndex)) Console.WriteLine("You sunk a ship");
+
+                if (isSunk(shipIndex)) {
+                    Console.WriteLine("You sunk a ship");
+
+                    if (gameOver()) {
+                        
+                    
+                    } 
+                }
             }
 
             //Called if the shot is a miss
             else getCurrentPlayer().addMiss(shot);
         }
 
-        
 
         //Checks if the ship of a given index has been hit on every position
         private bool isSunk(int shipIndex) {
@@ -104,9 +114,11 @@ namespace EECS_448___Project_1
                 //Checks if each position is hit and returns false if any are not
                 if (getCurrentOpponent().getShips()[shipIndex][i][2] == 0) return false;
             }
+
             //Returns true if every position on the ship has been hit
             return true;
         }
+
 
         //Returns the index of the ship that is hit; -1 if no ship is hit
         private int shipHit(int[] shot)
@@ -124,6 +136,20 @@ namespace EECS_448___Project_1
 
             //Returns -1 if the shot does not match any ship position
             return -1;
+        }
+
+
+        //Determines if all ships of the opponent have been sunk. Called when a ship is sunk on a turn
+        private bool gameOver() {
+            //Loops through each of the opponent's ships
+            for (int i = 0; i < getCurrentOpponent().getShips().Count; i++) {
+
+                //Returns false if any ship is not sunk
+                if (!isSunk(i)) return false;
+            }
+
+            //Returns true if all ships are sunk
+            return true;
         }
 
 
@@ -190,7 +216,6 @@ namespace EECS_448___Project_1
         }*/
 
         #endregion
-
 
     }
 }
