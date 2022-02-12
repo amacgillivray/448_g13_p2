@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace EECS_448___Project_1 {
     public partial class GameForm : Form {
@@ -245,11 +246,11 @@ namespace EECS_448___Project_1 {
                 targetSquare[1] = row;
 
                 //check if target is legal
-                for (int i = 0; i < game.getCurrentOpponent().getHits().Count; i++) {  //check 
-                    if (targetSquare.SequenceEqual(game.getCurrentOpponent().getHits()[i])) targeted = false;
+                for (int i = 0; i < game.getCurrentPlayer().getHits().Count; i++) {  //check 
+                    if (targetSquare.SequenceEqual(game.getCurrentPlayer().getHits()[i])) targeted = false;
                 }
-                for (int i = 0; i < game.getCurrentOpponent().getMisses().Count; i++) {
-                    if (targetSquare.SequenceEqual(game.getCurrentOpponent().getMisses()[i])) targeted = false;
+                for (int i = 0; i < game.getCurrentPlayer().getMisses().Count; i++) {
+                    if (targetSquare.SequenceEqual(game.getCurrentPlayer().getMisses()[i])) targeted = false;
                 }
 
                 //update label
@@ -293,12 +294,20 @@ namespace EECS_448___Project_1 {
 
         private void fireButton_Click(object sender, EventArgs e)
         {
-            fire();    
+            fire();
+            int delay = 2000;
+            Thread.Sleep(delay);
+            this.Hide();
+            Form2 landing = new Form2();
+            landing.Show();
+
         }
 
         private void fire()
         {
             Console.WriteLine("Firing");
+            int delay = 1000;
+            Thread.Sleep(delay);
             if (targeted) game.fire(targetSquare);
             targeted = false;
             oppBoardPictureBox.Refresh();

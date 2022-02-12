@@ -41,6 +41,7 @@ namespace EECS_448___Project_1 {
             NetworkGameButton.TabIndex = 2;
             NetworkGameButton.Text = "Network Game ";
             NetworkGameButton.UseVisualStyleBackColor = false;
+            NetworkGameButton.Click += new System.EventHandler(this.NetworkGameButton_Click);
             // 
             // LocalGameButton
             // 
@@ -64,6 +65,7 @@ namespace EECS_448___Project_1 {
             this.button1.TabIndex = 1;
             this.button1.Text = "Credits";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -87,6 +89,7 @@ namespace EECS_448___Project_1 {
             this.Controls.Add(this.LocalGameButton);
             this.Name = "Form1";
             this.Text = "Battleship";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

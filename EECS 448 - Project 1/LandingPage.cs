@@ -9,18 +9,23 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EECS_448___Project_1 {
-    public partial class Form1 : Form {
-        public Form1() {
+    public partial class Form2 : Form {
+        public Form2() {
             InitializeComponent();
+
         }
 
-        private void LocalGameButton_Click(object sender, EventArgs e) {
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
             GameForm gameForm = new GameForm();
             gameForm.Show();
-            
-            //SetupPage setup = new SetupPage();
-            //setup.Show();
-            this.Hide();
+            this.Close();
+           
         }
     }
 }
