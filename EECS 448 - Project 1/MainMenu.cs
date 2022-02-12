@@ -22,5 +22,22 @@ namespace EECS_448___Project_1 {
             //setup.Show();
             this.Hide();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CreditsPage credits = new CreditsPage();
+            credits.Show();
+        }
+
+        private void NetworkGameButton_Click(object sender, EventArgs e)
+        {
+            ConstructionPage constructionPage = new ConstructionPage();
+            constructionPage.Show();   
+        }
     }
 }
