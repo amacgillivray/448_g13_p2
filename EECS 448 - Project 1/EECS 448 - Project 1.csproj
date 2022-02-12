@@ -46,9 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ship.cs" />
-    <Compile Include="Spot.cs" />
-    <Compile Include="OccupationTypes.cs" />
     <Compile Include="Coordinates.cs" />
     <Compile Include="CreditsPage.cs">
       <SubType>Form</SubType>
