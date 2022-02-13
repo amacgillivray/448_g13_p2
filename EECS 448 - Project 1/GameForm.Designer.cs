@@ -717,6 +717,7 @@ namespace EECS_448___Project_1 {
             this.Controls.Add(this.myBoardPictureBox);
             this.Name = "GameForm";
             this.Text = "Battleship";
+            this.Load += new System.EventHandler(this.GameForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.myBoardPictureBox)).EndInit();
             this.xAxisPanel.ResumeLayout(false);

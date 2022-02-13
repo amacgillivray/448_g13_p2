@@ -293,7 +293,7 @@ namespace EECS_448___Project_1 {
             //draw target outline
             if (targeted) drawTargetSquare(sender, e, targetSquare);
 
-            hitListLabel.Text = game.getCurrentPlayer().getHits().Count.ToString();
+
             for(int i = 0; i < game.getCurrentPlayer().getHits().Count; i++) {
                // hitListLabel.Text += "hit: " + game.getCurrentPlayer().getHits()[i][0] + " " + game.getCurrentPlayer().getHits()[i][1];
             }
@@ -305,25 +305,27 @@ namespace EECS_448___Project_1 {
 
         private void fireButton_Click(object sender, EventArgs e)
         {
-            fire();
-            Console.Write("fired");
-            int delay = 1000;
-            Thread.Sleep(delay);
-            Form2 landing = new Form2(ref game);
-            landing.Show();
-            game.swapCurrentPlayer();
-            this.Close();
-            
-
+            fire();       
         }
 
         private void fire()
         {
+
             Console.WriteLine("Firing");
-            if (targeted) game.fire(targetSquare);
-            targeted = false;
-            oppBoardPictureBox.Refresh();
-            Console.WriteLine("targeted " + targeted);
+            if (targeted)
+            {
+                game.fire(targetSquare);
+                targeted = false;
+                oppBoardPictureBox.Refresh();
+                Console.WriteLine("targeted " + targeted);
+                Console.Write("fired");
+                int delay = 1000;
+                Thread.Sleep(delay);
+                Form2 landing = new Form2(ref game);
+                landing.Show();
+                game.swapCurrentPlayer();
+                this.Close();
+            }
         }
 
         private void resetButton_Click(object sender, EventArgs e) {
@@ -385,6 +387,11 @@ namespace EECS_448___Project_1 {
             //refresh boards
             myBoardPictureBox.Refresh();
             oppBoardPictureBox.Refresh();
+        }
+
+        private void GameForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
