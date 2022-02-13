@@ -10,8 +10,12 @@ using System.Windows.Forms;
 
 namespace EECS_448___Project_1 {
     public partial class SetupPage : Form {
-        public SetupPage() {
+
+        Game game = new Game();
+
+        public SetupPage(Game game) {
             InitializeComponent();
+            this.game = game;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -21,35 +25,35 @@ namespace EECS_448___Project_1 {
 
         private void button1_Click(object sender, EventArgs e)
         {
-            GameChoice choice = new GameChoice(1);
+            GameChoice choice = new GameChoice(game, 1);
             choice.Show();
             this.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            GameChoice choice = new GameChoice(2);
+            GameChoice choice = new GameChoice(game, 2);
             choice.Show();
             this.Close();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            GameChoice choice = new GameChoice(3);
+            GameChoice choice = new GameChoice(game, 3);
             choice.Show();
             this.Close();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            GameChoice choice = new GameChoice(4);
+            GameChoice choice = new GameChoice(game, 4);
             choice.Show();
             this.Close();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            GameChoice choice = new GameChoice(5);
+            GameChoice choice = new GameChoice(game, 5);
             choice.Show();
             this.Close();
         }

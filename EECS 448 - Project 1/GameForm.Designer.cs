@@ -73,8 +73,6 @@ namespace EECS_448___Project_1 {
             this.label38 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
             this.oppBoardPictureBox = new System.Windows.Forms.PictureBox();
-            this.hitListLabel = new System.Windows.Forms.Label();
-            this.resetButton = new System.Windows.Forms.Button();
             this.label40 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
@@ -670,25 +668,6 @@ namespace EECS_448___Project_1 {
             this.oppBoardPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.oppBoardPictureBox_MouseMove);
             this.oppBoardPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.oppBoardPictureBox_MouseUp);
             // 
-            // hitListLabel
-            // 
-            this.hitListLabel.AutoSize = true;
-            this.hitListLabel.Location = new System.Drawing.Point(460, 411);
-            this.hitListLabel.Name = "hitListLabel";
-            this.hitListLabel.Size = new System.Drawing.Size(41, 13);
-            this.hitListLabel.TabIndex = 8;
-            this.hitListLabel.Text = "label40";
-            // 
-            // resetButton
-            // 
-            this.resetButton.Location = new System.Drawing.Point(185, 449);
-            this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(75, 23);
-            this.resetButton.TabIndex = 9;
-            this.resetButton.Text = "Reset";
-            this.resetButton.UseVisualStyleBackColor = true;
-            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
-            // 
             // label40
             // 
             this.label40.AutoSize = true;
@@ -729,8 +708,6 @@ namespace EECS_448___Project_1 {
             this.Controls.Add(this.label42);
             this.Controls.Add(this.label41);
             this.Controls.Add(this.label40);
-            this.Controls.Add(this.resetButton);
-            this.Controls.Add(this.hitListLabel);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.oppBoardPictureBox);
@@ -740,6 +717,7 @@ namespace EECS_448___Project_1 {
             this.Controls.Add(this.myBoardPictureBox);
             this.Name = "GameForm";
             this.Text = "Battleship";
+            this.Load += new System.EventHandler(this.GameForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.myBoardPictureBox)).EndInit();
             this.xAxisPanel.ResumeLayout(false);
@@ -809,8 +787,6 @@ namespace EECS_448___Project_1 {
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.PictureBox oppBoardPictureBox;
-        private System.Windows.Forms.Label hitListLabel;
-        private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.Label label42;
