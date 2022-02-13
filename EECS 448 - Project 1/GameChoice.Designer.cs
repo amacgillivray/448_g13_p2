@@ -401,7 +401,7 @@
             // GameChoice
             // 
             this.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.ClientSize = new System.Drawing.Size(646, 479);
+            this.ClientSize = new System.Drawing.Size(498, 479);
             this.Controls.Add(this.backButton);
             this.Controls.Add(this.xAxisPanel);
             this.Controls.Add(this.panel2);
