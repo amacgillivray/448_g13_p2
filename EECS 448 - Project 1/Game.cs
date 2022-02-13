@@ -21,6 +21,7 @@ namespace EECS_448___Project_1
             if (player > 2 || player < 1) throw new Exception("Invalid player number!");
             else playerTurn = player;
         }
+
         public ref Player getCurrentPlayer() {
             if (playerTurn == 1) return ref playerOne;
             else return ref playerTwo;
