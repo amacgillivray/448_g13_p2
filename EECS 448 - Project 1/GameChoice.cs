@@ -13,6 +13,10 @@ namespace EECS_448___Project_1 {
 
     public partial class GameChoice : Form
     {
+        //Players
+        Player playerOne = new Player();
+        Player playerTwo = new Player();
+
         public bool player_1 = true;
         public List<int[][]> player_1_location = new List<int[][]>();
         public List<int[][]> player_2_location = new List<int[][]>();
@@ -35,15 +39,19 @@ namespace EECS_448___Project_1 {
             foreach(Ship ship in ships) ship.snap();
         }
 
-        private class Ship
-        {
+
+		#region Ship Class
+		private class Ship { 
+        
             public Rectangle rectangle; //rectangle used in drawing, will be passed in methods to picturebox
             public bool selected;       //is the ship selected
             public bool isRotated;      //true when ship is verticle
+            public int numSquares;      //number of squares this ship occupies on teh board
 
             public Ship(int length)
             {
                 // rectangle = new Rectangle(x + Formatting.offset, y - Formatting.offset, length * Formatting.squareSize - 2 * Formatting.offset, Formatting.squareSize - 2 * Formatting.offset);
+                numSquares = length;
                 rectangle = new Rectangle();
                 rectangle.X = Formatting.offset;
                 rectangle.Y = Formatting.squareSize * length + Formatting.offset;
@@ -59,6 +67,8 @@ namespace EECS_448___Project_1 {
                 int oldWidth = rectangle.Width;
                 rectangle.Width = rectangle.Height;
                 rectangle.Height = oldWidth;
+                if(isRotated) isRotated = false;
+                else isRotated = true;
                 Console.WriteLine("Width: " + rectangle.Width + "Height: " + rectangle.Height);
             }
 
@@ -66,7 +76,7 @@ namespace EECS_448___Project_1 {
             public void snap() {
                 //get approximate nearest row and col
                 double approximateCol = (double)rectangle.Location.X / (double)Formatting.squareSize;
-                double approximateRow = rectangle.Location.Y / Formatting.squareSize;
+                double approximateRow = (double)rectangle.Location.Y / (double)Formatting.squareSize;
 
                 //set x to nearest col
                 double distToColRoundDown = Math.Abs((int)Math.Floor(approximateCol) * Formatting.squareSize - rectangle.X);
@@ -115,10 +125,36 @@ namespace EECS_448___Project_1 {
                 //check in bounds
                 if(inXBounds && inYBounds) return true;
                 else return false;
-
-                return false;
 			}
+
+			//getGameCoordinates
+			public int[][] getGameCoordinates() {
+
+                Console.WriteLine("squres : " + numSquares + "Rotated " + isRotated);
+                int[][] coords = new int[numSquares][];
+                for(int i = 0; i < numSquares; i++) {
+                    coords[i] = new int[3];
+
+                    int col = 0;
+                    int row = 0;
+
+                    if(isRotated) {
+                        col = rectangle.Location.X / Formatting.squareSize;
+                        row = (rectangle.Location.Y + (Formatting.squareSize * i)) / Formatting.squareSize;
+                    } else {
+                        col = (rectangle.Location.X + (Formatting.squareSize * i)) / Formatting.squareSize;
+                        row = rectangle.Location.Y / Formatting.squareSize;
+                    }
+
+                    Console.WriteLine("i: " + i + "\tcol: " + col + "\trow: " + row);
+                }
+
+                return coords;
+            }
         }
+        #endregion
+
+
 
         List<Ship> ships = new List<Ship>();
 
@@ -142,6 +178,21 @@ namespace EECS_448___Project_1 {
 
             return null;
         }
+
+        //set player ships
+        public void setPlayerShips() {
+            //if it is player ones ships
+            if(player_1) {
+                foreach(Ship ship in ships) {
+                    playerOne.addShip(ship.getGameCoordinates());
+                }
+            } else {
+                foreach(Ship ship in ships) {
+                    playerTwo.addShip(ship.getGameCoordinates());
+                }
+            }
+		}
+
 
 
 
@@ -220,8 +271,13 @@ namespace EECS_448___Project_1 {
             pictureBox.Refresh();
         }
 
+
+        //Next player button
         private void button2_Click(object sender, EventArgs e)  
         {
+            //set player one ships
+            setPlayerShips();
+
             //next player
             player_1 = false;
             button2.Hide();
@@ -374,35 +430,41 @@ namespace EECS_448___Project_1 {
 
         private void button3_Click(object sender, EventArgs e)
         {
-            // save the location of ship
-            List<int> eachLocation= new List<int>();
             
-            foreach (Ship ship in ships)
-            {
-                eachLocation.Add(ship.rectangle.X);
-                eachLocation.Add(ship.rectangle.Width);
-                eachLocation.Add(ship.rectangle.Y);
-                eachLocation.Add(ship.rectangle.Height);
-                if (player_1)
-                {
-                   // player_1_location.Add(eachLocation);
-                }
-                else
-                {
-                   // player_2_location.Add(eachLocation);
-                }
-                     
-                
-            }
-            button3.Hide();
-            button1.Hide();
+            
 
-        }
+            
+
+            
+			/* save the location of ship
+			List<int> eachLocation= new List<int>();
+
+			foreach(Ship ship in ships) {
+				eachLocation.Add(ship.rectangle.X);
+				eachLocation.Add(ship.rectangle.Width);
+				eachLocation.Add(ship.rectangle.Y);
+				eachLocation.Add(ship.rectangle.Height);
+				if(player_1) {
+					// player_1_location.Add(eachLocation);
+				} else {
+					// player_2_location.Add(eachLocation);
+				}
+
+
+			}*/
+			button3.Hide();
+			button1.Hide();
+
+		}
 
         private void playGame_Click(object sender, EventArgs e)
         {
+            //set playerShips
+            setPlayerShips();
+
             //play a game
             this.Hide();
+           
         }
 
         private void GameChoice_Load(object sender, EventArgs e)
