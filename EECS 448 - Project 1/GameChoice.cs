@@ -117,8 +117,6 @@ namespace EECS_448___Project_1 {
                 //check in bounds
                 if(inXBounds && inYBounds) return true;
                 else return false;
-
-                return false;
 			}
         }
 
@@ -387,7 +385,7 @@ namespace EECS_448___Project_1 {
                 eachLocation.Add(ship.rectangle.Height);
                 if (player_1)
                 {
-                   // player_1_location.Add(eachLocation);
+                  // player_1_location.Add(eachLocation);
                 }
                 else
                 {
