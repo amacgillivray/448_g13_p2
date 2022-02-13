@@ -314,16 +314,14 @@ namespace EECS_448___Project_1 {
             Console.WriteLine("Firing");
             if (targeted)
             {
-                game.fire(targetSquare);
-                targeted = false;
-                oppBoardPictureBox.Refresh();
-                Console.WriteLine("targeted " + targeted);
-                Console.Write("fired");
                 int delay = 1000;
-                Thread.Sleep(delay);
-                Form2 landing = new Form2(ref game);
-                landing.Show();
-                game.swapCurrentPlayer();
+                game.fire(targetSquare);       
+                targeted = false;
+                oppBoardPictureBox.Refresh();   //refreshes images on board
+                Thread.Sleep(delay);             //pauses for 1 second (1000 milliseconds)
+                Form2 landing = new Form2(ref game);    
+                landing.Show();                         //Swaps to the landing form
+                game.swapCurrentPlayer();       //Changes the current player (flips the boards)
                 this.Close();
             }
         }
@@ -380,6 +378,7 @@ namespace EECS_448___Project_1 {
 
             //swap players
             game.swapCurrentPlayer();
+
 
             //update board titles
             label40.Text = game.getCurrentPlayer().getName();

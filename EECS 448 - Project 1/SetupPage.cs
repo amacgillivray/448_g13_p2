@@ -22,6 +22,7 @@ namespace EECS_448___Project_1 {
         {
 
         }
+        //sends the choice of ship amount along with the game object to the next form: (the next five methods)
 
         private void button1_Click(object sender, EventArgs e)
         {

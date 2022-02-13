@@ -23,7 +23,7 @@ namespace EECS_448___Project_1 {
             this.KeyPreview = true;
             InitializeComponent();
             this.game = game;
-            for (int i = 1; i <= shipNum; i++)
+            for (int i = 1; i <= shipNum; i++) // Creates the corresonding number of ships based on the button clicked on the previous form
             {
                 addShips(i);
             }

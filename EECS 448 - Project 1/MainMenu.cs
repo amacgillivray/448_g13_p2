@@ -16,9 +16,9 @@ namespace EECS_448___Project_1 {
 
         private void LocalGameButton_Click(object sender, EventArgs e) {
 
-            PlayerCreator players = new PlayerCreator();
-            players.Show();
-            this.Hide();
+            PlayerCreator players = new PlayerCreator(); //Creates the playercreator form
+            players.Show();                             //shows next form
+            this.Hide();                                //Hides this form
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -28,16 +28,16 @@ namespace EECS_448___Project_1 {
 
         private void button1_Click(object sender, EventArgs e)
         {
-            CreditsPage credits = new CreditsPage();
-            credits.Show();
-            this.Hide();
+            CreditsPage credits = new CreditsPage(); //Creates a Credits form
+            credits.Show();                          //Shows the credits               
+            this.Hide();                               // Hides this form
         }
 
         private void NetworkGameButton_Click(object sender, EventArgs e)
         {
-            ConstructionPage constructionPage = new ConstructionPage();
-            constructionPage.Show();
-            this.Hide();
+            ConstructionPage constructionPage = new ConstructionPage();     //Creates an underconstruction form
+            constructionPage.Show();                                        // shows that form
+            this.Hide();                                                    // Hides this form
         }
     }
 }
