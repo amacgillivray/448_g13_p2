@@ -401,8 +401,10 @@ namespace EECS_448___Project_1 {
 
         private void playGame_Click(object sender, EventArgs e)
         {
-            //play a game
-            this.Hide();
+            Game game = new Game();
+            GameForm gameForm = new GameForm(ref game);
+            gameForm.Show();
+            this.Close();
         }
 
         private void GameChoice_Load(object sender, EventArgs e)
