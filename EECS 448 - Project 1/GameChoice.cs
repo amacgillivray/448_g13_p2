@@ -76,7 +76,7 @@ namespace EECS_448___Project_1
 
 
 
-        private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        private void pictureBox_Paint(object sender, PaintEventArgs e)
         {
             //pen
             Pen pen = new Pen(Color.White, 1);
@@ -87,13 +87,13 @@ namespace EECS_448___Project_1
             for (int j = 0; j < 11; j++)
             {
                 start.X = 0;
-                start.Y = j * pictureBox2.Height / 10;
-                end.X = pictureBox2.Width;
+                start.Y = j * pictureBox.Height / 10;
+                end.X = pictureBox.Width;
                 end.Y = start.Y;
                 e.Graphics.DrawLine(pen, start, end);
             }
             //draw bottom border
-            start.Y = pictureBox2.Height - (int)Math.Ceiling(pen.Width);
+            start.Y = pictureBox.Height - (int)Math.Ceiling(pen.Width);
             end.Y = start.Y;
             e.Graphics.DrawLine(pen, start, end);
 
@@ -101,15 +101,15 @@ namespace EECS_448___Project_1
             for (int i = 0; i < 11; i++)
             {
                 //draw verticle lines
-                start.X = i * pictureBox2.Width / 10;
+                start.X = i * pictureBox.Width / 10;
                 start.Y = 0;
                 end.X = start.X;
-                end.Y = pictureBox2.Height;
+                end.Y = pictureBox.Height;
                 e.Graphics.DrawLine(pen, start, end);
 
             }
             //draw right side border
-            start.X = pictureBox2.Width - (int)Math.Ceiling(pen.Width);
+            start.X = pictureBox.Width - (int)Math.Ceiling(pen.Width);
             end.X = start.X;
             e.Graphics.DrawLine(pen, start, end);
 
@@ -151,7 +151,7 @@ namespace EECS_448___Project_1
                     ship.rectangle.Y = ship.rectangle.Width;
               
             }
-            pictureBox2.Refresh();
+            pictureBox.Refresh();
         }
 
         private void button2_Click(object sender, EventArgs e)  
@@ -169,7 +169,7 @@ namespace EECS_448___Project_1
                 ship.rectangle.Y = ship.rectangle.Width;
 
             }
-            pictureBox2.Refresh();
+            pictureBox.Refresh();
 
         }
 
@@ -197,7 +197,7 @@ namespace EECS_448___Project_1
                     if (selectedShip != null) selectedShip.rotate();
 
                     //refresh
-                    pictureBox2.Refresh();
+                    pictureBox.Refresh();
                 }
 
 
@@ -212,10 +212,10 @@ namespace EECS_448___Project_1
         private void GameChoice_KeyUp(object sender, KeyEventArgs e)
         {
             isKeyDown = false;
-            pictureBox2.Refresh();
+            pictureBox.Refresh();
         }
 
-        private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
+        private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             Console.WriteLine(isMouseDown);
 
@@ -252,10 +252,10 @@ namespace EECS_448___Project_1
                 }
             }
 
-            pictureBox2.Refresh();
+            pictureBox.Refresh();
         }
 
-        private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
+        private void pictureBox_MouseUp(object sender, MouseEventArgs e)
         {
             //deselect all ships
             foreach (Ship ship in ships) ship.selected = false;
@@ -264,10 +264,10 @@ namespace EECS_448___Project_1
             isMouseDown = false;
 
             //refresh the picturebox
-            pictureBox2.Refresh();
+            pictureBox.Refresh();
         }
 
-        private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
+        private void pictureBox_MouseMove(object sender, MouseEventArgs e)
         {
             //check if mouse is down
             if (isMouseDown)
@@ -282,7 +282,7 @@ namespace EECS_448___Project_1
                 }
 
                 //refresh picturebox
-                pictureBox2.Refresh();
+                pictureBox.Refresh();
             }
         }
 
@@ -299,11 +299,11 @@ namespace EECS_448___Project_1
                 eachLocation.Add(ship.rectangle.Height);
                 if (player_1)
                 {
-                    player_1_location.Add(eachLocation);
+                   // player_1_location.Add(eachLocation);
                 }
                 else
                 {
-                    player_2_location.Add(eachLocation);
+                   // player_2_location.Add(eachLocation);
                 }
                      
                 

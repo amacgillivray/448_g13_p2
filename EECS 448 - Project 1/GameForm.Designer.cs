@@ -93,7 +93,7 @@ namespace EECS_448___Project_1 {
             this.myBoardPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.myBoardPictureBox.Location = new System.Drawing.Point(56, 106);
             this.myBoardPictureBox.Name = "myBoardPictureBox";
-            this.myBoardPictureBox.Size = new System.Drawing.Size(301, 301);
+            this.myBoardPictureBox.Size = new System.Drawing.Size(302, 302);
             this.myBoardPictureBox.TabIndex = 0;
             this.myBoardPictureBox.TabStop = false;
             this.myBoardPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.myBoardPictureBox_Paint);
@@ -267,7 +267,7 @@ namespace EECS_448___Project_1 {
             this.panel2.Controls.Add(this.label12);
             this.panel2.Controls.Add(this.label11);
             this.panel2.Controls.Add(this.label10);
-            this.panel2.Location = new System.Drawing.Point(28, 106);
+            this.panel2.Location = new System.Drawing.Point(26, 106);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(30, 301);
             this.panel2.TabIndex = 4;
@@ -404,7 +404,7 @@ namespace EECS_448___Project_1 {
             this.panel3.Controls.Add(this.label27);
             this.panel3.Controls.Add(this.label28);
             this.panel3.Controls.Add(this.label29);
-            this.panel3.Location = new System.Drawing.Point(427, 109);
+            this.panel3.Location = new System.Drawing.Point(424, 109);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(30, 301);
             this.panel3.TabIndex = 7;
@@ -662,7 +662,7 @@ namespace EECS_448___Project_1 {
             this.oppBoardPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.oppBoardPictureBox.Location = new System.Drawing.Point(455, 109);
             this.oppBoardPictureBox.Name = "oppBoardPictureBox";
-            this.oppBoardPictureBox.Size = new System.Drawing.Size(301, 301);
+            this.oppBoardPictureBox.Size = new System.Drawing.Size(302, 302);
             this.oppBoardPictureBox.TabIndex = 5;
             this.oppBoardPictureBox.TabStop = false;
             this.oppBoardPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.oppBoardPictureBox_Paint);

@@ -21,9 +21,12 @@ namespace EECS_448___Project_1 {
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Game game = new Game();
-            GameForm gameForm = new GameForm();
-            gameForm.Show();
+            GameChoice choice = new GameChoice();
+            choice.Show();
+
+            //Game game = new Game();
+            //GameForm gameForm = new GameForm();
+            //gameForm.Show();
             this.Close();
         }
 

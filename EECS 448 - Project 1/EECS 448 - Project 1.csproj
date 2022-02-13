@@ -59,6 +59,12 @@
     <Compile Include="ConstructionPage.Designer.cs">
       <DependentUpon>ConstructionPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameChoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameChoice.Designer.cs">
+      <DependentUpon>GameChoice.cs</DependentUpon>
+    </Compile>
     <Compile Include="YouWin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CreditsPage.resx">
       <DependentUpon>CreditsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GameChoice.resx">
+      <DependentUpon>GameChoice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GameForm.resx">
       <DependentUpon>GameForm.cs</DependentUpon>
