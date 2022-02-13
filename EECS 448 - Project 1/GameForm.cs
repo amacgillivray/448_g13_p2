@@ -23,22 +23,29 @@ namespace EECS_448___Project_1 {
         bool mouseDown = false;
 
 
-        public GameForm() {
+       /* public GameForm() {
             InitializeComponent();
-            InitializePictureBoxes();
+            
 
             game.setPlayerOne(one);
             game.setPlayerTwo(two);
             game.setPlayerTurn(1);
-                       
-        }
+
+            InitializePictureBoxes();
+
+        }*/
 
         public GameForm(ref Game game)
         {
             InitializeComponent();
-            InitializePictureBoxes();
+            
 
             this.game = game;
+
+            
+            game.swapCurrentPlayer();
+            InitializePictureBoxes();
+
         }
 
         private void InitializePictureBoxes() {
@@ -187,22 +194,6 @@ namespace EECS_448___Project_1 {
 
         private void myBoardPictureBox_Paint(object sender, PaintEventArgs e) {
             drawGridLines(sender, e,this.myBoardPictureBox);
-
-
-            /*List<int[]> hits = new List<int[]>();
-            for(int i = 0; i < 10; i ++) {
-                int[] hit = { 3, i };
-                hits.Add(hit);
-            }
-
-            List<int[]> misses = new List<int[]>();
-            int[] miss = { 7, 5 };
-            misses.Add(miss);
-
-            List<int[,]> ships = new List<int[,]>();
-            int[,] ship = { { 1, 2 }, { 1, 3 }, { 1, 4 }, { 1, 5 } };
-            ships.Add(ship);*/
-
 
             //draw ships
             drawShips(sender, e, game.getCurrentPlayer().getShips(), myBoardPictureBox);
