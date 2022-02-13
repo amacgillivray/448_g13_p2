@@ -8,16 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace EECS_448___Project_1
-{
+namespace EECS_448___Project_1 { 
+
+
     public partial class GameChoice : Form
     {
         public bool player_1 = true;
         public List<int[][]> player_1_location = new List<int[][]>();
         public List<int[][]> player_2_location = new List<int[][]>();
 
-        public GameChoice()
-        {
+        public GameChoice() {
             this.KeyPreview = true;
             InitializeComponent();
             addShips(1);
@@ -33,12 +33,18 @@ namespace EECS_448___Project_1
             public bool selected;       //is the ship selected
             public bool isRotated;      //true when ship is verticle
 
-            public Ship(int length, int x, int y)
+            public Ship(int length)
             {
-                rectangle = new Rectangle(x, y, length * 30, 30);
+                // rectangle = new Rectangle(x + Formatting.offset, y - Formatting.offset, length * Formatting.squareSize - 2 * Formatting.offset, Formatting.squareSize - 2 * Formatting.offset);
+                rectangle = new Rectangle();
+                rectangle.X = Formatting.offset;
+                rectangle.Y = Formatting.squareSize * length + Formatting.offset;
+                rectangle.Width = Formatting.squareSize * length - 2 * Formatting.offset;
+                rectangle.Height = Formatting.shipWidth;
                 selected = false;
                 isRotated = false;
             }
+
             public void rotate()
             {
                 Console.WriteLine("rotate called!");
@@ -46,8 +52,25 @@ namespace EECS_448___Project_1
                 rectangle.Width = rectangle.Height;
                 rectangle.Height = oldWidth;
                 Console.WriteLine("Width: " + rectangle.Width + "Height: " + rectangle.Height);
+            }
 
+            //snap
+            public void snap() {
+                //get approximate nearest row and col
+                double approximateCol = (double)rectangle.Location.X / (double)Formatting.squareSize;
+                double approximateRow = rectangle.Location.Y / Formatting.squareSize;
 
+                //set x to nearest col
+                double distToColRoundDown = Math.Abs((int)Math.Floor(approximateCol) * Formatting.squareSize - rectangle.X);
+                double distToColRoundUp = Math.Abs((int)Math.Ceiling(approximateCol) * Formatting.squareSize - rectangle.X);
+                if(distToColRoundUp <= distToColRoundDown) rectangle.X = (int)Math.Ceiling(approximateCol) * Formatting.squareSize + Formatting.offset + 1;
+                else rectangle.X = (int)Math.Floor(approximateCol) * Formatting.squareSize + Formatting.offset + 1;
+
+                //set y to nearest row
+                double distToRowRoundDown = Math.Abs((int)Math.Floor(approximateRow) * Formatting.squareSize - rectangle.Y);
+                double distToRowRoundUp = Math.Abs((int)Math.Ceiling(approximateRow) * Formatting.squareSize - rectangle.Y);
+                if (distToRowRoundUp <= distToRowRoundDown) rectangle.Y = (int)Math.Ceiling(approximateRow) * Formatting.squareSize + Formatting.offset + 1;
+                else rectangle.Y = (int)Math.Floor(approximateRow) * Formatting.squareSize + Formatting.offset + 1;
             }
         }
 
@@ -59,7 +82,7 @@ namespace EECS_448___Project_1
         //addRects
         private void addShips(int num)
         {
-            Ship ship = new Ship(num, 0, 30*num);
+            Ship ship = new Ship(num);
             ships.Add(ship);
         }
 
@@ -257,6 +280,9 @@ namespace EECS_448___Project_1
 
         private void pictureBox_MouseUp(object sender, MouseEventArgs e)
         {
+            //snap ships
+            foreach (Ship ship in ships) ship.snap();
+
             //deselect all ships
             foreach (Ship ship in ships) ship.selected = false;
 
@@ -318,5 +344,11 @@ namespace EECS_448___Project_1
             //play a game
             this.Hide();
         }
+    }
+
+    public static class Formatting {
+        public const int squareSize = 30;
+        public const int offset = (int)(squareSize * 0.1);
+        public const int shipWidth = (int)(squareSize * 0.8);
     }
 }

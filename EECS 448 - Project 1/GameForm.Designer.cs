@@ -93,7 +93,7 @@ namespace EECS_448___Project_1 {
             this.myBoardPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.myBoardPictureBox.Location = new System.Drawing.Point(56, 106);
             this.myBoardPictureBox.Name = "myBoardPictureBox";
-            this.myBoardPictureBox.Size = new System.Drawing.Size(302, 302);
+            this.myBoardPictureBox.Size = new System.Drawing.Size(300, 300);
             this.myBoardPictureBox.TabIndex = 0;
             this.myBoardPictureBox.TabStop = false;
             this.myBoardPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.myBoardPictureBox_Paint);
