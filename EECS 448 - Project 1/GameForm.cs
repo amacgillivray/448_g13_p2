@@ -353,5 +353,19 @@ namespace EECS_448___Project_1 {
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e) {
+            Console.WriteLine("Player change button presed");
+
+            //swap players
+            game.swapCurrentPlayer();
+
+            //update board titles
+            label40.Text = game.getCurrentPlayer().getName();
+
+            //refresh boards
+            myBoardPictureBox.Refresh();
+            oppBoardPictureBox.Refresh();
+        }
     }
 }
