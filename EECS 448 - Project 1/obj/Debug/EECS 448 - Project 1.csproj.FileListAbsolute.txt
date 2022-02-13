@@ -94,3 +94,4 @@ C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Debug\EEC
 C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.pdb
 C:\Users\james\source\repos\eecs448-project-1\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.GameChoice.resources
 C:\Users\matth\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.GameChoice.resources
+C:\Users\matth\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.PlayerCreator.resources

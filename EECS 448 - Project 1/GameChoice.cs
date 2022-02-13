@@ -17,10 +17,12 @@ namespace EECS_448___Project_1 {
         public List<int[][]> player_1_location = new List<int[][]>();
         public List<int[][]> player_2_location = new List<int[][]>();
         Point lastLegalPosition = new Point();
+        Game game = new Game();
 
-        public GameChoice(int shipNum) {
+        public GameChoice(Game game,int shipNum) {
             this.KeyPreview = true;
             InitializeComponent();
+            this.game = game;
             for (int i = 1; i <= shipNum; i++)
             {
                 addShips(i);
@@ -401,7 +403,6 @@ namespace EECS_448___Project_1 {
 
         private void playGame_Click(object sender, EventArgs e)
         {
-            Game game = new Game();
             GameForm gameForm = new GameForm(ref game);
             gameForm.Show();
             this.Close();

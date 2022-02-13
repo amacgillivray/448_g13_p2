@@ -16,8 +16,8 @@ namespace EECS_448___Project_1 {
 
         private void LocalGameButton_Click(object sender, EventArgs e) {
 
-            SetupPage setup = new SetupPage();
-            setup.Show();
+            PlayerCreator players = new PlayerCreator();
+            players.Show();
             this.Hide();
         }
 
