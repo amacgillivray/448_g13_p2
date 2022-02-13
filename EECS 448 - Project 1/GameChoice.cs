@@ -18,12 +18,16 @@ namespace EECS_448___Project_1 {
         public List<int[][]> player_2_location = new List<int[][]>();
         Point lastLegalPosition = new Point();
 
-        public GameChoice() {
+        public GameChoice(int shipNum) {
             this.KeyPreview = true;
             InitializeComponent();
+            for (int i = 1; i <= shipNum; i++)
+            {
+                addShips(i);
+            }
             //addShips(1);
-            addShips(2);
-            addShips(3);
+            //addShips(2);
+            //addShips(3);
             //addShips(4);
             //addShips(5);
 
@@ -399,6 +403,11 @@ namespace EECS_448___Project_1 {
         {
             //play a game
             this.Hide();
+        }
+
+        private void GameChoice_Load(object sender, EventArgs e)
+        {
+
         }
     }
 

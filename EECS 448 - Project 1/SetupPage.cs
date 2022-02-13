@@ -21,45 +21,36 @@ namespace EECS_448___Project_1 {
 
         private void button1_Click(object sender, EventArgs e)
         {
-            GameChoice choice = new GameChoice();
+            GameChoice choice = new GameChoice(1);
             choice.Show();
-
-            //Game game = new Game();
-            //GameForm gameForm = new GameForm();
-            //gameForm.Show();
             this.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Game game = new Game();
-            GameForm gameForm = new GameForm();
-            gameForm.Show();
+            GameChoice choice = new GameChoice(2);
+            choice.Show();
             this.Close();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Game game = new Game();
-            GameForm gameForm = new GameForm();
-            gameForm.Show();
+            GameChoice choice = new GameChoice(3);
+            choice.Show();
             this.Close();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Game game = new Game();
-            GameForm gameForm = new GameForm();
-            gameForm.Show();
+            GameChoice choice = new GameChoice(4);
+            choice.Show();
             this.Close();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Game game = new Game();
-            GameForm gameForm = new GameForm();
-            gameForm.Show();
-
+            GameChoice choice = new GameChoice(5);
+            choice.Show();
             this.Close();
         }
     }
