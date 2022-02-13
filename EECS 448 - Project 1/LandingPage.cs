@@ -10,9 +10,17 @@ using System.Windows.Forms;
 
 namespace EECS_448___Project_1 {
     public partial class Form2 : Form {
+
+        Game game = new Game();
         public Form2() {
             InitializeComponent();
 
+        }
+
+        public Form2(ref Game game)
+        {
+            InitializeComponent();
+            this.game = game;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -22,7 +30,7 @@ namespace EECS_448___Project_1 {
 
         private void button1_Click(object sender, EventArgs e)
         {
-            GameForm gameForm = new GameForm();
+            GameForm gameForm = new GameForm( ref game);
             gameForm.Show();
             this.Close();
            

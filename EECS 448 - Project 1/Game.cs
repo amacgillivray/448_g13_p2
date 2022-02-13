@@ -71,7 +71,11 @@ namespace EECS_448___Project_1
             Random rand = new Random();
             setPlayerTurn(rand.Next(1, 2));       
         }
-
+    
+        public void swapCurrentPlayer() {
+            if (getCurrentPlayer() == playerOne) setPlayerTurn(2);
+            else setPlayerTurn(1);
+        }
 
         //game turn
         /*  1. Current player guesses (on game form)   

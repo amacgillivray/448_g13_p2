@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace EECS_448___Project_1 {
     public partial class GameForm : Form {
@@ -30,6 +31,14 @@ namespace EECS_448___Project_1 {
             game.setPlayerTwo(two);
             game.setPlayerTurn(1);
                        
+        }
+
+        public GameForm(ref Game game)
+        {
+            InitializeComponent();
+            InitializePictureBoxes();
+
+            this.game = game;
         }
 
         private void InitializePictureBoxes() {
@@ -296,7 +305,16 @@ namespace EECS_448___Project_1 {
 
         private void fireButton_Click(object sender, EventArgs e)
         {
-            fire();    
+            fire();
+            Console.Write("fired");
+            int delay = 1000;
+            Thread.Sleep(delay);
+            Form2 landing = new Form2(ref game);
+            landing.Show();
+            game.swapCurrentPlayer();
+            this.Close();
+            
+
         }
 
         private void fire()
@@ -353,6 +371,20 @@ namespace EECS_448___Project_1 {
         private void label40_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            Console.WriteLine("Player change button presed");
+
+            //swap players
+            game.swapCurrentPlayer();
+
+            //update board titles
+            label40.Text = game.getCurrentPlayer().getName();
+
+            //refresh boards
+            myBoardPictureBox.Refresh();
+            oppBoardPictureBox.Refresh();
         }
     }
 }
