@@ -78,7 +78,6 @@ namespace EECS_448___Project_1 {
             this.label40 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
-            this.changePlayerButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.myBoardPictureBox)).BeginInit();
             this.xAxisPanel.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -721,23 +720,12 @@ namespace EECS_448___Project_1 {
             this.label42.TabIndex = 12;
             this.label42.Text = "(Targeting Board)";
             // 
-            // changePlayerButton
-            // 
-            this.changePlayerButton.Location = new System.Drawing.Point(70, 455);
-            this.changePlayerButton.Name = "changePlayerButton";
-            this.changePlayerButton.Size = new System.Drawing.Size(75, 23);
-            this.changePlayerButton.TabIndex = 13;
-            this.changePlayerButton.Text = "Change Players";
-            this.changePlayerButton.UseVisualStyleBackColor = true;
-            this.changePlayerButton.Click += new System.EventHandler(this.button1_Click);
-            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HotTrack;
             this.ClientSize = new System.Drawing.Size(800, 504);
-            this.Controls.Add(this.changePlayerButton);
             this.Controls.Add(this.label42);
             this.Controls.Add(this.label41);
             this.Controls.Add(this.label40);
@@ -826,6 +814,5 @@ namespace EECS_448___Project_1 {
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.Label label42;
-        private System.Windows.Forms.Button changePlayerButton;
     }
 }

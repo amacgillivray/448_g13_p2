@@ -33,6 +33,14 @@ namespace EECS_448___Project_1 {
                        
         }
 
+        public GameForm(ref Game game)
+        {
+            InitializeComponent();
+            InitializePictureBoxes();
+
+            this.game = game;
+        }
+
         private void InitializePictureBoxes() {
             myBoardPictureBox.Refresh();
             oppBoardPictureBox.Refresh();
@@ -298,11 +306,14 @@ namespace EECS_448___Project_1 {
         private void fireButton_Click(object sender, EventArgs e)
         {
             fire();
+            Console.Write("fired");
             int delay = 1000;
             Thread.Sleep(delay);
-            Form2 landing = new Form2();
+            Form2 landing = new Form2(ref game);
             landing.Show();
+            game.swapCurrentPlayer();
             this.Close();
+            
 
         }
 
