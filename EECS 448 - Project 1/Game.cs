@@ -160,7 +160,7 @@ namespace EECS_448___Project_1
             //Returns true if all ships are sunk
             return true;
         }*/
-
+        
 
         //check sunk
         private bool isSunk(int[] shot, int[][] ship) {
