@@ -16,15 +16,19 @@ namespace EECS_448___Project_1 {
         public bool player_1 = true;
         public List<int[][]> player_1_location = new List<int[][]>();
         public List<int[][]> player_2_location = new List<int[][]>();
+        Point lastLegalPosition = new Point();
 
         public GameChoice() {
             this.KeyPreview = true;
             InitializeComponent();
-            addShips(1);
+            //addShips(1);
             addShips(2);
             addShips(3);
-            addShips(4);
-            addShips(5);
+            //addShips(4);
+            //addShips(5);
+
+            //snap ships
+            foreach(Ship ship in ships) ship.snap();
         }
 
         private class Ship
@@ -72,6 +76,44 @@ namespace EECS_448___Project_1 {
                 if (distToRowRoundUp <= distToRowRoundDown) rectangle.Y = (int)Math.Ceiling(approximateRow) * Formatting.squareSize + Formatting.offset + 1;
                 else rectangle.Y = (int)Math.Floor(approximateRow) * Formatting.squareSize + Formatting.offset + 1;
             }
+
+            //check overlap
+            public bool checkOverlap(Ship ship) {
+                //is compared ship this?
+                if(ship != this) {
+                    bool xOverlap = false;
+                    bool yOverlap = false;
+
+                    //check if overlap on x region
+                    if(rectangle.X < ship.rectangle.X + ship.rectangle.Width && rectangle.X + rectangle.Width > ship.rectangle.X) xOverlap = true;
+				
+                    //check overlap on y region
+                    if(rectangle.Y < ship.rectangle.Y + ship.rectangle.Height && rectangle.Y + rectangle.Height> ship.rectangle.Y) yOverlap = true;
+
+                    //if there is x and y overlap, then the two ships overlap
+                    if(xOverlap && yOverlap) return true;
+                }
+
+                return false;
+			}
+
+            //check in bounds
+            public bool checkInBounds() {
+                bool inXBounds = false;
+                bool inYBounds = false;
+
+                //check x bounds
+                if(rectangle.X >= 0 && rectangle.X + rectangle.Width < Formatting.squareSize * 10) inXBounds = true;
+
+                //check y bounds
+                if(rectangle.Y >= 0 && rectangle.Y + rectangle.Height < Formatting.squareSize * 10) inYBounds = true;
+
+                //check in bounds
+                if(inXBounds && inYBounds) return true;
+                else return false;
+
+                return false;
+			}
         }
 
         List<Ship> ships = new List<Ship>();
@@ -159,9 +201,6 @@ namespace EECS_448___Project_1 {
 
 
         }
-
-       
-
         
 
         private void button1_Click(object sender, EventArgs e)
@@ -265,6 +304,7 @@ namespace EECS_448___Project_1 {
                        mouse.Y <= ship.rectangle.Location.Y + ship.rectangle.Height && mouse.Y >= ship.rectangle.Location.Y)
                     {
                         ship.selected = true;
+                        lastLegalPosition = ship.rectangle.Location; //store location
                     }
                     else
                     {
@@ -278,14 +318,30 @@ namespace EECS_448___Project_1 {
             pictureBox.Refresh();
         }
 
-        private void pictureBox_MouseUp(object sender, MouseEventArgs e)
-        {
-            //snap ships
-            foreach (Ship ship in ships) ship.snap();
+        private void pictureBox_MouseUp(object sender, MouseEventArgs e) {
+            bool overlap = false;
+            bool outOfBounds = true;
 
-            //deselect all ships
-            foreach (Ship ship in ships) ship.selected = false;
+            //if a ship is selected do this
+            if(getSelectedShip() != null) {
+                //snap
+                getSelectedShip().snap();
 
+                //check overlap
+                foreach(Ship ship in ships) {
+                    if(getSelectedShip().checkOverlap(ship)) overlap = true;
+                }
+
+                //check in bounds
+                outOfBounds = !getSelectedShip().checkInBounds();
+
+                //if overlapped or out of bounds return to legal space
+                if(overlap || outOfBounds) getSelectedShip().rectangle.Location = lastLegalPosition;
+
+                //deselect all ships
+                foreach(Ship ship in ships) ship.selected = false;
+            }
+            
             //set mouse down tracker
             isMouseDown = false;
 
