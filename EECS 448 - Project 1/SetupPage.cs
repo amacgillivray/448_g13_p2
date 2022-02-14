@@ -18,12 +18,7 @@ namespace EECS_448___Project_1 {
             this.game = game;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-        //sends the choice of ship amount along with the game object to the next form: (the next five methods)
-
+        //one ship game
         private void button1_Click(object sender, EventArgs e)
         {
             GameChoice choice = new GameChoice(game, 1);
@@ -31,6 +26,7 @@ namespace EECS_448___Project_1 {
             this.Close();
         }
 
+        //two ship game
         private void button2_Click(object sender, EventArgs e)
         {
             GameChoice choice = new GameChoice(game, 2);
@@ -38,6 +34,7 @@ namespace EECS_448___Project_1 {
             this.Close();
         }
 
+        //three ship game
         private void button3_Click(object sender, EventArgs e)
         {
             GameChoice choice = new GameChoice(game, 3);
@@ -45,6 +42,7 @@ namespace EECS_448___Project_1 {
             this.Close();
         }
 
+        //four ship game
         private void button4_Click(object sender, EventArgs e)
         {
             GameChoice choice = new GameChoice(game, 4);
@@ -52,6 +50,7 @@ namespace EECS_448___Project_1 {
             this.Close();
         }
 
+        //five ship game
         private void button5_Click(object sender, EventArgs e)
         {
             GameChoice choice = new GameChoice(game, 5);

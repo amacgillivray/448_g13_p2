@@ -17,6 +17,7 @@ namespace EECS_448___Project_1
             InitializeComponent();
         }
 
+        //next button
         private void button1_Click(object sender, EventArgs e)
         {
             Player player1 = new Player(textBox1.Text);  //creates player 1 from textbox 1
@@ -25,11 +26,6 @@ namespace EECS_448___Project_1
             SetupPage setup = new SetupPage(game);      // passes the game to the next form
             setup.Show();                               // shows the next form
             this.Close();                               // closes this form
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

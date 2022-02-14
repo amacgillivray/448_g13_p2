@@ -30,9 +30,16 @@ namespace EECS_448___Project_1 {
         private void InitializePictureBoxes() {
             game.swapCurrentPlayer();
             game.swapCurrentPlayer();
+            updateBoardLabels();
             myBoardPictureBox.Refresh();
             oppBoardPictureBox.Refresh();
         }
+
+        //update board labels
+        private void updateBoardLabels() {
+            oppBoardLabel.Text = game.getCurrentOpponent().getName();
+            myBoardLabel.Text = game.getCurrentPlayer().getName();
+		}
 
         #region drawing methods
         private void drawGridLines(object sender, PaintEventArgs e, PictureBox pictureBox) {
