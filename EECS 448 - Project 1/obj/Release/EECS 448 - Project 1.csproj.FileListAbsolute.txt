@@ -11,3 +11,20 @@ C:\Users\Administrator\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\R
 C:\Users\Administrator\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.csproj.CoreCompileInputs.cache
 C:\Users\Administrator\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.exe
 C:\Users\Administrator\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.pdb
+C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\bin\Release\EECS 448 - Project 1.exe.config
+C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\bin\Release\EECS 448 - Project 1.exe
+C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\bin\Release\EECS 448 - Project 1.pdb
+C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.csprojAssemblyReference.cache
+C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.CreditsPage.resources
+C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.PlayerCreator.resources
+C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.GameChoice.resources
+C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.GameForm.resources
+C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.Form2.resources
+C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.Form1.resources
+C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.Properties.Resources.resources
+C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.SetupPage.resources
+C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.YouWin.resources
+C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.csproj.GenerateResource.cache
+C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.csproj.CoreCompileInputs.cache
+C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.exe
+C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.pdb
