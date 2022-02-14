@@ -227,7 +227,7 @@ namespace EECS_448___Project_1
                     Console.WriteLine("You sunk a ship");
 
                     //remove ship from opponents list of ships. 
-                    getCurrentOpponent().removeShip(hitShip.Length - 1);
+                //    getCurrentOpponent().removeShip(hitShip.Length - 1);
                 }
 
             } else {
