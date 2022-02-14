@@ -12,42 +12,24 @@ using System.Threading;
 namespace EECS_448___Project_1 {
     public partial class GameForm : Form {
 
-        //test
-        Player one = new Player("John");
-        Player two = new Player("Jane");
-        Game game = new Game();
-
-        //trackers
-        bool targeted = false;
+        //vars
+		Game game = new Game();
+		bool targeted = false;
         int[] targetSquare = new int[2];
         bool mouseDown = false;
 
 
-       /* public GameForm() {
-            InitializeComponent();
-            
-
-            game.setPlayerOne(one);
-            game.setPlayerTwo(two);
-            game.setPlayerTurn(1);
-
-            InitializePictureBoxes();
-
-        }*/
-
         public GameForm(ref Game game)
         {
             InitializeComponent();
-            
-
             this.game = game;
-
-            
             InitializePictureBoxes();
 
         }
 
         private void InitializePictureBoxes() {
+            game.swapCurrentPlayer(); 
+            game.swapCurrentPlayer();
             myBoardPictureBox.Refresh();
             oppBoardPictureBox.Refresh();
         }
@@ -243,7 +225,7 @@ namespace EECS_448___Project_1 {
                     Console.WriteLine("\t\t" + game.getCurrentPlayer().getHits()[i][0] + " " + game.getCurrentPlayer().getHits()[i][1]);
                 }
 
-                Console.WriteLine("\tTargeted: " + col + " " + row);
+       
 
                 //check if target is legal
                 for (int i = 0; i < game.getCurrentPlayer().getHits().Count; i++) {  //check 
@@ -272,7 +254,7 @@ namespace EECS_448___Project_1 {
 
 
             //draw ships
-            //drawShips(sender, e, game.getCurrentOpponent().getShips(), oppBoardPictureBox);
+            drawShips(sender, e, game.getCurrentOpponent().getShips(), oppBoardPictureBox);
 
             //draw hits
             drawHits(sender, e, game.getCurrentPlayer().getHits(), oppBoardPictureBox);

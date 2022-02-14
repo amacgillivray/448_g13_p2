@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace EECS_448___Project_1
 {
@@ -40,10 +41,11 @@ namespace EECS_448___Project_1
         public void setPlayerOne(Player one) { playerOne = one; }
         public void setPlayerTwo(Player two) { playerTwo = two; }
 
-        #endregion
+		#endregion
 
-        //constructor
-        public Game() {
+		#region Constructors
+		//constructors
+		public Game() {
             playerOne = new Player();
             playerTwo = new Player();
             playerTurn = 0;
@@ -54,129 +56,28 @@ namespace EECS_448___Project_1
             playerOne = one;
             playerTwo = two;
         }
+        #endregion
 
         #region methods
 
-        //start game
-        /*  1. Get player data (name, ships) from game setup form
-         *  2. Determine starting player
-         *  3. Game loop
-         */
-        public void startGame(Player one, Player two) {
-            //Get player data
-            playerOne = one;
-            playerTwo = two;
-
-            //determine starting player
-            Random rand = new Random();
-            setPlayerTurn(rand.Next(1, 2));       
-        }
-    
+        //exchange whose turn it is
         public void swapCurrentPlayer() {
             if (getCurrentPlayer() == playerOne) setPlayerTurn(2);
             else setPlayerTurn(1);
         }
 
-        //game turn
-        /*  1. Current player guesses (on game form)   
-         *  2. Determine hit or miss
-         *      - if hit, check if sunk
-         *          -if sunk, check if the game needs to end
-         *  3. Switch current players
-         *  4. Call again
-         */
-
-        
-        /*//Called when a position is chosen by a player
-        public void fire(int[] shot) {
-            int shipIndex = shipHit(shot);
-
-            //Checks if the shot was a hit
-            if (shipIndex > -1) {
-
-                Console.WriteLine("Hit");
-                getCurrentPlayer().addHit(shot);
-
-                if (isSunk(shipIndex)) {
-
-                    Console.WriteLine("You sunk a ship");
-
-                    if (gameOver()) {
-                        
-                    
-                    }
-
-                    //if game is not over switches which player is playing
-                    if (playerTurn == 1)
-                        setPlayerTurn(2);
-                    else
-                        setPlayerTurn(1);
-                }
-            }
-
-            //Called if the shot is a miss
-            else getCurrentPlayer().addMiss(shot);
-        }
-
-
-        //Checks if the ship of a given index has been hit on every position
-        private bool isSunk(int shipIndex) {
-            //Loops through each position of the given ship
-            for (int i = 0; i < getCurrentOpponent().getShips()[shipIndex].Length; i++) {
-
-                //Checks if each position is hit and returns false if any are not
-                if (getCurrentOpponent().getShips()[shipIndex][i][2] == 0) return false;
-            }
-
-            //Returns true if every position on the ship has been hit
-            return true;
-        }
-
-
-        //Returns the index of the ship that is hit; -1 if no ship is hit
-        private int shipHit(int[] shot)
-        {
-            //Loops through each of the opponents ships
-            for (int i = 0; i < getCurrentOpponent().getShips().Count; i++) {
-
-                //Loops through each position on the ship
-                for (int j = 0; j < getCurrentOpponent().getShips()[i].Length; j++) {
-
-                    //Checks if the ship position matches the shot position; if it does, returns the index of the ship
-                    if (shot.SequenceEqual(getCurrentOpponent().getShips()[i][j])) return i;
-                }
-            }
-
-            //Returns -1 if the shot does not match any ship position
-            return -1;
-        }*/
-
-
-       /* //Determines if all ships of the opponent have been sunk. Called when a ship is sunk on a turn
-        private bool gameOver() {
-            //Loops through each of the opponent's ships
-            for (int i = 0; i < getCurrentOpponent().getShips().Count; i++) {
-
-                //Returns false if any ship is not sunk
-                if (!isSunk(i)) return false;
-            }
-
-            //Returns true if all ships are sunk
-            return true;
-        }*/
-        
 
         //check sunk
         private bool isSunk(int[] shot, int[][] ship) {
             //check if any square is not hit (index 2 in each square) ship[sqaure][index 0: col, index 1: row, index 2: hit? (0  = no)
             for (int i = 0; i < ship.Length; i++) {
-                Console.WriteLine("Square " + i + "\tval: " + ship[i][2]);
-                if (ship[i][2] == 0) return false;
+                if (ship[i][2] == 0) return false; //if the current square is not hit, return false
             }
 
             //if no square is un-hit, return true (the ship is sunk)
             return true;
         }
+
 
         //check hit
         private int[][] shipHit(int[] shot) {
@@ -193,9 +94,9 @@ namespace EECS_448___Project_1
 
                     //compare coordinates
                     if (shot.SequenceEqual(shipSquare)) {
-                        //set this ship's square to hit
+                        //set this ship's square to "hit"
                         getCurrentOpponent().getShips()[i][j][2] = 1;
-                        return ship;
+                        return ship; //return the hit ship's array
                     }
                 }
             }
@@ -223,23 +124,38 @@ namespace EECS_448___Project_1
 
                 //check if sunk
                 if (isSunk(shot, hitShip)) {
-                    //get which ship (carrier, battleship, etc)
-                    Console.WriteLine("You sunk a ship");
-                    this.getCurrentPlayer().addSunk();
-                     
-
-                    //remove ship from opponents list of ships. 
-                    //getCurrentOpponent().removeShip(hitShip.Length - 1);
+                    MessageBox.Show(whichShip(hitShip.Length)); //show message box of what you sunk
+                    this.getCurrentPlayer().addSunk(); //increment
                 }
 
             } else {
                 getCurrentPlayer().addMiss(shotCopy);
                 Console.WriteLine("Miss");
             }
-
         }
 
-        #endregion
+        private string whichShip(int squares) {
+            string ship = "";
+            switch(squares) {
+                case 1:
+                    ship = "Lifeboat";
+                    break;
+                case 2:
+                    ship = "Patrol boat";
+                    break;
+                case 3:
+                    ship = "Destroyer";
+                    break;
+                case 4:
+                    ship = "Battleship";
+                    break;
+                case 5:
+                    ship = "Carrier";
+                break;
+			}
+            return "You sunk " + getCurrentOpponent().getName() + "'s " + ship + "!";
+		}
 
+        #endregion
     }
 }
