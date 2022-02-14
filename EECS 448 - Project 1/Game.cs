@@ -170,6 +170,7 @@ namespace EECS_448___Project_1
         private bool isSunk(int[] shot, int[][] ship) {
             //check if any square is not hit (index 2 in each square) ship[sqaure][index 0: col, index 1: row, index 2: hit? (0  = no)
             for (int i = 0; i < ship.Length; i++) {
+                Console.WriteLine("Square " + i + "\tval: " + ship[i][2]);
                 if (ship[i][2] == 0) return false;
             }
 
@@ -192,6 +193,8 @@ namespace EECS_448___Project_1
 
                     //compare coordinates
                     if (shot.SequenceEqual(shipSquare)) {
+                        //set this ship's square to hit
+                        getCurrentOpponent().getShips()[i][j][2] = 1;
                         return ship;
                     }
                 }
@@ -212,7 +215,7 @@ namespace EECS_448___Project_1
             shotCopy[1] = shot[1];
 
             //check if hit
-            if (shipHit(shot) != null) {
+            if (hitShip != null) {
                 Console.WriteLine("Hit");
     
                 //add hit

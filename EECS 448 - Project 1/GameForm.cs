@@ -44,6 +44,7 @@ namespace EECS_448___Project_1 {
 
             
             game.swapCurrentPlayer();
+            game.swapCurrentPlayer();
             InitializePictureBoxes();
 
         }
@@ -288,9 +289,10 @@ namespace EECS_448___Project_1 {
             for(int i = 0; i < game.getCurrentPlayer().getHits().Count; i++) {
                // hitListLabel.Text += "hit: " + game.getCurrentPlayer().getHits()[i][0] + " " + game.getCurrentPlayer().getHits()[i][1];
             }
+            
         }
 
-
+        
 
         #endregion
 
