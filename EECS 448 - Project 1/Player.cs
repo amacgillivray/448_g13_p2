@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace EECS_448___Project_1 {
     public class Player {
-        //variables
-        private string name;
+		#region variables
+		private string name;
         private List<int[]> hits; //list of 2 element int arrays, representing coordinates of hits this player guessed
         private List<int[]> misses; //list of 2 element in arrays, representing coordinates of misses this player guessed
         private List<int[][]> ships; //list of ships placed by the player. each ship is an array of 3-element int arrays with the form { horizontal pos, vertical pos, is hit (0 false, 1 if true) }
         int sunkships;
+        #endregion
 
         //Constructors
         public Player() {
@@ -39,7 +40,6 @@ namespace EECS_448___Project_1 {
         public string getName() {
             return name;
         }
-
         #endregion
 
 
@@ -61,21 +61,20 @@ namespace EECS_448___Project_1 {
             return ships;
         }
 
+        //Increment number of ships sunk by this player
         public void addSunk()
         {
             sunkships++;
         }
 
+        //get number of ships sunk by this player
         public int getSunk()
         {
             return sunkships;
         }
         #endregion
 
-
-
         #region hit & miss methods
-
         //addHit
         public void addHit(int[] hit) {
             if (hit.Length == 2) hits.Add(hit);
