@@ -225,7 +225,7 @@ namespace EECS_448___Project_1
                 if (isSunk(shot, hitShip)) {
                     //get which ship (carrier, battleship, etc)
                     Console.WriteLine("You sunk a ship");
-                    this.getCurrentOpponent().addSunk();
+                    this.getCurrentPlayer().addSunk();
                      
 
                     //remove ship from opponents list of ships. 
