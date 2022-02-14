@@ -272,7 +272,7 @@ namespace EECS_448___Project_1 {
 
 
             //draw ships
-            drawShips(sender, e, game.getCurrentOpponent().getShips(), oppBoardPictureBox);
+            //drawShips(sender, e, game.getCurrentOpponent().getShips(), oppBoardPictureBox);
 
             //draw hits
             drawHits(sender, e, game.getCurrentPlayer().getHits(), oppBoardPictureBox);

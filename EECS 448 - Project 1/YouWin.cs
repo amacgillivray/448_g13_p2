@@ -16,5 +16,10 @@ namespace EECS_448___Project_1
         {
             InitializeComponent();
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
