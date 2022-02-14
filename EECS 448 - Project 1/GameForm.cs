@@ -241,9 +241,6 @@ namespace EECS_448___Project_1 {
             //draw grid lines
             drawGridLines(sender, e, oppBoardPictureBox);
 
-            //draw ships
-            drawShips(sender, e, game.getCurrentOpponent().getShips(), oppBoardPictureBox);
-
             //draw hits
             drawHits(sender, e, game.getCurrentPlayer().getHits(), oppBoardPictureBox);
 
