@@ -46,18 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Coordinates.cs" />
     <Compile Include="CreditsPage.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CreditsPage.Designer.cs">
       <DependentUpon>CreditsPage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ConstructionPage.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ConstructionPage.Designer.cs">
-      <DependentUpon>ConstructionPage.cs</DependentUpon>
     </Compile>
     <Compile Include="PlayerCreator.cs">
       <SubType>Form</SubType>
@@ -105,9 +98,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ConstructionPage.resx">
-      <DependentUpon>ConstructionPage.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CreditsPage.resx">
       <DependentUpon>CreditsPage.cs</DependentUpon>
     </EmbeddedResource>
