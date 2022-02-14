@@ -43,7 +43,6 @@ namespace EECS_448___Project_1 {
             this.game = game;
 
             
-            game.swapCurrentPlayer();
             InitializePictureBoxes();
 
         }
@@ -310,10 +309,19 @@ namespace EECS_448___Project_1 {
                 targeted = false;
                 oppBoardPictureBox.Refresh();   //refreshes images on board
                 Thread.Sleep(delay);             //pauses for 1 second (1000 milliseconds)
-                Form2 landing = new Form2(ref game);    
-                landing.Show();                         //Swaps to the landing form
-                game.swapCurrentPlayer();       //Changes the current player (flips the boards)
-                this.Close();
+                if (game.getCurrentPlayer().getHits().Count() == game.getCurrentOpponent().getShips().Count)
+                {
+                    YouWin win = new YouWin();
+                    win.Show();
+                    this.Close();
+                }
+                else
+                {
+                    Form2 landing = new Form2(ref game);
+                    landing.Show();                         //Swaps to the landing form
+                    game.swapCurrentPlayer();       //Changes the current player (flips the boards)
+                    this.Close();
+                }
             }
         }
 
