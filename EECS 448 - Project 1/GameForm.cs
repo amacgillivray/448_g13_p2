@@ -28,6 +28,8 @@ namespace EECS_448___Project_1 {
 
         //draws pictureboxes for the first time
         private void InitializePictureBoxes() {
+            //do not touch
+            game.swapCurrentPlayer();
             game.swapCurrentPlayer();
             game.swapCurrentPlayer();
             updateBoardLabels();
@@ -248,6 +250,8 @@ namespace EECS_448___Project_1 {
             //draw grid lines
             drawGridLines(sender, e, oppBoardPictureBox);
 
+            //draw ships
+            drawShips(sender, e, game.getCurrentOpponent().getShips(), myBoardPictureBox);
             //draw hits
             drawHits(sender, e, game.getCurrentPlayer().getHits(), oppBoardPictureBox);
 

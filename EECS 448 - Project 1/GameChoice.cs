@@ -26,19 +26,19 @@ namespace EECS_448___Project_1 {
         bool isKeyDown = false;
 		#endregion
 
+        //constructor
 		public GameChoice(Game game,int shipNum) {
             this.KeyPreview = true;
             InitializeComponent();
             this.game = game;
-            for (int i = 1; i <= shipNum; i++) // Creates the corresonding number of ships based on the button clicked on the previous form
+            //update label
+            boardLabel.Text = game.getPlayerOne().getName();
+
+            // Creates the corresonding number of ships based on the button clicked on the previous form
+            for(int i = 1; i <= shipNum; i++) 
             {
                 addShips(i);
             }
-            //addShips(1);
-            //addShips(2);
-            //addShips(3);
-            //addShips(4);
-            //addShips(5);
 
             //snap ships
             foreach(Ship ship in ships) ship.snap();
@@ -249,45 +249,10 @@ namespace EECS_448___Project_1 {
 
         }
         
-
+        //reset button click
         private void button1_Click(object sender, EventArgs e)
         {
-            //reset
-            foreach (Ship ship in ships)
-            {
-                
-                    ship.rectangle.X = 0; 
-                    ship.rectangle.Y = ship.rectangle.Width;
-              
-            }
-            pictureBox.Refresh();
-        }
-
-        private void button2_Click(object sender, EventArgs e)  
-        {
-            //player
-            foreach(Ship ship in ships) {
-                int[][] shipCoords = new int[ship.numSquares][];
-                /*for(int i =0; i < ship.numSquares; i++) {
-                    shipCoords[i] = new int[3];
-                    shipCoords[i][0] = ship.getGameCoordinates()[i][0];
-                    shipCoords[i][1] = ship.getGameCoordinates()[i][1];
-                    shipCoords[i][2] = ship.getGameCoordinates()[i][2];
-				}*/
-                for(int i = 0; i < ship.numSquares; i++) {
-                    
-                }
-                game.getPlayerOne().addShip(saveGameCoords(ship.getGameCoordinates()));
-			}
-            
-            //next player
-            player_1 = false;
-            button2.Hide();
-            button3.Show();
-            button1.Show();
-            playGame.Show();
-
-            //reset ships
+            //reset ship positions
             foreach (Ship ship in ships)
             {
                 ship.rectangle.X = Formatting.offset;
@@ -296,18 +261,41 @@ namespace EECS_448___Project_1 {
                 ship.rectangle.Height = Formatting.shipWidth;
             }
             pictureBox.Refresh();
-
         }
 
-      
+        //next player / play game button press
+        private void button2_Click(object sender, EventArgs e)  
+        {
+            if(player_1) {
+                //save to player one
+                foreach(Ship ship in ships) {
+                    game.getPlayerOne().addShip(saveGameCoords(ship.getGameCoordinates()));
+                }
+                //it is now player twos turn to place ships
+                player_1 = false;
+                //update button text
+                button2.Text = "Play Game";
+                //reset ships
+                button1_Click(sender, e);
 
+                //update label
+                boardLabel.Text = game.getPlayerTwo().getName();
+            } else {
+                //if player 2 is setting up their board
+                foreach(Ship ship in ships) {
+                    game.getPlayerTwo().addShip(saveGameCoords(ship.getGameCoordinates()));
+                }
 
+                //create new game form
+                GameForm gameForm = new GameForm(ref game);
+                gameForm.Show(); //show the game form
+                this.Close();    //close this form
+            }
+        }
 
-
+        //key down event
         private void GameChoice_KeyDown(object sender, KeyEventArgs e)
         {
-            Console.WriteLine("KeyPressed" + e.KeyCode);
-
             //check if key is down
             if (!isKeyDown)
             {
@@ -335,18 +323,16 @@ namespace EECS_448___Project_1 {
             }
         }
 
+        //key up event
         private void GameChoice_KeyUp(object sender, KeyEventArgs e)
         {
             isKeyDown = false;
             pictureBox.Refresh();
         }
 
+        //mouse down event
         private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            Console.WriteLine(isMouseDown);
-
-           // Console.WriteLine(e.Location.X + " " + e.Location.Y);
-
             Point mouse = new Point(e.Location.X, e.Location.Y);
 
             //check if mouse is already down
@@ -374,14 +360,13 @@ namespace EECS_448___Project_1 {
                     {
                         ship.selected = false;
                     }
-
-                    Console.WriteLine("Selected: " + ship.selected);
                 }
             }
 
             pictureBox.Refresh();
         }
 
+        //mouse up event
         private void pictureBox_MouseUp(object sender, MouseEventArgs e) {
             bool overlap = false;
             bool outOfBounds = true;
@@ -413,6 +398,7 @@ namespace EECS_448___Project_1 {
             pictureBox.Refresh();
         }
 
+        //mouse move event
         private void pictureBox_MouseMove(object sender, MouseEventArgs e)
         {
             //check if mouse is down
@@ -432,56 +418,26 @@ namespace EECS_448___Project_1 {
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //save player ones coordintates
-            foreach(Ship ship in ships) {
-                ship.getGameCoordinates();
-            }
+        //back button
+		private void backButton_Click(object sender, EventArgs e) {
+            //create new game
+            Game backGame = new Game();                     //creates new game object
+            //set names
+            backGame.getPlayerOne().setName(game.getPlayerOne().getName());
+            backGame.getPlayerTwo().setName(game.getPlayerTwo().getName());
 
-            /*// save the location of ship
-            List<int> eachLocation= new List<int>();
-            
-            foreach (Ship ship in ships)
-            {
-                eachLocation.Add(ship.rectangle.X);
-                eachLocation.Add(ship.rectangle.Width);
-                eachLocation.Add(ship.rectangle.Y);
-                eachLocation.Add(ship.rectangle.Height);
-                if (player_1)
-                {
-                  // player_1_location.Add(eachLocation);
-                }
-                else
-                {
-                   // player_2_location.Add(eachLocation);
-                }
-                     
-                
-            }*/
-            /*button3.Hide();
-            button1.Hide();*/
+            //set old game to null
+            game = null;
 
+            //new setup form
+            SetupPage setup = new SetupPage(backGame);      // passes the game to the next form
+            setup.Show();                               // shows the next form
+            this.Close();                               // closes this form
         }
+	}
 
-        private void playGame_Click(object sender, EventArgs e)
-        {
-            foreach(Ship ship in ships) {
-                game.getPlayerTwo().addShip(saveGameCoords(ship.getGameCoordinates()));
-            }
-
-            GameForm gameForm = new GameForm(ref game);
-            gameForm.Show();
-            this.Close();
-        }
-
-        private void GameChoice_Load(object sender, EventArgs e)
-        {
-
-        }
-    }
-
-    public static class Formatting {
+	//formating class
+	public static class Formatting {
         public const int squareSize = 30;
         public const int offset = (int)(squareSize * 0.1);
         public const int shipWidth = (int)(squareSize * 0.8);
