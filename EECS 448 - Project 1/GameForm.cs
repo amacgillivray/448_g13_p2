@@ -309,7 +309,7 @@ namespace EECS_448___Project_1 {
                 targeted = false;
                 oppBoardPictureBox.Refresh();   //refreshes images on board
                 Thread.Sleep(delay);             //pauses for 1 second (1000 milliseconds)
-                if (game.getCurrentPlayer().getHits().Count() == game.getCurrentOpponent().getShips().Count)
+                if (game.getCurrentOpponent().getSunk() == game.getCurrentOpponent().getShips().Count())
                 {
                     YouWin win = new YouWin();
                     win.Show();

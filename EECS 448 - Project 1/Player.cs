@@ -11,6 +11,7 @@ namespace EECS_448___Project_1 {
         private List<int[]> hits; //list of 2 element int arrays, representing coordinates of hits this player guessed
         private List<int[]> misses; //list of 2 element in arrays, representing coordinates of misses this player guessed
         private List<int[][]> ships; //list of ships placed by the player. each ship is an array of 3-element int arrays with the form { horizontal pos, vertical pos, is hit (0 false, 1 if true) }
+        int sunkships;
 
         //Constructors
         public Player() {
@@ -18,6 +19,7 @@ namespace EECS_448___Project_1 {
             hits = new List<int[]>();
             misses = new List<int[]>();
             ships = new List<int[][]>();
+            sunkships = 0;
         }
 
         public Player(string _name) {
@@ -25,6 +27,7 @@ namespace EECS_448___Project_1 {
             hits = new List<int[]>();
             misses = new List<int[]>();
             ships = new List<int[][]>();
+            sunkships = 0;
         }
 
         #region name methods
@@ -58,6 +61,15 @@ namespace EECS_448___Project_1 {
             return ships;
         }
 
+        public void addSunk()
+        {
+            sunkships++;
+        }
+
+        public int getSunk()
+        {
+            return sunkships;
+        }
         #endregion
 
 
