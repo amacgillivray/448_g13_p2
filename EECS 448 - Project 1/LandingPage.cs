@@ -11,23 +11,17 @@ using System.Windows.Forms;
 namespace EECS_448___Project_1 {
     public partial class Form2 : Form {
 
+        //var (passed around
         Game game = new Game();
-        public Form2() {
-            InitializeComponent();
 
-        }
-
+        //constructor with param
         public Form2(ref Game game)
         {
             InitializeComponent();
             this.game = game;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        //okay button
         private void button1_Click(object sender, EventArgs e)
         {
             GameForm gameForm = new GameForm( ref game);

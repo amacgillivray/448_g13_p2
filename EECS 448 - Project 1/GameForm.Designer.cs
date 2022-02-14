@@ -677,7 +677,6 @@ namespace EECS_448___Project_1 {
             this.label40.Size = new System.Drawing.Size(162, 33);
             this.label40.TabIndex = 10;
             this.label40.Text = "Your Board";
-            this.label40.Click += new System.EventHandler(this.label40_Click);
             // 
             // label41
             // 
@@ -717,8 +716,6 @@ namespace EECS_448___Project_1 {
             this.Controls.Add(this.myBoardPictureBox);
             this.Name = "GameForm";
             this.Text = "Battleship";
-            this.Load += new System.EventHandler(this.GameForm_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.myBoardPictureBox)).EndInit();
             this.xAxisPanel.ResumeLayout(false);
             this.xAxisPanel.PerformLayout();

@@ -106,7 +106,6 @@ namespace EECS_448___Project_1
 
         //fire
         public void fire(int[] shot) {
-            Console.WriteLine("Method Fire Called at " + shot[0] + " " + shot[1]);
             //create ship object of the ship that is hit by the guessed shot (returns null if miss)
             int[][] hitShip = shipHit(shot);
 
@@ -116,9 +115,7 @@ namespace EECS_448___Project_1
             shotCopy[1] = shot[1];
 
             //check if hit
-            if (hitShip != null) {
-                Console.WriteLine("Hit");
-    
+            if (hitShip != null) {    
                 //add hit
                 getCurrentPlayer().addHit(shotCopy);
 
@@ -130,7 +127,6 @@ namespace EECS_448___Project_1
 
             } else {
                 getCurrentPlayer().addMiss(shotCopy);
-                Console.WriteLine("Miss");
             }
         }
 

@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,23 +21,11 @@ namespace EECS_448___Project_1 {
             this.Hide();                                //Hides this form
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             CreditsPage credits = new CreditsPage(); //Creates a Credits form
             credits.Show();                          //Shows the credits               
             this.Hide();                               // Hides this form
-        }
-
-        private void NetworkGameButton_Click(object sender, EventArgs e)
-        {
-            ConstructionPage constructionPage = new ConstructionPage();     //Creates an underconstruction form
-            constructionPage.Show();                                        // shows that form
-            this.Hide();                                                    // Hides this form
         }
     }
 }
