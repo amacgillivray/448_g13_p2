@@ -29,9 +29,10 @@ namespace EECS_448___Project_1 {
         //draws pictureboxes for the first time
         private void InitializePictureBoxes() {
             //do not touch
-            game.swapCurrentPlayer();
-            game.swapCurrentPlayer();
-            game.swapCurrentPlayer();
+
+            //game.swapCurrentPlayer();
+            //game.swapCurrentPlayer();
+            //game.swapCurrentPlayer();
             updateBoardLabels();
             myBoardPictureBox.Refresh();
             oppBoardPictureBox.Refresh();
@@ -193,6 +194,7 @@ namespace EECS_448___Project_1 {
         }
 
 
+
         #region oppBoard Methods
         //mouse move event
         private void oppBoardPictureBox_MouseMove(object sender, MouseEventArgs e) {
@@ -251,7 +253,7 @@ namespace EECS_448___Project_1 {
             drawGridLines(sender, e, oppBoardPictureBox);
 
             //draw ships
-            drawShips(sender, e, game.getCurrentOpponent().getShips(), myBoardPictureBox);
+            //drawShips(sender, e, game.getCurrentOpponent().getShips(), myBoardPictureBox);
             //draw hits
             drawHits(sender, e, game.getCurrentPlayer().getHits(), oppBoardPictureBox);
 
@@ -293,5 +295,10 @@ namespace EECS_448___Project_1 {
             }
         }
         #endregion
+
+        private void GameForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
