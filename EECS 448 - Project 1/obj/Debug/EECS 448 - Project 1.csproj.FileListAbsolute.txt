@@ -71,6 +71,7 @@ C:\Users\matth\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Debug\EEC
 C:\Users\matth\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.exe
 C:\Users\matth\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.pdb
 C:\Users\matth\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.CreditsPage.resources
+C:\Users\matth\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.ConstructionPage.resources
 C:\Users\james\source\repos\EECS 448 - Project 1\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.ConstructionPage.resources
 C:\Users\james\source\repos\EECS 448 - Project 1\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.CreditsPage.resources
 C:\Users\james\source\repos\EECS 448 - Project 1\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.Form2.resources
