@@ -20,6 +20,7 @@ namespace EECS_448___Project_1
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             this.Close();
+            Application.Exit();
         }
     }
 }
