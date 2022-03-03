@@ -48,7 +48,7 @@ namespace EECS_448___Project_1
 		public Game() {
             playerOne = new Player();
             playerTwo = new Player();
-            playerTurn = 0;
+            playerTurn = 1;
         }
 
 
@@ -62,8 +62,11 @@ namespace EECS_448___Project_1
 
         //exchange whose turn it is
         public void swapCurrentPlayer() {
-            if (getCurrentPlayer() == playerOne) setPlayerTurn(2);
-            else setPlayerTurn(1);
+            if (getCurrentPlayer() == playerOne) {
+                setPlayerTurn(2);
+            } else {
+                setPlayerTurn(1);
+            }
         }
 
 
