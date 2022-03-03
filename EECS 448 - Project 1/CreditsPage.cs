@@ -17,7 +17,7 @@ namespace EECS_448___Project_1
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void label_Click(object sender, EventArgs e)
         {
             Form1 mainmenu = new Form1();
             mainmenu.Show();
@@ -27,27 +27,6 @@ namespace EECS_448___Project_1
         private void CreditsPage_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-            Form1 mainmenu = new Form1();
-            mainmenu.Show();
-            this.Close();
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-            Form1 mainmenu = new Form1();
-            mainmenu.Show();
-            this.Close();
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-            Form1 mainmenu = new Form1();
-            mainmenu.Show();
-            this.Close();
         }
 
         private void CreditsPage_Click(object sender, EventArgs e)

@@ -30,8 +30,8 @@ namespace EECS_448___Project_1 {
         private void InitializePictureBoxes() {
             //do not touch
             game.swapCurrentPlayer();
-            game.swapCurrentPlayer();
-            game.swapCurrentPlayer();
+            //game.swapCurrentPlayer();
+            //game.swapCurrentPlayer();
             updateBoardLabels();
             myBoardPictureBox.Refresh();
             oppBoardPictureBox.Refresh();
@@ -288,6 +288,7 @@ namespace EECS_448___Project_1 {
                     Form2 landing = new Form2(ref game);
                     landing.Show();                         //Swaps to the landing form
                     game.swapCurrentPlayer();               //Changes the current player (flips the boards)
+                    InitializePictureBoxes();
                     this.Close();
                 }
             }
