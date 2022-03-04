@@ -184,14 +184,14 @@ namespace EECS_448___Project_1
 
         private void hitgen_medium()
         {
-            if (1)
-            {
+           //if (1)
+            //{
 
-            }
-            else
-            {
+            //}
+            //else
+            //{
 
-            }
+            //}
         }
 
         private void hitgen_hard()
