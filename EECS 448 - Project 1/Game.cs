@@ -12,6 +12,7 @@ namespace EECS_448___Project_1
         private int playerTurn;
         private Player playerOne;
         private Player playerTwo;
+        private int ai_level;
         #endregion
 
         #region getters & setters
@@ -49,6 +50,7 @@ namespace EECS_448___Project_1
             playerOne = new Player();
             playerTwo = new Player();
             playerTurn = 1;
+            ai_level = 0;
         }
 
 
@@ -56,12 +58,21 @@ namespace EECS_448___Project_1
             playerOne = one;
             playerTwo = two;
         }
+
+        public Game(int ai_difficulty)
+        {
+            playerOne = new Player();
+            playerTwo = new Player();
+            playerTurn = 1;
+            ai_level = ai_difficulty;
+        }
         #endregion
 
         #region methods
 
         //exchange whose turn it is
         public void swapCurrentPlayer() {
+            
             if (getCurrentPlayer() == playerOne) {
                 setPlayerTurn(2);
             } else {
@@ -154,6 +165,39 @@ namespace EECS_448___Project_1
 			}
             return "You sunk " + getCurrentOpponent().getName() + "'s " + ship + "!";
 		}
+
+
+
+        private int rng()
+        {
+            var rand = new Random();
+            return rand.Next(100);
+        }
+
+        private void hitgen_easy()
+        {
+            int x = rng();
+            int y = rng();
+
+
+        }
+
+        private void hitgen_medium()
+        {
+            if (1)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+
+        private void hitgen_hard()
+        {
+
+        }
 
         #endregion
     }
