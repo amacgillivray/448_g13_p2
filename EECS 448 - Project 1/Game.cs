@@ -137,19 +137,19 @@ namespace EECS_448___Project_1
             string ship = "";
             switch(squares) {
                 case 1:
-                    ship = "Lifeboat";
+                    ship = "Patrol Boat";
                     break;
                 case 2:
-                    ship = "Patrol boat";
+                    ship = "Destroyer";
                     break;
                 case 3:
-                    ship = "Destroyer";
+                    ship = "Cruiser";
                     break;
                 case 4:
                     ship = "Battleship";
                     break;
                 case 5:
-                    ship = "Carrier";
+                    ship = "Aircraft Carrier";
                 break;
 			}
             return "You sunk " + getCurrentOpponent().getName() + "'s " + ship + "!";
