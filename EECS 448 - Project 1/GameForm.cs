@@ -28,10 +28,7 @@ namespace EECS_448___Project_1 {
 
         //draws pictureboxes for the first time
         private void InitializePictureBoxes() {
-            //do not touch
             game.swapCurrentPlayer();
-            //game.swapCurrentPlayer();
-            //game.swapCurrentPlayer();
             updateBoardLabels();
             myBoardPictureBox.Refresh();
             oppBoardPictureBox.Refresh();
