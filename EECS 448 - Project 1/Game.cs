@@ -57,14 +57,14 @@ namespace EECS_448___Project_1
             playerOne = new Player();
             playerTwo = new Player();
             playerTurn = 1;
-            ai_level = 1;
+            ai_level = 0;
         }
 
 
         public Game(Player one, Player two) {
             playerOne = one;
             playerTwo = two;
-            ai_level = 1;
+            ai_level = 0;
         }
 
         public Game(int ai_difficulty)
@@ -73,7 +73,7 @@ namespace EECS_448___Project_1
             playerTwo = new Player();
             playerTurn = 1;
             //ai_level = ai_difficulty;
-            ai_level = 1;
+            ai_level = ai_difficulty;
         }
         #endregion
 
@@ -174,7 +174,7 @@ namespace EECS_448___Project_1
 			}
 
             if (ai_level == 0 || playerTurn == 1) 
-                return "You sunk " + getCurrentOpponent().getName() + "'s " + ship + "!";
+                return "You sank " + getCurrentOpponent().getName() + "'s " + ship + "!";
             else
                 return "Your " + ship + " was destroyed!";
         }
