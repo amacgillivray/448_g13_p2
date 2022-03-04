@@ -12,7 +12,14 @@ namespace EECS_448___Project_1
         private int playerTurn;
         private Player playerOne;
         private Player playerTwo;
-        private int ai_level;
+        public int ai_level;
+        private bool ai_havehit = false;
+        //private int[2] ai_hitbase;
+        private bool ai_trynorth = false;
+        private bool ai_trysouth = false;
+        private bool ai_tryeast = false;
+        private bool ai_trywest = false;
+        private Random rand = new Random();
         #endregion
 
         #region getters & setters
@@ -50,13 +57,14 @@ namespace EECS_448___Project_1
             playerOne = new Player();
             playerTwo = new Player();
             playerTurn = 1;
-            ai_level = 0;
+            ai_level = 1;
         }
 
 
         public Game(Player one, Player two) {
             playerOne = one;
             playerTwo = two;
+            ai_level = 1;
         }
 
         public Game(int ai_difficulty)
@@ -64,7 +72,8 @@ namespace EECS_448___Project_1
             playerOne = new Player();
             playerTwo = new Player();
             playerTurn = 1;
-            ai_level = ai_difficulty;
+            //ai_level = ai_difficulty;
+            ai_level = 1;
         }
         #endregion
 
@@ -72,7 +81,6 @@ namespace EECS_448___Project_1
 
         //exchange whose turn it is
         public void swapCurrentPlayer() {
-            
             if (getCurrentPlayer() == playerOne) {
                 setPlayerTurn(2);
             } else {
@@ -135,8 +143,9 @@ namespace EECS_448___Project_1
 
                 //check if sunk
                 if (isSunk(shot, hitShip)) {
-                    MessageBox.Show(whichShip(hitShip.Length)); //show message box of what you sunk
-                    this.getCurrentPlayer().addSunk(); //increment
+                    //show message box of what you or the AI sank
+                    //if (ai_level == 0 || playerTurn == 1 )
+                        MessageBox.Show(whichShip(hitShip.Length));
                 }
 
             } else {
@@ -163,40 +172,71 @@ namespace EECS_448___Project_1
                     ship = "Aircraft Carrier";
                 break;
 			}
-            return "You sunk " + getCurrentOpponent().getName() + "'s " + ship + "!";
-		}
+
+            if (ai_level == 0 || playerTurn == 1) 
+                return "You sunk " + getCurrentOpponent().getName() + "'s " + ship + "!";
+            else
+                return "Your " + ship + " was destroyed!";
+        }
 
 
 
         private int rng()
         {
-            var rand = new Random();
-            return rand.Next(100);
+            return rand.Next(10);
         }
 
-        private void hitgen_easy()
+        public void hitgen_easy()
         {
-            int x = rng();
-            int y = rng();
+            playerTurn = 2;
+            int row = rng();
+            int col = rng();
+            int[] targetSquare = new int[2];
+            targetSquare[0] = col;
+            targetSquare[1] = row;
 
+            bool targeted = false;
 
-        }
-
-        private void hitgen_medium()
-        {
-            if (1)
+            while (!targeted)
             {
+                targeted = true;
+                row = rng();
+                col = rng();
+                targetSquare[0] = col;
+                targetSquare[1] = row;
+                //check if target is legal (has it already been guessed?)
+                for (int i = 0; i < getCurrentPlayer().getHits().Count; i++)
+                {     //check if targeted square is on a hit
+                    if (targetSquare.SequenceEqual(getCurrentPlayer().getHits()[i])) targeted = false; //no longer target confirmed
+                }
+                for (int i = 0; i < getCurrentPlayer().getMisses().Count; i++)
+                {
+                    if (targetSquare.SequenceEqual(getCurrentPlayer().getMisses()[i])) targeted = false; //no longer target confirmed
+                }
+            }
 
+            fire(targetSquare);
+            playerTurn = 1;
+        }
+
+        public void hitgen_medium()
+        {
+            playerTurn = 2;
+            if (ai_havehit)
+            {
+            
             }
             else
             {
 
             }
+            playerTurn = 1;
         }
 
-        private void hitgen_hard()
+        public void hitgen_hard()
         {
-
+            playerTurn = 2;
+            playerTurn = 1;
         }
 
         #endregion
