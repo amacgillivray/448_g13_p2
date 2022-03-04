@@ -90,6 +90,7 @@ namespace EECS_448___Project_1 {
             this.button3.TabIndex = 4;
             this.button3.Text = "Play vs. AI";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Form1
             // 

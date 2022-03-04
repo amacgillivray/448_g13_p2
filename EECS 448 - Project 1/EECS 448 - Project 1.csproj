@@ -52,6 +52,12 @@
     <Compile Include="CreditsPage.Designer.cs">
       <DependentUpon>CreditsPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="chooselevelAI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="chooselevelAI.Designer.cs">
+      <DependentUpon>chooselevelAI.cs</DependentUpon>
+    </Compile>
     <Compile Include="PlayerCreator.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CreditsPage.resx">
       <DependentUpon>CreditsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="chooselevelAI.resx">
+      <DependentUpon>chooselevelAI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PlayerCreator.resx">
       <DependentUpon>PlayerCreator.cs</DependentUpon>
