@@ -266,30 +266,77 @@ namespace EECS_448___Project_1 {
         //next player / play game button press
         private void button2_Click(object sender, EventArgs e)  
         {
-            if(player_1) {
-                //save to player one
-                foreach(Ship ship in ships) {
+            bool playvsai = true;
+            if (!playvsai)
+            {
+                if (player_1)
+                {
+                    //save to player one
+                    foreach (Ship ship in ships)
+                    {
+                        game.getPlayerOne().addShip(saveGameCoords(ship.getGameCoordinates()));
+                    }
+                    //it is now player twos turn to place ships
+                    player_1 = false;
+                    //update button text
+                    button2.Text = "Play Game";
+                    //reset ships
+                    button1_Click(sender, e);
+
+                    //update label
+                    boardLabel.Text = game.getPlayerTwo().getName();
+                }
+                else
+                {
+                    //if player 2 is setting up their board
+                    foreach (Ship ship in ships)
+                    {
+                        game.getPlayerTwo().addShip(saveGameCoords(ship.getGameCoordinates()));
+                    }
+
+                    //create new game form
+                    GameForm gameForm = new GameForm(ref game);
+                    gameForm.Show(); //show the game form
+                    this.Close();    //close this form
+                }
+            } else
+            {
+                //player places ships
+                foreach (Ship ship in ships)
+                {
                     game.getPlayerOne().addShip(saveGameCoords(ship.getGameCoordinates()));
                 }
-                //it is now player twos turn to place ships
-                player_1 = false;
-                //update button text
-                button2.Text = "Play Game";
-                //reset ships
                 button1_Click(sender, e);
+                //AI places ships
 
-                //update label
-                boardLabel.Text = game.getPlayerTwo().getName();
-            } else {
-                //if player 2 is setting up their board
-                foreach(Ship ship in ships) {
-                    game.getPlayerTwo().addShip(saveGameCoords(ship.getGameCoordinates()));
+                foreach (Ship ship2 in ships)
+                {
+                    Random rnd = new Random();
+                    bool checkoverlp = true;
+                    bool inbound = false;
+                    ship2.selected = true;
+                    while (!inbound && !checkoverlp)
+                    {
+                        //generate random coordinatesz
+                        ship2.rectangle.X = rnd.Next(300);
+                        ship2.rectangle.Y = rnd.Next(300);
+
+                        //check if overlap
+                        foreach (Ship otherships in ships)
+                        {
+                            if (ship2.checkOverlap(otherships) && otherships.selected == false) checkoverlp = true;
+                        }
+                        //check if inbound
+                        inbound = ship2.checkInBounds();
+                    }
+                    game.getPlayerTwo().addShip(saveGameCoords(ship2.getGameCoordinates()));
+                    ship2.selected = false;
+
                 }
-
-                //create new game form
                 GameForm gameForm = new GameForm(ref game);
                 gameForm.Show(); //show the game form
-                this.Close();    //close this form
+                this.Close();
+
             }
         }
 

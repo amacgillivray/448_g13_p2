@@ -184,7 +184,7 @@ namespace EECS_448___Project_1
 
         private void hitgen_medium()
         {
-            if (1)
+            if (true)
             {
 
             }
