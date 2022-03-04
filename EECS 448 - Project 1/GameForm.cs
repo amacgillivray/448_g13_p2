@@ -282,11 +282,30 @@ namespace EECS_448___Project_1 {
                     win.Show();                 //show win screen
                     this.Close();
                 } else {
-                    Form2 landing = new Form2(ref game);
-                    landing.Show();                         //Swaps to the landing form
-                    game.swapCurrentPlayer();               //Changes the current player (flips the boards)
-                    InitializePictureBoxes();
-                    this.Close();
+                    if (game.ai_level == 0) // for vs player
+                    { 
+                        Form2 landing = new Form2(ref game);
+                        landing.Show();                         //Swaps to the landing form
+                        game.swapCurrentPlayer();               //Changes the current player (flips the boards)
+                        InitializePictureBoxes();
+                        this.Close();
+                    } else // for vs ai
+                    {
+                        switch (game.ai_level)
+                        {
+                            case 1:
+                                game.hitgen_easy();
+                                break;
+                            case 2:
+                                game.hitgen_medium();
+                                break;
+                            case 3:
+                                game.hitgen_hard();
+                                break;
+                        }
+                        myBoardPictureBox.Refresh();
+                        oppBoardPictureBox.Refresh();
+                    }
                 }
             }
         }
