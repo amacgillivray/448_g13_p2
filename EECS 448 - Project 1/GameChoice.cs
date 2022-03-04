@@ -417,7 +417,7 @@ namespace EECS_448___Project_1 {
         private void pictureBox_MouseUp(object sender, MouseEventArgs e) {
             bool overlap = false;
             bool outOfBounds = true;
-            //testing github
+
             //if a ship is selected do this
             if(getSelectedShip() != null) {
                 //snap
