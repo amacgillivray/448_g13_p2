@@ -30,7 +30,9 @@ namespace EECS_448___Project_1 {
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            chooselevelAI choose = new chooselevelAI();
+            choose.Show();                            
+            this.Hide();
         }
     }
 }

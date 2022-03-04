@@ -129,3 +129,4 @@ C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Pro
 C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.csproj.CoreCompileInputs.cache
 C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.exe
 C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.pdb
+C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.chooselevelAI.resources
