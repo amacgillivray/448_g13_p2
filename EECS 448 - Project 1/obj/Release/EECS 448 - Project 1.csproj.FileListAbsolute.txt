@@ -28,3 +28,20 @@ C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Release\E
 C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.csproj.CoreCompileInputs.cache
 C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.exe
 C:\Users\james\Source\Repos\eecs448-project-1\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.pdb
+C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\bin\Release\EECS 448 - Project 1.exe.config
+C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\bin\Release\EECS 448 - Project 1.exe
+C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\bin\Release\EECS 448 - Project 1.pdb
+C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.CreditsPage.resources
+C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.PlayerCreator.resources
+C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.GameChoice.resources
+C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.GameForm.resources
+C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.Form2.resources
+C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.Form1.resources
+C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.Properties.Resources.resources
+C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.SetupPage.resources
+C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.YouWin.resources
+C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.csproj.GenerateResource.cache
+C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.exe
+C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.pdb
+C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.chooselevelAI.resources
+C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.csprojAssemblyReference.cache
