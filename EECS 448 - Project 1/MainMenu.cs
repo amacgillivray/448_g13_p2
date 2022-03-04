@@ -27,5 +27,10 @@ namespace EECS_448___Project_1 {
             credits.Show();                          //Shows the credits               
             this.Hide();                               // Hides this form
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

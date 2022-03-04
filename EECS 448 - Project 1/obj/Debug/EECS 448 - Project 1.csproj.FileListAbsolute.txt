@@ -111,3 +111,21 @@ C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project
 C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.exe
 C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.pdb
 C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.csprojAssemblyReference.cache
+C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\bin\Debug\EECS 448 - Project 1.exe.config
+C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\bin\Debug\EECS 448 - Project 1.exe
+C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\bin\Debug\EECS 448 - Project 1.pdb
+C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.csproj.AssemblyReference.cache
+C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.csproj.SuggestedBindingRedirects.cache
+C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.CreditsPage.resources
+C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.PlayerCreator.resources
+C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.GameChoice.resources
+C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.GameForm.resources
+C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.Form2.resources
+C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.Form1.resources
+C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.Properties.Resources.resources
+C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.SetupPage.resources
+C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.YouWin.resources
+C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.csproj.GenerateResource.cache
+C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.csproj.CoreCompileInputs.cache
+C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.exe
+C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.pdb
