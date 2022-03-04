@@ -130,6 +130,7 @@ C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Pro
 C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.exe
 C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.pdb
 C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.chooselevelAI.resources
+<<<<<<< HEAD
 C:\Users\mccum\OneDrive\Documents\EECS 448\448_g13_p2\EECS 448 - Project 1\bin\Debug\EECS 448 - Project 1.exe.config
 C:\Users\mccum\OneDrive\Documents\EECS 448\448_g13_p2\EECS 448 - Project 1\bin\Debug\EECS 448 - Project 1.exe
 C:\Users\mccum\OneDrive\Documents\EECS 448\448_g13_p2\EECS 448 - Project 1\bin\Debug\EECS 448 - Project 1.pdb
@@ -149,3 +150,24 @@ C:\Users\mccum\OneDrive\Documents\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\D
 C:\Users\mccum\OneDrive\Documents\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.csproj.CoreCompileInputs.cache
 C:\Users\mccum\OneDrive\Documents\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.exe
 C:\Users\mccum\OneDrive\Documents\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.pdb
+=======
+C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\bin\Debug\EECS 448 - Project 1.exe.config
+C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\bin\Debug\EECS 448 - Project 1.exe
+C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\bin\Debug\EECS 448 - Project 1.pdb
+C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.csproj.AssemblyReference.cache
+C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.csproj.SuggestedBindingRedirects.cache
+C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.CreditsPage.resources
+C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.chooselevelAI.resources
+C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.PlayerCreator.resources
+C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.GameChoice.resources
+C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.GameForm.resources
+C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.Form2.resources
+C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.Form1.resources
+C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.Properties.Resources.resources
+C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.SetupPage.resources
+C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS_448___Project_1.YouWin.resources
+C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.csproj.GenerateResource.cache
+C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.csproj.CoreCompileInputs.cache
+C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.exe
+C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Debug\EECS 448 - Project 1.pdb
+>>>>>>> f84545ee58c305e282083ba8e7e6c3c0fc522429
