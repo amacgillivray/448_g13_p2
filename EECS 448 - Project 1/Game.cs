@@ -16,21 +16,37 @@ namespace EECS_448___Project_1
 
         enum fire_direction
         {
+            notChecked,
             outOfBounds,
-            calledMissed,
+            calledMiss,
             calledHit,
             callable
         };
-        struct ai_directions {
-            int x;
-            int y;
-            fire_direction north;
-            fire_direction south;
-            fire_direction east;
-            fire_direction west;
+        struct ai_direction {
+            public ai_direction(
+                int argx, 
+                int argy, 
+                fire_direction argn, 
+                fire_direction args, 
+                fire_direction arge, 
+                fire_direction argw)
+            {
+                x = argx;
+                y = argy;
+                north = argn;
+                south = args;
+                east = arge;
+                west = argw;
+            }
+            public int x;
+            public int y;
+            public fire_direction north;
+            public fire_direction south;
+            public fire_direction east;
+            public fire_direction west;
         };
         private int ai_tracking_dir = 0;
-        private Stack<ai_directions> ai_hits;
+        private Stack<ai_direction> ai_hits = new Stack<ai_direction>();
         private Random rand = new Random();
         #endregion
 
@@ -155,19 +171,71 @@ namespace EECS_448___Project_1
             shotCopy[1] = shot[1];
 
             //check if hit
-            if (hitShip != null) {    
+            if (hitShip != null)
+            {
                 //add hit
                 getCurrentPlayer().addHit(shotCopy);
 
                 //check if sunk
-                if (isSunk(shot, hitShip)) {
+                if (isSunk(shot, hitShip))
+                {
                     //show message box of what you or the AI sank
                     //if (ai_level == 0 || playerTurn == 1 )
-                        MessageBox.Show(whichShip(hitShip.Length));
+                    MessageBox.Show(whichShip(hitShip.Length));
                 }
 
-            } else {
+                if (getCurrentPlayer() == playerTwo && ai_level > 0)
+                {
+                    int row = shotCopy[0];
+                    int col = shotCopy[1];
+
+                    ai_hits.Push( new ai_direction(
+                            shotCopy[0],
+                            shotCopy[1],
+                            check_direction(row, col - 1),
+                            check_direction(row, col + 1),
+                            check_direction(row - 1, col),
+                            check_direction(row + 1, col)
+                        )
+                    );
+
+                    // todo - update previous top of stack, if there is one.
+                }
+            }
+            else
+            {
                 getCurrentPlayer().addMiss(shotCopy);
+            }
+        }
+
+        private fire_direction check_direction(int x, int y)
+        {
+            int[] targetSquare = new int[2];
+            targetSquare[0] = y;
+            targetSquare[1] = x;
+
+            if (x > 9 || x < 0 || y > 9 || y < 0)
+            {
+                return fire_direction.outOfBounds;
+            }
+            else
+            {
+                for (int i = 0; i < getCurrentPlayer().getHits().Count; i++)
+                {     //check if targeted square is on a hit
+                    if (targetSquare.SequenceEqual(getCurrentPlayer().getHits()[i]))
+                    {
+                        return fire_direction.calledHit;
+                    }
+                }
+                for (int i = 0; i < getCurrentPlayer().getMisses().Count; i++)
+                {
+                    if (targetSquare.SequenceEqual(getCurrentPlayer().getMisses()[i]))
+                    {
+                        return fire_direction.calledMiss;
+                    }
+                }
+
+                return fire_direction.callable;
             }
         }
 
