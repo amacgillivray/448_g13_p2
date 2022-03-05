@@ -58,7 +58,7 @@ namespace EECS_448___Project_1
                 players.FormClosed += players_FormClosed;  //Add eventhandler to cleanup after form closes
             }
 
-            players.Show(this);  //Show Form assigning this form as the forms owner
+            players.Show(this); //Show Form assigning this form as the forms owner
             this.Hide();
         }
 

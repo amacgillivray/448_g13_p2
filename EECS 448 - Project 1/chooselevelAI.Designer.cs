@@ -62,7 +62,7 @@
             this.button3.TabIndex = 2;
             this.button3.Text = "CHEATING";
             this.button3.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // label1
             // 
