@@ -311,7 +311,11 @@ namespace EECS_448___Project_1 {
                                 if (ship2.checkOverlap(ship)) overlapping = true;
 
                             //check in bounds
-                            outofbounds = !ship2.checkInBounds();
+                            outofbounds = !ship2.checkInBounds() 
+                                || (ship2.rectangle.Location.X + ship2.rectangle.Width)>300 
+                                || (ship2.rectangle.Location.X + ship2.rectangle.Width)<0
+                                || (ship2.rectangle.Location.Y + ship2.rectangle.Height)>300
+                                || (ship2.rectangle.Location.Y + ship2.rectangle.Height)<0;
 
                         } while (outofbounds || overlapping);
                         //ship2.snap();
