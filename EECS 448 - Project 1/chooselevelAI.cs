@@ -67,5 +67,10 @@ namespace EECS_448___Project_1
             players = null;  //If form is closed make sure reference is set to null
             // Show();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
