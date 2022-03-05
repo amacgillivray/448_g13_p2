@@ -74,5 +74,10 @@ namespace EECS_448___Project_1 {
             //Show();
             Application.Exit();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

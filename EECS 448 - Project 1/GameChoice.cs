@@ -478,10 +478,35 @@ namespace EECS_448___Project_1 {
             setup.Show();                               // shows the next form
             this.Close();                               // closes this form
         }
-	}
 
-	//formating class
-	public static class Formatting {
+        private void xAxisLabel01_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+
+    //formating class
+    public static class Formatting {
         public const int squareSize = 30;
         public const int offset = (int)(squareSize * 0.1);
         public const int shipWidth = (int)(squareSize * 0.8);

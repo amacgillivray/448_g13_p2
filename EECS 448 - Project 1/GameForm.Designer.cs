@@ -86,7 +86,7 @@ namespace EECS_448___Project_1 {
             // 
             // myBoardPictureBox
             // 
-            this.myBoardPictureBox.BackColor = System.Drawing.Color.Fuchsia;
+            this.myBoardPictureBox.BackColor = System.Drawing.Color.Navy;
             this.myBoardPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.myBoardPictureBox.Location = new System.Drawing.Point(56, 106);
             this.myBoardPictureBox.Name = "myBoardPictureBox";
@@ -236,13 +236,15 @@ namespace EECS_448___Project_1 {
             // 
             // fireButton
             // 
-            this.fireButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.fireButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.fireButton.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fireButton.ForeColor = System.Drawing.Color.Lime;
             this.fireButton.Location = new System.Drawing.Point(227, 4);
             this.fireButton.Name = "fireButton";
             this.fireButton.Size = new System.Drawing.Size(70, 46);
             this.fireButton.TabIndex = 2;
-            this.fireButton.Text = "Fire!";
-            this.fireButton.UseVisualStyleBackColor = true;
+            this.fireButton.Text = "Fire";
+            this.fireButton.UseVisualStyleBackColor = false;
             this.fireButton.Click += new System.EventHandler(this.fireButton_Click);
             // 
             // panel1
@@ -258,7 +260,7 @@ namespace EECS_448___Project_1 {
             // 
             this.targetingLabel.AutoSize = true;
             this.targetingLabel.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.targetingLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.targetingLabel.ForeColor = System.Drawing.Color.Lime;
             this.targetingLabel.Location = new System.Drawing.Point(3, 15);
             this.targetingLabel.Name = "targetingLabel";
             this.targetingLabel.Size = new System.Drawing.Size(120, 22);
@@ -704,7 +706,7 @@ namespace EECS_448___Project_1 {
             // 
             // oppBoardPictureBox
             // 
-            this.oppBoardPictureBox.BackColor = System.Drawing.Color.DodgerBlue;
+            this.oppBoardPictureBox.BackColor = System.Drawing.Color.Maroon;
             this.oppBoardPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.oppBoardPictureBox.Location = new System.Drawing.Point(455, 109);
             this.oppBoardPictureBox.Name = "oppBoardPictureBox";
@@ -719,7 +721,7 @@ namespace EECS_448___Project_1 {
             // myBoardLabel
             // 
             this.myBoardLabel.Font = new System.Drawing.Font("Consolas", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.myBoardLabel.ForeColor = System.Drawing.SystemColors.Control;
+            this.myBoardLabel.ForeColor = System.Drawing.Color.Lime;
             this.myBoardLabel.Location = new System.Drawing.Point(56, 35);
             this.myBoardLabel.Name = "myBoardLabel";
             this.myBoardLabel.Size = new System.Drawing.Size(300, 33);
@@ -730,7 +732,7 @@ namespace EECS_448___Project_1 {
             // oppBoardLabel
             // 
             this.oppBoardLabel.Font = new System.Drawing.Font("Consolas", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.oppBoardLabel.ForeColor = System.Drawing.SystemColors.Control;
+            this.oppBoardLabel.ForeColor = System.Drawing.Color.Lime;
             this.oppBoardLabel.Location = new System.Drawing.Point(456, 35);
             this.oppBoardLabel.Name = "oppBoardLabel";
             this.oppBoardLabel.Size = new System.Drawing.Size(301, 33);
