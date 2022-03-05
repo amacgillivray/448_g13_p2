@@ -13,16 +13,23 @@ namespace EECS_448___Project_1
         private Player playerOne;
         private Player playerTwo;
         public int ai_level;
+
+        enum fire_direction
+        {
+            outOfBounds,
+            calledMissed,
+            calledHit,
+            callable
+        };
         struct ai_directions {
             int x;
             int y;
-            bool can_fire_north;
-            bool can_fire_south;
-            bool can_fire_east;
-            bool can_west;
+            fire_direction north;
+            fire_direction south;
+            fire_direction east;
+            fire_direction west;
         };
         private int ai_tracking_dir = 0;
-        //private Stack<int[]> ai_hits;
         private Stack<ai_directions> ai_hits;
         private Random rand = new Random();
         #endregion
@@ -233,7 +240,7 @@ namespace EECS_448___Project_1
         public void hitgen_medium()
         {
             playerTurn = 2;
-            if (ai_havehit)
+            if (ai_hits.Count() > 0)
             {
                 
             }
