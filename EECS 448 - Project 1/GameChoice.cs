@@ -271,15 +271,24 @@ namespace EECS_448___Project_1 {
                 foreach(Ship ship in ships) {
                     game.getPlayerOne().addShip(saveGameCoords(ship.getGameCoordinates()));
                 }
-                //it is now player twos turn to place ships
-                player_1 = false;
-                //update button text
-                button2.Text = "Play Game";
-                //reset ships
-                button1_Click(sender, e);
+                //it is now player twos turn to place ships,
+                // or time to start the game if playing vs ai
+                if (game.ai_level == 0)
+                {
+                    player_1 = false;
+                    //update button text
+                    button2.Text = "Play Game";
+                    //reset ships
+                    button1_Click(sender, e);
 
-                //update label
-                boardLabel.Text = game.getPlayerTwo().getName();
+                    //update label
+                    boardLabel.Text = game.getPlayerTwo().getName();
+                } else
+                {
+                    GameForm gameForm = new GameForm(ref game);
+                    gameForm.Show(); //show the game form
+                    this.Close();    //close this form
+                }
             } else {
                 //if player 2 is setting up their board
                 foreach(Ship ship in ships) {

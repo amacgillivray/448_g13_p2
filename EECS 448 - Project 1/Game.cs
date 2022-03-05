@@ -60,11 +60,18 @@ namespace EECS_448___Project_1
             ai_level = 0;
         }
 
-
         public Game(Player one, Player two) {
             playerOne = one;
             playerTwo = two;
+            playerTurn = 1;
             ai_level = 0;
+        }
+
+        public Game(Player one, Player two, int ai_difficulty) {
+            playerOne = one;
+            playerTwo = two;
+            playerTurn = 1;
+            ai_level = ai_difficulty;
         }
 
         public Game(int ai_difficulty)
@@ -72,7 +79,6 @@ namespace EECS_448___Project_1
             playerOne = new Player();
             playerTwo = new Player();
             playerTurn = 1;
-            //ai_level = ai_difficulty;
             ai_level = ai_difficulty;
         }
         #endregion
@@ -224,7 +230,7 @@ namespace EECS_448___Project_1
             playerTurn = 2;
             if (ai_havehit)
             {
-            
+                
             }
             else
             {

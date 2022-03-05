@@ -30,7 +30,8 @@ namespace EECS_448___Project_1 {
         void players_FormClosed(object sender, FormClosedEventArgs e)
         {
             players = null;  //If form is closed make sure reference is set to null
-            Show();
+            //Show();
+            Application.Exit();
         }
 
         CreditsPage credits;
@@ -70,7 +71,8 @@ namespace EECS_448___Project_1 {
         void choose_FormClosed(object sender, FormClosedEventArgs e)
         {
             choose = null;  //If form is closed make sure reference is set to null
-            Show();
+            //Show();
+            Application.Exit();
         }
     }
 }
