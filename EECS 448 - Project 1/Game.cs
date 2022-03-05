@@ -45,7 +45,7 @@ namespace EECS_448___Project_1
             public fire_direction east;
             public fire_direction west;
         };
-        private int ai_tracking_dir = 0;
+        private int ai_tracking_dir = -1;
         private Stack<ai_direction> ai_hits = new Stack<ai_direction>();
         private Random rand = new Random();
         #endregion
@@ -170,6 +170,8 @@ namespace EECS_448___Project_1
             shotCopy[0] = shot[0];
             shotCopy[1] = shot[1];
 
+            ai_direction copy;
+
             //check if hit
             if (hitShip != null)
             {
@@ -182,12 +184,59 @@ namespace EECS_448___Project_1
                     //show message box of what you or the AI sank
                     //if (ai_level == 0 || playerTurn == 1 )
                     MessageBox.Show(whichShip(hitShip.Length));
+
+                    // crawl hitShip array, check for matches in stack and pop them
+                    ai_direction[] cache = new ai_direction[ai_hits.Count()];
+                    bool[] cache_keep = new bool[ai_hits.Count()];
+                    int[] targetSquare = new int[2];
+                    for (int i = 0; i < ai_hits.Count(); i++)
+                    {
+                        cache[i] = ai_hits.Pop();
+                        targetSquare[0] = cache[i].x;
+                        targetSquare[1] = cache[i].y;
+                        if (shipHit(targetSquare) == hitShip)
+                            cache_keep[i] = false;
+                        else
+                            cache_keep[i] = true;
+                    }
+
+                    for (int i = cache.Length-1; i >= 0; i--)
+                    {
+                        if (cache_keep[i])
+                            ai_hits.Push(cache[i]);
+                    }
                 }
 
                 if (getCurrentPlayer() == playerTwo && ai_level > 0)
                 {
                     int row = shotCopy[0];
                     int col = shotCopy[1];
+
+                    if (ai_hits.Count() > 0)
+                    {
+                        copy = ai_hits.Pop();
+                        if (copy.x == row)
+                        {
+                            if (copy.y == (col-1))
+                            {
+                                copy.south = fire_direction.calledHit;
+                            } else if (copy.y == (col+1))
+                            {
+                                copy.north = fire_direction.calledHit;
+                            }
+                        } else if (copy.y == col)
+                        {
+                            if (copy.x == (row - 1))
+                            {
+                                copy.east = fire_direction.calledHit;
+                            }
+                            else if (copy.x == (row + 1))
+                            {
+                                copy.west = fire_direction.calledHit;
+                            }
+                        }
+                        ai_hits.Push(copy);
+                    }
 
                     ai_hits.Push( new ai_direction(
                             shotCopy[0],
@@ -197,13 +246,43 @@ namespace EECS_448___Project_1
                             check_direction(row - 1, col),
                             check_direction(row + 1, col)
                         )
-                    );
-
+                    );   
+                    
                     // todo - update previous top of stack, if there is one.
                 }
             }
             else
             {
+                if (ai_hits.Count() > 0)
+                {
+                    int row = shotCopy[0];
+                    int col = shotCopy[1];
+
+                    copy = ai_hits.Pop();
+                    if (copy.x == row)
+                    {
+                        if (copy.y == (col - 1))
+                        {
+                            copy.south = fire_direction.calledMiss;
+                        }
+                        else if (copy.y == (col + 1))
+                        {
+                            copy.north = fire_direction.calledMiss;
+                        }
+                    }
+                    else if (copy.y == col)
+                    {
+                        if (copy.x == (row - 1))
+                        {
+                            copy.east = fire_direction.calledMiss;
+                        }
+                        else if (copy.x == (row + 1))
+                        {
+                            copy.west = fire_direction.calledMiss;
+                        }
+                    }
+                    ai_hits.Push(copy);
+                }
                 getCurrentPlayer().addMiss(shotCopy);
             }
         }
@@ -300,28 +379,187 @@ namespace EECS_448___Project_1
                     if (targetSquare.SequenceEqual(getCurrentPlayer().getMisses()[i])) targeted = false; //no longer target confirmed
                 }
             }
-
+            Console.WriteLine("Easy-AI Firing at X: " + col + "; Y: " + row);
             fire(targetSquare);
             playerTurn = 1;
         }
 
         public void hitgen_medium()
         {
+
             playerTurn = 2;
             if (ai_hits.Count() > 0)
             {
-                
+                int[] targetSquare = new int[2];
+
+                int x;
+                int y;
+                ai_direction last = ai_hits.Peek();
+                x = last.x;
+                y = last.y;
+
+                if (ai_tracking_dir != -1)
+                {
+                    switch (ai_tracking_dir)
+                    {
+                        // north
+                        case 0:
+                            y--;
+                            break;
+                        // south
+                        case 1:
+                            y++;
+                            break;
+                        // east
+                        case 2:
+                            x--;
+                            break;
+                        // west
+                        case 3:
+                            x++;
+                            break;
+                    }
+                }
+                else
+                {
+                    int dir = rng() % 4;
+                    int i = 0;
+                    bool chosedir = false;
+
+                    while (i < 4)
+                    {
+                        if (dir == 0)
+                        {
+                            if (last.north == fire_direction.callable)
+                            {
+                                y--;
+                                chosedir = true;
+                                break;
+                            }
+                            else
+                            {
+                                dir++;
+                                i++;
+                                continue;
+                            }
+                        }
+                        if (dir == 1)
+                        {
+                            if (last.south == fire_direction.callable)
+                            {
+                                y++;
+                                chosedir = true;
+                                break;
+                            }
+                            else
+                            {
+                                dir++;
+                                i++;
+                                continue;
+                            }
+                        }
+                        if (dir == 2)
+                        {
+                            if (last.east == fire_direction.callable)
+                            {
+                                x--;
+                                chosedir = true;
+                                break;
+                            }
+                            else
+                            {
+                                dir++;
+                                i++;
+                                continue;
+                            }
+                        }
+                        if (dir == 3)
+                        {
+                            if (last.west == fire_direction.callable)
+                            {
+                                x++;
+                                chosedir = true;
+                                break;
+                            }
+                            else
+                            {
+                                dir = 0;
+                                i++;
+                                continue;
+                            }
+                        }
+                    }
+
+                    if (!chosedir)
+                    {
+                        ai_hits.Pop();
+                        hitgen_medium();
+                        return;
+                    }
+                }
+
+                targetSquare[0] = x;
+                targetSquare[1] = y;
+
+                // forcefully prevent from targeting already targeted square
+                for(int i = 0; i < getCurrentPlayer().getHits().Count; i++)
+                {     //check if targeted square is on a hit
+                    if (targetSquare.SequenceEqual(getCurrentPlayer().getHits()[i]))
+                    {
+                        ai_hits.Pop();
+                        hitgen_medium();
+                        return;
+                    }
+                }
+                for (int i = 0; i < getCurrentPlayer().getMisses().Count; i++)
+                {
+                    if (targetSquare.SequenceEqual(getCurrentPlayer().getMisses()[i]))
+                    {
+                        ai_hits.Pop();
+                        hitgen_medium();
+                        return;
+                    }
+                }
+
+                fire(targetSquare);
+                playerTurn = 1;
+                Console.WriteLine("Medium-AI firing at X: " + x + "; Y: " + y);
             }
             else
             {
-
+                hitgen_easy();
             }
-            playerTurn = 1;
         }
 
         public void hitgen_hard()
         {
             playerTurn = 2;
+            for (int i = 0; i < getCurrentOpponent().getShips().Count; i++)
+            {
+
+                //create copy of indexed ship 
+                int[][] ship = getCurrentOpponent().getShips()[i];
+
+                //loop through each square in ship and see if the matches any of those spots
+                for (int j = 0; j < ship.Length; j++)
+                {
+                    //get ship square coordinates
+                    int[] shipSquare = { ship[j][0], ship[j][1] };
+
+                    //compare coordinates
+                    if (getCurrentOpponent().getShips()[i][j][2] == 0)
+                    {
+                        int[] shot = new int[2];
+                        shot[0] = i;
+                        shot[1] = j;
+                        //set this ship's square to "hit"
+                        fire(shot);
+                        // return
+                        playerTurn = 1;
+                        return;
+                    }
+                }
+            }
             playerTurn = 1;
         }
 
