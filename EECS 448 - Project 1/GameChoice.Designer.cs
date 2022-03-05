@@ -56,6 +56,7 @@
             this.xAxisLabel01 = new System.Windows.Forms.Label();
             this.backButton = new System.Windows.Forms.Button();
             this.boardLabel = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.panel2.SuspendLayout();
             this.xAxisPanel.SuspendLayout();
@@ -91,7 +92,7 @@
             this.button1.BackColor = System.Drawing.SystemColors.ControlText;
             this.button1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.Lime;
-            this.button1.Location = new System.Drawing.Point(165, 402);
+            this.button1.Location = new System.Drawing.Point(119, 402);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 5;
@@ -104,9 +105,9 @@
             this.button2.BackColor = System.Drawing.SystemColors.ControlText;
             this.button2.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.Lime;
-            this.button2.Location = new System.Drawing.Point(275, 402);
+            this.button2.Location = new System.Drawing.Point(280, 402);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(69, 23);
             this.button2.TabIndex = 6;
             this.button2.Text = "Next Player";
             this.button2.UseVisualStyleBackColor = false;
@@ -405,7 +406,7 @@
             this.backButton.BackColor = System.Drawing.SystemColors.ControlText;
             this.backButton.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.backButton.ForeColor = System.Drawing.Color.Lime;
-            this.backButton.Location = new System.Drawing.Point(48, 402);
+            this.backButton.Location = new System.Drawing.Point(38, 402);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(75, 23);
             this.backButton.TabIndex = 21;
@@ -424,10 +425,23 @@
             this.boardLabel.Text = "Your Board";
             this.boardLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.SystemColors.ControlText;
+            this.button3.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.Color.Lime;
+            this.button3.Location = new System.Drawing.Point(198, 402);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(76, 23);
+            this.button3.TabIndex = 23;
+            this.button3.Text = "MOAB";
+            this.button3.UseVisualStyleBackColor = false;
+            // 
             // GameChoice
             // 
             this.BackColor = System.Drawing.SystemColors.Desktop;
             this.ClientSize = new System.Drawing.Size(381, 488);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.boardLabel);
             this.Controls.Add(this.backButton);
             this.Controls.Add(this.xAxisPanel);
@@ -480,5 +494,6 @@
         private System.Windows.Forms.Label xAxisLabel01;
 		private System.Windows.Forms.Button backButton;
 		private System.Windows.Forms.Label boardLabel;
-	}
+        private System.Windows.Forms.Button button3;
+    }
 }
