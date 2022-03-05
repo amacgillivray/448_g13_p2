@@ -76,6 +76,7 @@ namespace EECS_448___Project_1 {
             this.myBoardLabel = new System.Windows.Forms.Label();
             this.oppBoardLabel = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.label41 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.myBoardPictureBox)).BeginInit();
             this.xAxisPanel.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -250,12 +251,13 @@ namespace EECS_448___Project_1 {
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label41);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.targetingLabel);
             this.panel1.Controls.Add(this.fireButton);
             this.panel1.Location = new System.Drawing.Point(424, 429);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(333, 53);
+            this.panel1.Size = new System.Drawing.Size(333, 73);
             this.panel1.TabIndex = 3;
             // 
             // targetingLabel
@@ -749,17 +751,26 @@ namespace EECS_448___Project_1 {
             this.button1.ForeColor = System.Drawing.Color.Lime;
             this.button1.Location = new System.Drawing.Point(260, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(70, 46);
+            this.button1.Size = new System.Drawing.Size(73, 46);
             this.button1.TabIndex = 4;
             this.button1.Text = "MOAB";
             this.button1.UseVisualStyleBackColor = false;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(264, 52);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(66, 13);
+            this.label41.TabIndex = 13;
+            this.label41.Text = "(1 per game)";
             // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ClientSize = new System.Drawing.Size(800, 504);
+            this.ClientSize = new System.Drawing.Size(797, 511);
             this.Controls.Add(this.oppBoardLabel);
             this.Controls.Add(this.myBoardLabel);
             this.Controls.Add(this.panel3);
@@ -769,6 +780,7 @@ namespace EECS_448___Project_1 {
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.xAxisPanel);
             this.Controls.Add(this.myBoardPictureBox);
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "GameForm";
             this.Text = "Battleship";
@@ -842,5 +854,6 @@ namespace EECS_448___Project_1 {
         private System.Windows.Forms.Label myBoardLabel;
         private System.Windows.Forms.Label oppBoardLabel;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label41;
     }
 }

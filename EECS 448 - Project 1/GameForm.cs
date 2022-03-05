@@ -310,5 +310,15 @@ namespace EECS_448___Project_1 {
             }
         }
         #endregion
+
+        private void panel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label40_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
