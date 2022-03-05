@@ -74,8 +74,13 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(376, 74);
             this.button3.TabIndex = 2;
+<<<<<<< HEAD
+            this.button3.Text = "CHEATING";
+            this.button3.UseVisualStyleBackColor = true;
+=======
             this.button3.Text = "America\'s Navy (Hard)";
             this.button3.UseVisualStyleBackColor = false;
+>>>>>>> 059b5a9e5f1175c8b843f504ee54d37573c1a758
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // label1
