@@ -271,6 +271,9 @@ namespace EECS_448___Project_1 {
             if(targeted)                       //if there is a valid target
             {
                 int delay = 1000;               //sets duration of delay for 1 second
+                if (game.ai_level > 0)
+                    delay = 266;
+                
                 game.fire(targetSquare);        //call game fire method, targetting targetSquare (see Game.cs)
                 targeted = false;               //no longer targetting
                 oppBoardPictureBox.Refresh();   //refreshes images on board
