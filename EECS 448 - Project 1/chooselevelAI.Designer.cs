@@ -62,6 +62,7 @@
             this.button3.TabIndex = 2;
             this.button3.Text = "CHEATING";
             this.button3.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button3_Click);
             // 
             // label1
             // 
@@ -72,7 +73,6 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Choose level of AI";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // chooselevelAI
             // 

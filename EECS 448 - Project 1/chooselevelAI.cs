@@ -38,7 +38,7 @@ namespace EECS_448___Project_1
             this.Hide();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             if (players == null)
             {
@@ -50,7 +50,7 @@ namespace EECS_448___Project_1
             this.Hide();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
             if (players == null)
             {
