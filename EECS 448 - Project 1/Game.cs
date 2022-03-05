@@ -13,12 +13,17 @@ namespace EECS_448___Project_1
         private Player playerOne;
         private Player playerTwo;
         public int ai_level;
-        private bool ai_havehit = false;
-        //private int[2] ai_hitbase;
-        private bool ai_trynorth = false;
-        private bool ai_trysouth = false;
-        private bool ai_tryeast = false;
-        private bool ai_trywest = false;
+        struct ai_directions {
+            int x;
+            int y;
+            bool can_fire_north;
+            bool can_fire_south;
+            bool can_fire_east;
+            bool can_west;
+        };
+        private int ai_tracking_dir = 0;
+        //private Stack<int[]> ai_hits;
+        private Stack<ai_directions> ai_hits;
         private Random rand = new Random();
         #endregion
 
