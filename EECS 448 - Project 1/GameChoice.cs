@@ -18,6 +18,7 @@ namespace EECS_448___Project_1 {
         public List<int[][]> player_1_location = new List<int[][]>();
         public List<int[][]> player_2_location = new List<int[][]>();
         Point lastLegalPosition = new Point();
+        bool wasRotated = false;
         Game game = new Game();
 
         List<Ship> ships = new List<Ship>();
@@ -290,6 +291,7 @@ namespace EECS_448___Project_1 {
                     Random rnd = new Random();
                     bool overlapping;
                     bool outofbounds;
+                    int shipLegalRangeX=300, shipLegalRangeY=300;
 
                     foreach (Ship ship2 in ships)
                     {
@@ -298,10 +300,21 @@ namespace EECS_448___Project_1 {
                             // reset values
                             overlapping = false;
                             outofbounds = false;
-                            
+
+                            if (rnd.Next(1000)%2 == 0) ship2.rotate();
+
                             // generate random coordinates
-                            ship2.rectangle.X = rnd.Next(300);
-                            ship2.rectangle.Y = rnd.Next(300);
+                            if (ship2.isRotated)
+                            {
+                                shipLegalRangeY = 300 - (ship2.numSquares * Formatting.squareSize);
+                            }
+                            else
+                            {
+                                shipLegalRangeX = 300 - (ship2.numSquares * Formatting.squareSize);
+                            }
+
+                            ship2.rectangle.X = rnd.Next(1, shipLegalRangeX);
+                            ship2.rectangle.Y = rnd.Next(1, shipLegalRangeY);
                             ship2.snap();
 
                             // check for overlaps
@@ -310,11 +323,7 @@ namespace EECS_448___Project_1 {
                                     overlapping = true;
 
                             //check in bounds
-                            outofbounds = !ship2.checkInBounds() 
-                                || (ship2.rectangle.Location.X + ship2.rectangle.Width)>300 
-                                || (ship2.rectangle.Location.X + ship2.rectangle.Width)<0
-                                || (ship2.rectangle.Location.Y + ship2.rectangle.Height)>300
-                                || (ship2.rectangle.Location.Y + ship2.rectangle.Height)<0;
+                            outofbounds = !ship2.checkInBounds();
 
                         } while (outofbounds || overlapping);
                         
@@ -399,6 +408,7 @@ namespace EECS_448___Project_1 {
                     {
                         ship.selected = true;
                         lastLegalPosition = ship.rectangle.Location; //store location
+                        wasRotated = ship.isRotated; // store isRotated
                     }
                     else
                     {
@@ -429,7 +439,11 @@ namespace EECS_448___Project_1 {
                 outOfBounds = !getSelectedShip().checkInBounds();
 
                 //if overlapped or out of bounds return to legal space
-                if(overlap || outOfBounds) getSelectedShip().rectangle.Location = lastLegalPosition;
+                if (overlap || outOfBounds)
+                {
+                    getSelectedShip().rectangle.Location = lastLegalPosition;
+                    if (getSelectedShip().isRotated != wasRotated) getSelectedShip().rotate();
+                }
 
                 //deselect all ships
                 foreach(Ship ship in ships) ship.selected = false;
