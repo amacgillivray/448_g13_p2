@@ -288,30 +288,42 @@ namespace EECS_448___Project_1 {
                 {
                     button1_Click(sender, e);
                     //AI places ships
+                    // Random rnd = new Random();
+                    bool overlapping = true;
+                    bool outofbounds = false;
 
                     foreach (Ship ship2 in ships)
                     {
                         Random rnd = new Random();
-                        bool checkoverlp = true;
-                        bool inbound = false;
-                        ship2.selected = true;
-                        while (!inbound && !checkoverlp)
+                        overlapping = true;
+                        outofbounds = true;
+                        //ship2.selected = true;
+                        do
                         {
-                            //generate random coordinatesz
+                            overlapping = false;
+                            outofbounds = false;
+                            //generate random coordinates
                             ship2.rectangle.X = rnd.Next(300);
                             ship2.rectangle.Y = rnd.Next(300);
+                            ship2.snap();
 
-                            //check if overlap
-                            foreach (Ship otherships in ships)
-                            {
-                                if (ship2.checkOverlap(otherships) && otherships.selected == false) checkoverlp = true;
-                            }
-                            //check if inbound
-                            inbound = ship2.checkInBounds();
-                        }
-                    game.getPlayerTwo().addShip(saveGameCoords(ship2.getGameCoordinates()));
-                    ship2.selected = false;
+                            foreach (Ship ship in ships)
+                                if (ship2.checkOverlap(ship)) overlapping = true;
+
+                            //check in bounds
+                            outofbounds = !ship2.checkInBounds();
+
+                        } while (outofbounds || overlapping);
+                        //ship2.snap();
+                        //game.getPlayerTwo().addShip(saveGameCoords(ship2.getGameCoordinates()));
+                        //ship2.selected = false;
                     }
+
+                    foreach (Ship ship in ships)
+                    {
+                        game.getPlayerTwo().addShip(saveGameCoords(ship.getGameCoordinates()));
+                    }
+
                     GameForm gameForm = new GameForm(ref game);
                     gameForm.Show(); //show the game form
                     this.Close();    //close this form
