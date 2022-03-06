@@ -714,7 +714,7 @@ namespace EECS_448___Project_1 {
             this.oppBoardPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.oppBoardPictureBox.Location = new System.Drawing.Point(455, 109);
             this.oppBoardPictureBox.Name = "oppBoardPictureBox";
-            this.oppBoardPictureBox.Size = new System.Drawing.Size(302, 302);
+            this.oppBoardPictureBox.Size = new System.Drawing.Size(300, 300);
             this.oppBoardPictureBox.TabIndex = 5;
             this.oppBoardPictureBox.TabStop = false;
             this.oppBoardPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.oppBoardPictureBox_Paint);
