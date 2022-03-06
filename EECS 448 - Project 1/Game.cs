@@ -204,11 +204,13 @@ namespace EECS_448___Project_1
                         i++;
                     }
 
-                    for (i = cache.Length-1; i >= 0; i--)
+                    //for (i = cache.Length-1; i >= 0; i--)
+                    for (i = 0; i < cache.Length; i++)
                     {
                         if (cache_keep[i])
                             ai_hits.Push(cache[i]);
                     }
+                    ai_tracking_dir = -1;
                 }
 
                 if (getCurrentPlayer() == playerTwo && ai_level > 0)
@@ -467,6 +469,7 @@ namespace EECS_448___Project_1
                                 ai_tracking_dir = 2;
                                 break;
                         }
+                        ai_hits.Pop();
                         hitgen_medium();
                         return;
                     }
