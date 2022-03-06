@@ -17,6 +17,7 @@ namespace EECS_448___Project_1 {
         bool targeted = false;
         int[] targetSquare = new int[2];
         bool mouseDown = false;
+        bool isspecialshot = false;
 
 
         public GameForm(ref Game game) {
@@ -275,6 +276,24 @@ namespace EECS_448___Project_1 {
                     delay = 266;
                 
                 game.fire(targetSquare);        //call game fire method, targetting targetSquare (see Game.cs)
+
+                if (isspecialshot)                      //special shot
+                {
+                    int[] sixsquares = new int[2];
+                    for (int i = targetSquare[0] -1; i<= targetSquare[0]+1; i++)
+                    {
+                        for (int j = targetSquare[1] -1; j<= targetSquare[1]+1; j++)
+                        {
+                            if (i >= 0 && i <= 10 && j >= 0 && j <= 10)
+                            {
+                                sixsquares[0] = i;
+                                sixsquares[1] = j;
+                                game.fire(sixsquares);
+                            }
+                        }
+                    }
+                    isspecialshot = false;
+                }
                 targeted = false;               //no longer targetting
                 oppBoardPictureBox.Refresh();   //refreshes images on board
                 Thread.Sleep(delay);            //pauses for 1 second (1000 milliseconds)
@@ -322,6 +341,12 @@ namespace EECS_448___Project_1 {
         private void label40_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            isspecialshot = true;
+            this.button1.Enabled = false;
         }
     }
 }
