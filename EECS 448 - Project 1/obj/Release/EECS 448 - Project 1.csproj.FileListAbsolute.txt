@@ -44,7 +44,6 @@ C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project
 C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.exe
 C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.pdb
 C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.chooselevelAI.resources
-C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.csprojAssemblyReference.cache
 C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\bin\Release\EECS 448 - Project 1.exe.config
 C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\bin\Release\EECS 448 - Project 1.exe
 C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\bin\Release\EECS 448 - Project 1.pdb
@@ -84,9 +83,6 @@ C:\Users\mccum\OneDrive\Documents\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\R
 C:\Users\mccum\OneDrive\Documents\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.exe
 C:\Users\mccum\OneDrive\Documents\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.pdb
 C:\Users\mccum\OneDrive\Documents\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.Form3.resources
-<<<<<<< HEAD
-C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.Form3.resources
-=======
 C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\bin\Release\EECS 448 - Project 1.exe.config
 C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\bin\Release\EECS 448 - Project 1.exe
 C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\bin\Release\EECS 448 - Project 1.pdb
@@ -108,6 +104,4 @@ C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Rel
 C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.pdb
 C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.AIwin.resources
 C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.Form3.resources
->>>>>>> 0760a0741cfe47992cfe3ed49317b0cf9f267b5a
->>>>>>> 2e4c189a4463d6c4e27249b9ab132da236868fc0
 C:\Users\Andrew\Documents\ku_academic\eecs_448\eecs448_g13_p2\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.AIwin.resources
