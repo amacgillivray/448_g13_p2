@@ -274,15 +274,15 @@ namespace EECS_448___Project_1 {
                 int delay = 1000;               //sets duration of delay for 1 second
                 if (game.ai_level > 0)
                     delay = 266;
-                
-                game.fire(targetSquare);        //call game fire method, targetting targetSquare (see Game.cs)
 
-                if (isspecialshot)                      //special shot
+                if (!isspecialshot)             //normal shot
+                    game.fire(targetSquare);        //call game fire method, targetting targetSquare (see Game.cs)
+                else                            //special shot
                 {
                     int[] sixsquares = new int[2];
-                    for (int i = targetSquare[0] -1; i<= targetSquare[0]+1; i++)
+                    for (int i = targetSquare[0] - 1; i <= targetSquare[0] + 1; i++)
                     {
-                        for (int j = targetSquare[1] -1; j<= targetSquare[1]+1; j++)
+                        for (int j = targetSquare[1] - 1; j <= targetSquare[1] + 1; j++)
                         {
                             if (i >= 0 && i <= 10 && j >= 0 && j <= 10)
                             {
@@ -293,7 +293,9 @@ namespace EECS_448___Project_1 {
                         }
                     }
                     isspecialshot = false;
-                }
+                }//special shot
+
+
                 targeted = false;               //no longer targetting
                 oppBoardPictureBox.Refresh();   //refreshes images on board
                 Thread.Sleep(delay);            //pauses for 1 second (1000 milliseconds)
