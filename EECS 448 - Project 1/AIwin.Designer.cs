@@ -1,6 +1,6 @@
 ﻿namespace EECS_448___Project_1
 {
-    partial class Form3
+    partial class AIwin
     {
         /// <summary>
         /// Required designer variable.
