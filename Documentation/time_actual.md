@@ -17,7 +17,7 @@ Luke McCumber
 2022-04-23 - 10 hours working on Ai with Andrew and Nhat
 2022-05-23 -  ?hours working on Ai & special shot addition with Andrew Nhat and Jarrod
 ```
-Nhat Ngyuen
+Nhat Nguyen
 ```
 2022-03-23 - 5 hours working on fixing orignal teams code and starting the Ai code with Andrew Luke and Jarrod 
 2022-03-23 - 1 hour Ai screen for each level difficulty
