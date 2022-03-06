@@ -34,6 +34,7 @@ namespace EECS_448___Project_1
         };
         private int ai_tracking_dir = -1;
         private int ai_tracked_dist = 0;
+        private int ai_reverse_ct = 0;
         private Stack<ai_direction> ai_hits = new Stack<ai_direction>();
         private Random rand = new Random();
         #endregion
@@ -284,8 +285,8 @@ namespace EECS_448___Project_1
                     {
                         if (cache_keep[i])
                             ai_hits.Push(cache[i]);
-                        Console.WriteLine("ai_hits count after restoring stack: " + ai_hits.Count());
                     }
+                    Console.WriteLine("ai_hits count after restoring stack: " + ai_hits.Count());
                     ai_tracking_dir = -1;
                 }
             }
@@ -305,74 +306,49 @@ namespace EECS_448___Project_1
 
                     if (ai_tracking_dir != -1)
                     {
-                        //ai_direction[] cache = new ai_direction[ai_hits.Count()];
-                        //ai_direction last;
-                        //bool[] cache_keep = new bool[ai_hits.Count()];
-                        //int[] targetSquare = new int[2];
-                        //int i = ai_hits.Count() - 1;
-                        //for (int i = 0; i < ai_hits.Count(); i++)
-                        /*while (ai_tracked_dist > 1)
-                        {
-                            // cache[i] = ai_hits.Pop();
-                            // cache_keep[i] = true;
-
-                            if (ai_hits.Count() > 0)
-                            {
-                                last = ai_hits.Peek();
-                                switch (ai_tracking_dir)
-                                {
-                                    case 0:
-                                        if (cache[i].y == last.y - 1)
-                                            cache_keep[i] = false;
-                                        break;
-                                    case 1:
-                                        if (cache[i].y == last.y + 1)
-                                            cache_keep[i] = false;
-                                        break;
-                                    case 2:
-                                        if (cache[i].x == last.x + 1)
-                                            cache_keep[i] = false;
-                                        break;
-                                    case 3:
-                                        if (cache[i].x == last.x - 1)
-                                            cache_keep[i] = false;
-                                        break;
-                                }
-                            }
-                            i--;
-                            ai_tracked_dist--;
-                        }
-
-                        //for (i = cache.Length-1; i >= 0; i--)
-                        for (i = 0; i < cache.Length; i++)
-                        {
-                            if (cache_keep[i])
-                                ai_hits.Push(cache[i]);
-                        }*/
-
+                        Console.WriteLine("AI was tracking in Dir " + ai_tracking_dir + " and encountered Miss.");
+                        Console.WriteLine("ai_tracked_dist: " + ai_tracked_dist);
+                        Console.WriteLine("ai_hits count: " + ai_hits.Count());
+                        int restore_len = ai_tracked_dist;
+                        int i = 0;
+                        ai_direction origin;
+                        ai_direction[] cache = new ai_direction[ai_hits.Count()];
                         while (ai_tracked_dist > 0)
                         {
-                            ai_hits.Pop();
+                            cache[i] = ai_hits.Pop();
                             ai_tracked_dist--;
                         }
-
-                        //copy = ai_hits.Peek();
-                        Console.WriteLine("AI was tracking in Dir " + ai_tracking_dir + " and encountered Miss.");
-                        switch (ai_tracking_dir)
+                        origin = ai_hits.Pop();
+                        while (restore_len > 0)
                         {
-                            case 0:
-                                ai_tracking_dir = 1;
-                                break;
-                            case 1:
-                                ai_tracking_dir = 0;
-                                break;
-                            case 2:
-                                ai_tracking_dir = 3;
-                                break;
-                            case 3:
-                                ai_tracking_dir = 2;
-                                break;
+                            ai_hits.Push(cache[restore_len]);
+                            restore_len--;
                         }
+                        ai_hits.Push(origin);
+                        if (ai_reverse_ct == 0)
+                        {
+                            switch (ai_tracking_dir)
+                            {
+                                case 0:
+                                    ai_tracking_dir = 1;
+                                    break;
+                                case 1:
+                                    ai_tracking_dir = 0;
+                                    break;
+                                case 2:
+                                    ai_tracking_dir = 3;
+                                    break;
+                                case 3:
+                                    ai_tracking_dir = 2;
+                                    break;
+                            }
+                            ai_reverse_ct++;
+                        } else
+                        {
+                            ai_reverse_ct = 0;
+                            ai_tracking_dir = -1;
+                        }
+                        Console.WriteLine("ai_hits count after removing hits from stack: " + ai_hits.Count());
                         Console.WriteLine("AI is now tracking in Dir " + ai_tracking_dir);
                         ai_tracked_dist = 0;
                     }
@@ -510,24 +486,31 @@ namespace EECS_448___Project_1
                         targetSquare[1] < 0 ||
                         targetSquare[1] > 9)
                     {
-                        switch (ai_tracking_dir)
+                        if (ai_reverse_ct == 0)
                         {
-                            case 0:
-                                ai_tracking_dir = 1;
-                                break;
-                            case 1:
-                                ai_tracking_dir = 0;
-                                break;
-                            case 2:
-                                ai_tracking_dir = 3;
-                                break;
-                            case 3:
-                                ai_tracking_dir = 2;
-                                break;
+                            switch (ai_tracking_dir)
+                            {
+                                case 0:
+                                    ai_tracking_dir = 1;
+                                    break;
+                                case 1:
+                                    ai_tracking_dir = 0;
+                                    break;
+                                case 2:
+                                    ai_tracking_dir = 3;
+                                    break;
+                                case 3:
+                                    ai_tracking_dir = 2;
+                                    break;
+                            }
+                            ai_reverse_ct++;
+                        } else
+                        {
+                            ai_tracking_dir = -1;
+                            ai_reverse_ct = 0;
                         }
-
                         Console.WriteLine("Move " + targetSquare[0] + "," + targetSquare[1] + " is out of bounds; skipping.");
-                        ai_hits.Pop();
+                        //ai_hits.Pop();
                         hitgen_medium();
                         return;
                     }
@@ -615,6 +598,9 @@ namespace EECS_448___Project_1
                             {
                                 i = 0;
                                 chosedir = false;
+                            } else
+                            {
+                                ai_tracked_dist++;
                             }
                         }
                     }
@@ -629,78 +615,78 @@ namespace EECS_448___Project_1
                 }
 
                 // forcefully prevent from targeting already targeted square
-                for (int i = 0; i < getCurrentPlayer().getHits().Count; i++)
-                {     //check if targeted square is on a hit
-                    if (targetSquare.SequenceEqual(getCurrentPlayer().getHits()[i]))
-                    {
-                        Console.WriteLine("Move " + targetSquare[0] + "," + targetSquare[1] + "is already called (hit), skipping.");
-                        if (ai_tracking_dir != -1)
-                        {
-                            switch (ai_tracking_dir)
-                            {
-                                // north
-                                case 0:
-                                    targetSquare[1]--;
-                                    Console.WriteLine("Medium-AI: Tracked north");
-                                    break;
-                                // south
-                                case 1:
-                                    targetSquare[1]++;
-                                    Console.WriteLine("Medium-AI: Tracked south");
-                                    break;
-                                // east
-                                case 2:
-                                    targetSquare[0]++;
-                                    Console.WriteLine("Medium-AI: Tracked east");
-                                    break;
-                                // west
-                                case 3:
-                                    targetSquare[0]--;
-                                    Console.WriteLine("Medium-AI: Tracked west");
-                                    break;
-                            }
-                        }
-                        //ai_hits.Pop();
-                        //hitgen_medium();
-                        //return;
-                    }
-                }
-                for (int i = 0; i < getCurrentPlayer().getMisses().Count; i++)
-                {
-                    if (targetSquare.SequenceEqual(getCurrentPlayer().getMisses()[i]))
-                    {
-                        Console.WriteLine("Move " + targetSquare[0] + "," + targetSquare[1] + "is already called (miss), skipping.");
-                        //ai_hits.Pop();
-                        //hitgen_medium();
-                        //return;
-                        if (ai_tracking_dir != -1)
-                        {
-                            switch (ai_tracking_dir)
-                            {
-                                // north
-                                case 0:
-                                    targetSquare[1]--;
-                                    Console.WriteLine("Medium-AI: Tracked north");
-                                    break;
-                                // south
-                                case 1:
-                                    targetSquare[1]++;
-                                    Console.WriteLine("Medium-AI: Tracked south");
-                                    break;
-                                // east
-                                case 2:
-                                    targetSquare[0]++;
-                                    Console.WriteLine("Medium-AI: Tracked east");
-                                    break;
-                                // west
-                                case 3:
-                                    targetSquare[0]--;
-                                    Console.WriteLine("Medium-AI: Tracked west");
-                                    break;
-                            }
-                        }
-                    }
-                }
+                //for (int i = 0; i < getCurrentPlayer().getHits().Count; i++)
+                //{     //check if targeted square is on a hit
+                //    if (targetSquare.SequenceEqual(getCurrentPlayer().getHits()[i]))
+                //    {
+                //        Console.WriteLine("Move " + targetSquare[0] + "," + targetSquare[1] + "is already called (hit), skipping.");
+                //        if (ai_tracking_dir != -1)
+                //        {
+                //            switch (ai_tracking_dir)
+                //            {
+                //                // north
+                //                case 0:
+                //                    targetSquare[1]--;
+                //                    Console.WriteLine("Medium-AI: Tracked north");
+                //                    break;
+                //                // south
+                //                case 1:
+                //                    targetSquare[1]++;
+                //                    Console.WriteLine("Medium-AI: Tracked south");
+                //                    break;
+                //                // east
+                //                case 2:
+                //                    targetSquare[0]++;
+                //                    Console.WriteLine("Medium-AI: Tracked east");
+                //                    break;
+                //                // west
+                //                case 3:
+                //                    targetSquare[0]--;
+                //                    Console.WriteLine("Medium-AI: Tracked west");
+                //                    break;
+                //            }
+                //        }
+                //        //ai_hits.Pop();
+                //        //hitgen_medium();
+                //        //return;
+                //    }
+                //}
+                //for (int i = 0; i < getCurrentPlayer().getMisses().Count; i++)
+                //{
+                //    if (targetSquare.SequenceEqual(getCurrentPlayer().getMisses()[i]))
+                //    {
+                //        Console.WriteLine("Move " + targetSquare[0] + "," + targetSquare[1] + "is already called (miss), skipping.");
+                //        //ai_hits.Pop();
+                //        //hitgen_medium();
+                //        //return;
+                //        if (ai_tracking_dir != -1)
+                //        {
+                //            switch (ai_tracking_dir)
+                //            {
+                //                // north
+                //                case 0:
+                //                    targetSquare[1]--;
+                //                    Console.WriteLine("Medium-AI: Tracked north");
+                //                    break;
+                //                // south
+                //                case 1:
+                //                    targetSquare[1]++;
+                //                    Console.WriteLine("Medium-AI: Tracked south");
+                //                    break;
+                //                // east
+                //                case 2:
+                //                    targetSquare[0]++;
+                //                    Console.WriteLine("Medium-AI: Tracked east");
+                //                    break;
+                //                // west
+                //                case 3:
+                //                    targetSquare[0]--;
+                //                    Console.WriteLine("Medium-AI: Tracked west");
+                //                    break;
+                //            }
+                //        }
+                //    }
+                //}
 
                 fire(targetSquare);
                 playerTurn = 1;
