@@ -33,10 +33,10 @@
             int[] sx = {292, 423, 241, 479};
             int[] sy = {55, 55, 55, 55};
             string[] contributors = {
-                "Drake Pham",
-                "James Hanselman",
-                "Derek Ruf",
-                "Matthew McManness"
+                "Andrew MacGillivray",
+                "Luke McCumber",
+                "Nhat Nguyen",
+                "Jarrod Grothusen"
             };
 
             this.labels = new System.Windows.Forms.Label[4];
