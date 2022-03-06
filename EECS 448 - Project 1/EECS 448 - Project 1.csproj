@@ -60,6 +60,12 @@
     <Compile Include="chooselevelAI.Designer.cs">
       <DependentUpon>chooselevelAI.cs</DependentUpon>
     </Compile>
+    <Compile Include="AIwin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AIwin.Designer.cs">
+      <DependentUpon>AIwin.cs</DependentUpon>
+    </Compile>
     <Compile Include="PlayerCreator.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +112,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AIwin.resx">
+      <DependentUpon>AIwin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CreditsPage.resx">
       <DependentUpon>CreditsPage.cs</DependentUpon>
     </EmbeddedResource>

@@ -102,10 +102,10 @@ namespace EECS_448___Project_1 {
                     bool yOverlap = false;
 
                     //check if overlap on x region
-                    if(rectangle.X < ship.rectangle.X + ship.rectangle.Width && rectangle.X + rectangle.Width > ship.rectangle.X) xOverlap = true;
+                    if(rectangle.X <= ship.rectangle.X + ship.rectangle.Width && rectangle.X + rectangle.Width >= ship.rectangle.X) xOverlap = true;
 				
                     //check overlap on y region
-                    if(rectangle.Y < ship.rectangle.Y + ship.rectangle.Height && rectangle.Y + rectangle.Height> ship.rectangle.Y) yOverlap = true;
+                    if(rectangle.Y <= ship.rectangle.Y + ship.rectangle.Height && rectangle.Y + rectangle.Height>= ship.rectangle.Y) yOverlap = true;
 
                     //if there is x and y overlap, then the two ships overlap
                     if(xOverlap && yOverlap) return true;
@@ -301,9 +301,17 @@ namespace EECS_448___Project_1 {
                             overlapping = false;
                             outofbounds = false;
 
-                            if (rnd.Next(1000)%2 == 0) ship2.rotate();
+                            //random rotation
+                            if (rnd.Next(100) % 2 == 0)
+                            {
+                                ship2.rotate();
+                                foreach(Ship ship in ships)
+                                {
+                                    if (ship != ship2) ship.rotate();
+                                }
+                            }
 
-                            // generate random coordinates
+                            // generate random coordinates with in legal ranges (inbound)
                             if (ship2.isRotated)
                             {
                                 shipLegalRangeY = 300 - (ship2.numSquares * Formatting.squareSize);
@@ -319,14 +327,18 @@ namespace EECS_448___Project_1 {
 
                             // check for overlaps
                             foreach (Ship ship in ships)
-                                if (ship2.checkOverlap(ship)) 
+                                if (ship.checkOverlap(ship2)||ship2.checkOverlap(ship)) 
                                     overlapping = true;
 
                             //check in bounds
                             outofbounds = !ship2.checkInBounds();
 
                         } while (outofbounds || overlapping);
-                        
+
+                        Console.WriteLine("\nRange X: " + ship2.rectangle.Location.X + " - " + (ship2.rectangle.Location.X + ship2.rectangle.Width));
+                        Console.WriteLine("Range Y: " + ship2.rectangle.Location.Y + " - " + (ship2.rectangle.Location.Y + ship2.rectangle.Height));
+                        Console.WriteLine(ship2.isRotated + " " + ship2.numSquares);
+
                         // save ship position
                         game.getPlayerTwo().addShip(saveGameCoords(ship2.getGameCoordinates()));
                     }
