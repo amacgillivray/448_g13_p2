@@ -168,8 +168,8 @@ namespace EECS_448___Project_1
 
                 if (getCurrentPlayer() == playerTwo && ai_level > 0)
                 {
-                    int x = shotCopy[1];
-                    int y = shotCopy[0];
+                    int x = shotCopy[0];
+                    int y = shotCopy[1];
 
                     if (ai_hits.Count() > 0)
                     {
@@ -177,14 +177,14 @@ namespace EECS_448___Project_1
                         int sz = ai_hits.Count();
                         int i = 0;
 
-                        copy = ai_hits.Peek();
+                        //copy = ai_hits.Peek();
                         while (i < sz)
                         {
                             hits_reverse_order[i] = ai_hits.Pop();
                             i++;
                         }
 
-                        for (i = 0; i < sz; i++)
+                        for (i = sz-1; i >=0; i--)
                         {
                             copy = hits_reverse_order[i];
                             if (copy.x == x)
@@ -289,6 +289,7 @@ namespace EECS_448___Project_1
                     //show message box of what you or the AI sank
                     //if (ai_level == 0 || playerTurn == 1 )
                     MessageBox.Show(whichShip(hitShip.Length));
+                    this.getCurrentPlayer().addSunk(); //increment
                     Console.WriteLine("Sank ship of size " + hitShip.Length);
 
                     // crawl hitShip array, check for matches in stack and pop them
