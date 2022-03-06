@@ -71,7 +71,7 @@ namespace EECS_448___Project_1 {
                 int oldWidth = rectangle.Width;
                 rectangle.Width = rectangle.Height;
                 rectangle.Height = oldWidth;
-                if(isRotated) isRotated = false;
+                if(isRotated && rectangle.Width < rectangle.Height) isRotated = false;
                 else isRotated = true;
             }
 
@@ -260,6 +260,7 @@ namespace EECS_448___Project_1 {
                 ship.rectangle.Y = Formatting.squareSize * ship.numSquares + Formatting.offset;
                 ship.rectangle.Width = Formatting.squareSize * ship.numSquares - 2 * Formatting.offset;
                 ship.rectangle.Height = Formatting.shipWidth;
+                ship.isRotated = false;
             }
             pictureBox.Refresh();
         }
@@ -302,14 +303,7 @@ namespace EECS_448___Project_1 {
                             outofbounds = false;
 
                             //random rotation
-                            if (rnd.Next(100) % 2 == 0)
-                            {
-                                ship2.rotate();
-                                foreach(Ship ship in ships)
-                                {
-                                    if (ship != ship2) ship.rotate();
-                                }
-                            }
+                            if (rnd.Next(100) % 2 == 0) ship2.rotate();
 
                             // generate random coordinates with in legal ranges (inbound)
                             if (ship2.isRotated)

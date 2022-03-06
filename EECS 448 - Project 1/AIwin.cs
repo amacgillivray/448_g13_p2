@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace EECS_448___Project_1
 {
-    public partial class Form3 : Form
+    public partial class AIwin : Form
     {
-        public Form3()
+        public AIwin()
         {
             InitializeComponent();
         }

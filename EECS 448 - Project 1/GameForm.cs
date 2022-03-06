@@ -245,6 +245,12 @@ namespace EECS_448___Project_1 {
 
         //painth function for opponents picturebox
         private void oppBoardPictureBox_Paint(object sender, PaintEventArgs e) {
+            if(game.getCurrentOpponent().getSunk() >= game.getCurrentOpponent().getShips().Count())
+            {
+                AIwin win = new AIwin();
+                win.Show();                 //show win screen
+                this.Close();
+            }
             //draw grid lines
             drawGridLines(sender, e, oppBoardPictureBox);
 
