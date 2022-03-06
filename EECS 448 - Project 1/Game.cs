@@ -14,7 +14,7 @@ namespace EECS_448___Project_1
         private Player playerTwo;
         public int ai_level;
 
-        enum fire_direction
+        enum cell_status
         {
             notChecked,
             outOfBounds,
@@ -25,25 +25,13 @@ namespace EECS_448___Project_1
         struct ai_direction {
             public ai_direction(
                 int argx, 
-                int argy, 
-                fire_direction argn, 
-                fire_direction args, 
-                fire_direction arge, 
-                fire_direction argw)
+                int argy)
             {
                 x = argx;
                 y = argy;
-                north = argn;
-                south = args;
-                east = arge;
-                west = argw;
             }
             public int x;
             public int y;
-            public fire_direction north;
-            public fire_direction south;
-            public fire_direction east;
-            public fire_direction west;
         };
         private int ai_tracking_dir = -1;
         private Stack<ai_direction> ai_hits = new Stack<ai_direction>();
@@ -122,7 +110,6 @@ namespace EECS_448___Project_1
             }
         }
 
-
         //check sunk
         private bool isSunk(int[] shot, int[][] ship) {
             //check if any square is not hit (index 2 in each square) ship[sqaure][index 0: col, index 1: row, index 2: hit? (0  = no)
@@ -133,7 +120,6 @@ namespace EECS_448___Project_1
             //if no square is un-hit, return true (the ship is sunk)
             return true;
         }
-
 
         //check hit
         private int[][] shipHit(int[] shot) {
@@ -180,36 +166,32 @@ namespace EECS_448___Project_1
 
                 if (getCurrentPlayer() == playerTwo && ai_level > 0)
                 {
-                    int row = shotCopy[0];
-                    int col = shotCopy[1];
+                    int x = shotCopy[0];
+                    int y = shotCopy[1];
 
                     if (ai_hits.Count() > 0)
                     {
-                        copy = ai_hits.Pop();
-                        if (copy.x == row)
+                        copy = ai_hits.Peek();
+                        if (copy.x == x)
                         {
-                            if (copy.y == (col-1))
+                            if (copy.y == (y-1))
                             {
-                                copy.south = fire_direction.calledHit;
                                 if (ai_tracking_dir == -1)
                                     ai_tracking_dir = 0;
-                            } else if (copy.y == (col+1))
+                            } else if (copy.y == (y+1))
                             {
-                                copy.north = fire_direction.calledHit;
                                 if (ai_tracking_dir == -1)
                                     ai_tracking_dir = 1;
                             }
-                        } else if (copy.y == col)
+                        } else if (copy.y == y)
                         {
-                            if (copy.x == (row - 1))
+                            if (copy.x == (x - 1))
                             {
-                                copy.east = fire_direction.calledHit;
                                 if (ai_tracking_dir == -1)
                                     ai_tracking_dir = 2;
                             }
-                            else if (copy.x == (row + 1))
+                            else if (copy.x == (x + 1))
                             {
-                                copy.west = fire_direction.calledHit;
                                 if (ai_tracking_dir == -1)
                                     ai_tracking_dir = 3;
                             }
@@ -218,17 +200,12 @@ namespace EECS_448___Project_1
                         {
                             Console.WriteLine("Did not set tracking direction");
                         }
-                        ai_hits.Push(copy);
                     }
 
                     ai_hits.Push( 
                         new ai_direction(
                             shotCopy[0],
-                            shotCopy[1],
-                            check_direction(row, col - 1),
-                            check_direction(row, col + 1),
-                            check_direction(row - 1, col),
-                            check_direction(row + 1, col)
+                            shotCopy[1]
                         )
                     );   
                     
@@ -276,8 +253,16 @@ namespace EECS_448___Project_1
                 {
                     int row = shotCopy[1];
                     int col = shotCopy[0];
+                      
 
-                    copy = ai_hits.Pop();
+                    // need to do: 
+                    // if (tracking_dir != -1)
+                    // pop entries that are in this direction
+                    // get back to origin
+                    // add the first hit since we started tracking back to the top of the stack
+                    // reverse tracking direction
+
+                    copy = ai_hits.Peek();
 
                     switch (ai_tracking_dir)
                     {
@@ -299,12 +284,10 @@ namespace EECS_448___Project_1
                     {
                         if (copy.y == (col - 1))
                         {
-                            copy.south = fire_direction.calledMiss;
                             //ai_tracking_dir = -1;
                         }
                         else if (copy.y == (col + 1))
                         {
-                            copy.north = fire_direction.calledMiss;
                             //ai_tracking_dir = -1;
                         }
                     }
@@ -312,32 +295,28 @@ namespace EECS_448___Project_1
                     {
                         if (copy.x == (row - 1))
                         {
-                            copy.east = fire_direction.calledMiss;
                             //ai_tracking_dir = -1;
                         }
                         else if (copy.x == (row + 1))
                         {
-                            copy.west = fire_direction.calledMiss;
                             //ai_tracking_dir = -1;
                         }
                     }
-
-                    ai_hits.Push(copy);
                 }
                 getCurrentPlayer().addMiss(shotCopy);
             }
         }
 
-        private fire_direction check_direction(int x, int y)
+        private cell_status check_cell(int x, int y)
         {
             int[] targetSquare = new int[2];
             // may be reversed
-            targetSquare[0] = y;
-            targetSquare[1] = x;
+            targetSquare[0] = x;
+            targetSquare[1] = y;
 
             if (x > 9 || x < 0 || y > 9 || y < 0)
             {
-                return fire_direction.outOfBounds;
+                return cell_status.outOfBounds;
             }
             else
             {
@@ -345,18 +324,18 @@ namespace EECS_448___Project_1
                 {     //check if targeted square is on a hit
                     if (targetSquare.SequenceEqual(getCurrentPlayer().getHits()[i]))
                     {
-                        return fire_direction.calledHit;
+                        return cell_status.calledHit;
                     }
                 }
                 for (int i = 0; i < getCurrentPlayer().getMisses().Count; i++)
                 {
                     if (targetSquare.SequenceEqual(getCurrentPlayer().getMisses()[i]))
                     {
-                        return fire_direction.calledMiss;
+                        return cell_status.calledMiss;
                     }
                 }
 
-                return fire_direction.callable;
+                return cell_status.callable;
             }
         }
 
@@ -396,32 +375,20 @@ namespace EECS_448___Project_1
         public void hitgen_easy()
         {
             playerTurn = 2;
-            int row = rng();
-            int col = rng();
             int[] targetSquare = new int[2];
-            targetSquare[0] = col;
-            targetSquare[1] = row;
 
             bool targeted = false;
 
             while (!targeted)
             {
                 targeted = true;
-                row = rng();
-                col = rng();
-                targetSquare[0] = col;
-                targetSquare[1] = row;
-                //check if target is legal (has it already been guessed?)
-                for (int i = 0; i < getCurrentPlayer().getHits().Count; i++)
-                {     //check if targeted square is on a hit
-                    if (targetSquare.SequenceEqual(getCurrentPlayer().getHits()[i])) targeted = false; //no longer target confirmed
-                }
-                for (int i = 0; i < getCurrentPlayer().getMisses().Count; i++)
-                {
-                    if (targetSquare.SequenceEqual(getCurrentPlayer().getMisses()[i])) targeted = false; //no longer target confirmed
-                }
+                targetSquare[0] = rng();
+                targetSquare[1] = rng();
+
+                if (check_cell(targetSquare[0], targetSquare[1]) != cell_status.callable)
+                    targeted = false;
             }
-            Console.WriteLine("Easy-AI Firing at X: " + col + "; Y: " + row);
+            Console.WriteLine("Easy-AI Firing at X: " + targetSquare[0] + "; Y: " + targetSquare[1]);
             fire(targetSquare);
             playerTurn = 1;
         }
@@ -431,13 +398,10 @@ namespace EECS_448___Project_1
             playerTurn = 2;
             if (ai_hits.Count() > 0)
             {
-                int[] targetSquare = new int[2];
-
-                int x;
-                int y;
                 ai_direction last = ai_hits.Peek();
-                x = last.x;
-                y = last.y;
+                int[] targetSquare = new int[2];
+                targetSquare[0] = last.x;
+                targetSquare[1] = last.y;
 
                 if (ai_tracking_dir != -1)
                 {
@@ -445,27 +409,30 @@ namespace EECS_448___Project_1
                     {
                         // north
                         case 0:
-                            y--;
+                            targetSquare[1]--;
                             Console.WriteLine("Medium-AI: Tracked north");
                             break;
                         // south
                         case 1:
-                            y++;
+                            targetSquare[1]++;
                             Console.WriteLine("Medium-AI: Tracked south");
                             break;
                         // east
                         case 2:
-                            x++;
+                            targetSquare[0]++;
                             Console.WriteLine("Medium-AI: Tracked east");
                             break;
                         // west
                         case 3:
-                            x--;
+                            targetSquare[0]--;
                             Console.WriteLine("Medium-AI: Tracked west");
                             break;
                     }
 
-                    if (x < 0 || x > 9 || y < 0 || y > 9)
+                    if (targetSquare[0] < 0 ||
+                        targetSquare[0] > 9 ||
+                        targetSquare[1] < 0 ||
+                        targetSquare[1] > 9)
                     {
                         switch (ai_tracking_dir)
                         {
@@ -483,7 +450,7 @@ namespace EECS_448___Project_1
                                 break;
                         }
 
-                        Console.WriteLine("Move " + x + "," + y + " is out of bounds; skipping.");
+                        Console.WriteLine("Move " + targetSquare[0] + "," + targetSquare[1] + " is out of bounds; skipping.");
                         ai_hits.Pop();
                         hitgen_medium();
                         return;
@@ -499,10 +466,10 @@ namespace EECS_448___Project_1
                     {
                         if (dir == 0)
                         {
-                            if (check_direction(last.x, last.y-1)==fire_direction.callable)
+                            if (check_cell(last.x, last.y - 1) == cell_status.callable)
                             {
                                 Console.WriteLine("Medium-AI: Chose north.");
-                                y--;
+                                targetSquare[1]--;
                                 chosedir = true;
                                 break;
                             }
@@ -516,10 +483,10 @@ namespace EECS_448___Project_1
                         }
                         else if (dir == 1)
                         {
-                            if (check_direction(last.x, last.y+1)==fire_direction.callable)
+                            if (check_cell(last.x, last.y + 1) == cell_status.callable)
                             {
                                 Console.WriteLine("Medium-AI: Chose south.");
-                                y++;
+                                targetSquare[1]++;
                                 chosedir = true;
                                 break;
                             }
@@ -533,10 +500,10 @@ namespace EECS_448___Project_1
                         }
                         else if (dir == 2)
                         {
-                            if (check_direction(last.x+1, last.y)==fire_direction.callable)
+                            if (check_cell(last.x + 1, last.y) == cell_status.callable)
                             {
                                 Console.WriteLine("Medium-AI: Chose east.");
-                                x++;
+                                targetSquare[0]++;
                                 chosedir = true;
                                 break;
                             }
@@ -550,10 +517,10 @@ namespace EECS_448___Project_1
                         }
                         else if (dir == 3)
                         {
-                            if (check_direction(last.x-1, last.y)==fire_direction.callable)
+                            if (check_cell(last.x - 1, last.y) == cell_status.callable)
                             {
                                 Console.WriteLine("Medium-AI: Chose west.");
-                                x--;
+                                targetSquare[0]--;
                                 chosedir = true;
                                 break;
                             }
@@ -563,6 +530,15 @@ namespace EECS_448___Project_1
                                 dir = 0;
                                 i++;
                                 continue;
+                            }
+                        }
+
+                        if (chosedir)
+                        {
+                            if (check_cell(targetSquare[0], targetSquare[1]) != cell_status.callable)
+                            {
+                                i = 0;
+                                chosedir = false;
                             }
                         }
                     }
@@ -576,25 +552,48 @@ namespace EECS_448___Project_1
                     }
                 }
 
-                targetSquare[0] = x;
-                targetSquare[1] = y;
-
                 // forcefully prevent from targeting already targeted square
-                for(int i = 0; i < getCurrentPlayer().getHits().Count; i++)
+                for (int i = 0; i < getCurrentPlayer().getHits().Count; i++)
                 {     //check if targeted square is on a hit
                     if (targetSquare.SequenceEqual(getCurrentPlayer().getHits()[i]))
                     {
-                        Console.WriteLine("Move " + x + "," + y + "is already called (hit), skipping.");
-                        ai_hits.Pop();
-                        hitgen_medium();
-                        return;
+                        Console.WriteLine("Move " + targetSquare[0] + "," + targetSquare[1] + "is already called (hit), skipping.");
+                        if (ai_tracking_dir != -1)
+                        {
+                            switch (ai_tracking_dir)
+                            {
+                                // north
+                                case 0:
+                                    targetSquare[1]--;
+                                    Console.WriteLine("Medium-AI: Tracked north");
+                                    break;
+                                // south
+                                case 1:
+                                    targetSquare[1]++;
+                                    Console.WriteLine("Medium-AI: Tracked south");
+                                    break;
+                                // east
+                                case 2:
+                                    targetSquare[0]++;
+                                    Console.WriteLine("Medium-AI: Tracked east");
+                                    break;
+                                // west
+                                case 3:
+                                    targetSquare[0]--;
+                                    Console.WriteLine("Medium-AI: Tracked west");
+                                    break;
+                            }
+                        }
+                        //ai_hits.Pop();
+                        //hitgen_medium();
+                        //return;
                     }
                 }
                 for (int i = 0; i < getCurrentPlayer().getMisses().Count; i++)
                 {
                     if (targetSquare.SequenceEqual(getCurrentPlayer().getMisses()[i]))
                     {
-                        Console.WriteLine("Move " + x + "," + y + "is already called (miss), skipping.");
+                        Console.WriteLine("Move " + targetSquare[0] + "," + targetSquare[1] + "is already called (miss), skipping.");
                         ai_hits.Pop();
                         hitgen_medium();
                         return;
@@ -603,7 +602,7 @@ namespace EECS_448___Project_1
 
                 fire(targetSquare);
                 playerTurn = 1;
-                Console.WriteLine("Medium-AI firing at X: " + x + "; Y: " + y);
+                Console.WriteLine("Medium-AI firing at X: " + targetSquare[0] + "; Y: " + targetSquare[1]);
             }
             else
             {
