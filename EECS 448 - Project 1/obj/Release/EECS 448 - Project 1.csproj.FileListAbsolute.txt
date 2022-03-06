@@ -84,6 +84,7 @@ C:\Users\mccum\OneDrive\Documents\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\R
 C:\Users\mccum\OneDrive\Documents\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.exe
 C:\Users\mccum\OneDrive\Documents\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.pdb
 C:\Users\mccum\OneDrive\Documents\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.Form3.resources
+<<<<<<< HEAD
 C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\bin\Release\EECS 448 - Project 1.exe.config
 C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\bin\Release\EECS 448 - Project 1.exe
 C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\bin\Release\EECS 448 - Project 1.pdb
@@ -104,3 +105,6 @@ C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Rel
 C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.exe
 C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Release\EECS 448 - Project 1.pdb
 C:\Users\jarro\Documents\School\EECS 448\448_g13_p2\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.AIwin.resources
+=======
+C:\Users\nhatn\PROJECT2\448_g13_p2\EECS 448 - Project 1\obj\Release\EECS_448___Project_1.Form3.resources
+>>>>>>> 0760a0741cfe47992cfe3ed49317b0cf9f267b5a
