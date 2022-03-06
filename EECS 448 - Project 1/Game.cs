@@ -177,23 +177,60 @@ namespace EECS_448___Project_1
                             if (copy.y == (y-1))
                             {
                                 if (ai_tracking_dir == -1)
-                                    ai_tracking_dir = 0;
+                                {
+                                    Console.WriteLine("AI will now track South (1).");
+                                    ai_tracking_dir = 1;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("AI already tracking in Dir " + ai_tracking_dir);
+                                }
+
                             } else if (copy.y == (y+1))
                             {
+                                //if (ai_tracking_dir == -1)
+                                //    ai_tracking_dir = 0;
+
                                 if (ai_tracking_dir == -1)
-                                    ai_tracking_dir = 1;
+                                {
+                                    Console.WriteLine("AI will now track North (0).");
+                                    ai_tracking_dir = 0;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("AI already tracking in Dir " + ai_tracking_dir);
+                                }
                             }
                         } else if (copy.y == y)
                         {
                             if (copy.x == (x - 1))
                             {
+                                //if (ai_tracking_dir == -1)
+                                //    ai_tracking_dir = 2;
+
                                 if (ai_tracking_dir == -1)
+                                {
+                                    Console.WriteLine("AI will now track East (2).");
                                     ai_tracking_dir = 2;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("AI already tracking in Dir " + ai_tracking_dir);
+                                }
+
                             }
                             else if (copy.x == (x + 1))
                             {
+                                //if (ai_tracking_dir == -1)
+                                //    ai_tracking_dir = 3;
                                 if (ai_tracking_dir == -1)
-                                    ai_tracking_dir = 3;
+                                {
+                                    Console.WriteLine("AI will now track West (3).");
+                                    ai_tracking_dir = 0;
+                                } else
+                                {
+                                    Console.WriteLine("AI already tracking in Dir " + ai_tracking_dir);
+                                }
                             }
                         } 
                         if (ai_tracking_dir == -1)
@@ -218,6 +255,7 @@ namespace EECS_448___Project_1
                     //show message box of what you or the AI sank
                     //if (ai_level == 0 || playerTurn == 1 )
                     MessageBox.Show(whichShip(hitShip.Length));
+                    Console.WriteLine("Sank ship of size " + hitShip.Length);
 
                     // crawl hitShip array, check for matches in stack and pop them
                     ai_direction[] cache = new ai_direction[ai_hits.Count()];
@@ -225,6 +263,8 @@ namespace EECS_448___Project_1
                     int[] targetSquare = new int[2];
                     int i = ai_hits.Count() - 1;
                     //for (int i = 0; i < ai_hits.Count(); i++)
+
+                    Console.WriteLine("ai_hits count before popping stack: " + ai_hits.Count());
                     while (ai_hits.Count() > 0)
                     {
                         cache[i] = ai_hits.Pop();
@@ -237,12 +277,14 @@ namespace EECS_448___Project_1
                             cache_keep[i] = true;
                         i--;
                     }
+                    Console.WriteLine("ai_hits count after popping stack: " + ai_hits.Count());
 
                     //for (i = cache.Length-1; i >= 0; i--)
                     for (i = 0; i < cache.Length; i++)
                     {
                         if (cache_keep[i])
                             ai_hits.Push(cache[i]);
+                        Console.WriteLine("ai_hits count after restoring stack: " + ai_hits.Count());
                     }
                     //ai_tracking_dir = -1;
                 }
@@ -251,57 +293,104 @@ namespace EECS_448___Project_1
             {
                 if (ai_hits.Count() > 0)
                 {
-                    int row = shotCopy[1];
-                    int col = shotCopy[0];
+                    int x = shotCopy[0];
+                    int y = shotCopy[1];
                       
 
-                    // need to do: 
+                    // need to do
                     // if (tracking_dir != -1)
                     // pop entries that are in this direction
                     // get back to origin
                     // add the first hit since we started tracking back to the top of the stack
                     // reverse tracking direction
 
-                    copy = ai_hits.Peek();
+                    if (ai_tracking_dir != -1)
+                    {
+                        ai_direction[] cache = new ai_direction[ai_hits.Count()];
+                        ai_direction last;
+                        bool[] cache_keep = new bool[ai_hits.Count()];
+                        int[] targetSquare = new int[2];
+                        int i = ai_hits.Count() - 1;
+                        //for (int i = 0; i < ai_hits.Count(); i++)
+                        while (ai_hits.Count() > 0)
+                        {
+                            cache[i] = ai_hits.Pop();
+                            cache_keep[i] = true;
 
-                    switch (ai_tracking_dir)
-                    {
-                        case 0:
-                            ai_tracking_dir = 1;
-                            break;
-                        case 1:
-                            ai_tracking_dir = 0;
-                            break;
-                        case 2:
-                            ai_tracking_dir = 3;
-                            break;
-                        case 3:
-                            ai_tracking_dir = 2;
-                            break;
-                    }
+                            if (ai_hits.Count() > 0)
+                            {
+                                last = ai_hits.Peek();
+                                switch (ai_tracking_dir)
+                                {
+                                    case 0:
+                                        if (cache[i].y == last.y - 1)
+                                            cache_keep[i] = false;
+                                        break;
+                                    case 1:
+                                        if (cache[i].y == last.y + 1)
+                                            cache_keep[i] = false;
+                                        break;
+                                    case 2:
+                                        if (cache[i].x == last.x + 1)
+                                            cache_keep[i] = false;
+                                        break;
+                                    case 3:
+                                        if (cache[i].x == last.x - 1)
+                                            cache_keep[i] = false;
+                                        break;
+                                }
+                            }
+                            i--;
+                        }
 
-                    if (copy.x == row)
-                    {
-                        if (copy.y == (col - 1))
+                        //for (i = cache.Length-1; i >= 0; i--)
+                        for (i = 0; i < cache.Length; i++)
                         {
-                            //ai_tracking_dir = -1;
+                            if (cache_keep[i])
+                                ai_hits.Push(cache[i]);
                         }
-                        else if (copy.y == (col + 1))
+
+                        //copy = ai_hits.Peek();
+                        Console.WriteLine("AI was tracking in Dir " + ai_tracking_dir + " and encountered Miss.");
+                        switch (ai_tracking_dir)
                         {
-                            //ai_tracking_dir = -1;
+                            case 0:
+                                ai_tracking_dir = 1;
+                                break;
+                            case 1:
+                                ai_tracking_dir = 0;
+                                break;
+                            case 2:
+                                ai_tracking_dir = 3;
+                                break;
+                            case 3:
+                                ai_tracking_dir = 2;
+                                break;
                         }
+                        Console.WriteLine("AI is now tracking in Dir " + ai_tracking_dir);
                     }
-                    else if (copy.y == col)
-                    {
-                        if (copy.x == (row - 1))
-                        {
-                            //ai_tracking_dir = -1;
-                        }
-                        else if (copy.x == (row + 1))
-                        {
-                            //ai_tracking_dir = -1;
-                        }
-                    }
+                    //if (copy.x == x)
+                    //{
+                    //    if (copy.y == (y - 1))
+                    //    {
+                    //        //ai_tracking_dir = -1;
+                    //    }
+                    //    else if (copy.y == (y + 1))
+                    //    {
+                    //        //ai_tracking_dir = -1;
+                    //    }
+                    //}
+                    //else if (copy.y == y)
+                    //{
+                    //    if (copy.x == (x - 1))
+                    //    {
+                    //        //ai_tracking_dir = -1;
+                    //    }
+                    //    else if (copy.x == (x + 1))
+                    //    {
+                    //        //ai_tracking_dir = -1;
+                    //    }
+                    //}
                 }
                 getCurrentPlayer().addMiss(shotCopy);
             }
