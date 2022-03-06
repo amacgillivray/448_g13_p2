@@ -189,7 +189,7 @@ namespace EECS_448___Project_1
                     ai_direction[] cache = new ai_direction[ai_hits.Count()];
                     bool[] cache_keep = new bool[ai_hits.Count()];
                     int[] targetSquare = new int[2];
-                    int i = 0;
+                    int i = ai_hits.Count()-1;
                     //for (int i = 0; i < ai_hits.Count(); i++)
                     while( ai_hits.Count() > 0 )
                     {
@@ -197,11 +197,11 @@ namespace EECS_448___Project_1
                         // may be backwards
                         targetSquare[0] = cache[i].x;
                         targetSquare[1] = cache[i].y;
-                        if (shipHit(targetSquare) == hitShip)
+                        if (shipHit(targetSquare) == shipHit(shot))
                             cache_keep[i] = false;
                         else
                             cache_keep[i] = true;
-                        i++;
+                        i--;
                     }
 
                     //for (i = cache.Length-1; i >= 0; i--)
