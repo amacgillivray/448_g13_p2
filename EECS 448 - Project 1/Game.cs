@@ -631,8 +631,8 @@ namespace EECS_448___Project_1
                     if (getCurrentOpponent().getShips()[i][j][2] == 0)
                     {
                         int[] shot = new int[2];
-                        shot[0] = i;
-                        shot[1] = j;
+                        shot[0] = getCurrentOpponent().getShips()[i][j][0];
+                        shot[1] = getCurrentOpponent().getShips()[i][j][1];
                         //set this ship's square to "hit"
                         fire(shot);
                         // return
