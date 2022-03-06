@@ -35,6 +35,7 @@ namespace EECS_448___Project_1
         private int ai_tracking_dir = -1;
         private int ai_tracked_dist = 0;
         private int ai_reverse_ct = 0;
+        private int dbg_ct = 0;
         private Stack<ai_direction> ai_hits = new Stack<ai_direction>();
         private Random rand = new Random();
         #endregion
@@ -172,71 +173,97 @@ namespace EECS_448___Project_1
 
                     if (ai_hits.Count() > 0)
                     {
+                        ai_direction[] hits_reverse_order = new ai_direction[ai_hits.Count()];
+                        int sz = ai_hits.Count();
+                        int i = 0;
+
                         copy = ai_hits.Peek();
-                        if (copy.x == x)
+                        while (i < sz)
                         {
-                            if (copy.y == (y-1))
-                            {
-                                if (ai_tracking_dir == -1)
-                                {
-                                    Console.WriteLine("AI will now track South (1).");
-                                    ai_tracking_dir = 1;
-                                }
-                                else
-                                {
-                                    Console.WriteLine("AI already tracking in Dir " + ai_tracking_dir);
-                                }
+                            hits_reverse_order[i] = ai_hits.Pop();
+                            i++;
+                        }
 
-                            } else if (copy.y == (y+1))
+                        for (i = 0; i < sz; i++)
+                        {
+                            copy = hits_reverse_order[i];
+                            if (copy.x == x)
                             {
-                                //if (ai_tracking_dir == -1)
-                                //    ai_tracking_dir = 0;
+                                if (copy.y == (y - 1))
+                                {
+                                    if (ai_tracking_dir == -1)
+                                    {
+                                        Console.WriteLine("AI will now track South (1).");
+                                        ai_tracking_dir = 1;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("AI already tracking in Dir " + ai_tracking_dir);
+                                    }
 
-                                if (ai_tracking_dir == -1)
-                                {
-                                    Console.WriteLine("AI will now track North (0).");
-                                    ai_tracking_dir = 0;
                                 }
-                                else
+                                else if (copy.y == (y + 1))
                                 {
-                                    Console.WriteLine("AI already tracking in Dir " + ai_tracking_dir);
+                                    //if (ai_tracking_dir == -1)
+                                    //    ai_tracking_dir = 0;
+
+                                    if (ai_tracking_dir == -1)
+                                    {
+                                        Console.WriteLine("AI will now track North (0).");
+                                        ai_tracking_dir = 0;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("AI already tracking in Dir " + ai_tracking_dir);
+                                    }
                                 }
                             }
-                        } else if (copy.y == y)
-                        {
-                            if (copy.x == (x - 1))
+                            else if (copy.y == y)
                             {
-                                //if (ai_tracking_dir == -1)
-                                //    ai_tracking_dir = 2;
-
-                                if (ai_tracking_dir == -1)
+                                if (copy.x == (x - 1))
                                 {
-                                    Console.WriteLine("AI will now track East (2).");
-                                    ai_tracking_dir = 2;
-                                }
-                                else
-                                {
-                                    Console.WriteLine("AI already tracking in Dir " + ai_tracking_dir);
-                                }
+                                    //if (ai_tracking_dir == -1)
+                                    //    ai_tracking_dir = 2;
 
+                                    if (ai_tracking_dir == -1)
+                                    {
+                                        Console.WriteLine("AI will now track East (2).");
+                                        ai_tracking_dir = 2;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("AI already tracking in Dir " + ai_tracking_dir);
+                                    }
+
+                                }
+                                else if (copy.x == (x + 1))
+                                {
+                                    //if (ai_tracking_dir == -1)
+                                    //    ai_tracking_dir = 3;
+                                    if (ai_tracking_dir == -1)
+                                    {
+                                        Console.WriteLine("AI will now track West (3).");
+                                        ai_tracking_dir = 0;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("AI already tracking in Dir " + ai_tracking_dir);
+                                    }
+                                }
                             }
-                            else if (copy.x == (x + 1))
+                            if (ai_tracking_dir == -1)
                             {
-                                //if (ai_tracking_dir == -1)
-                                //    ai_tracking_dir = 3;
-                                if (ai_tracking_dir == -1)
-                                {
-                                    Console.WriteLine("AI will now track West (3).");
-                                    ai_tracking_dir = 0;
-                                } else
-                                {
-                                    Console.WriteLine("AI already tracking in Dir " + ai_tracking_dir);
-                                }
+                                Console.WriteLine("Did not set tracking direction");
                             }
-                        } 
-                        if (ai_tracking_dir == -1)
+                        }
+
+                        for (i = sz-1; i >= 0; i--)
                         {
-                            Console.WriteLine("Did not set tracking direction");
+                            ai_hits.Push(hits_reverse_order[i]);
                         }
                     }
 
@@ -294,9 +321,6 @@ namespace EECS_448___Project_1
             {
                 if (ai_hits.Count() > 0)
                 {
-                    //int x = shotCopy[0];
-                    //int y = shotCopy[1];          
-
                     // need to do
                     // if (tracking_dir != -1)
                     // pop entries that are in this direction
@@ -614,80 +638,6 @@ namespace EECS_448___Project_1
                     }
                 }
 
-                // forcefully prevent from targeting already targeted square
-                //for (int i = 0; i < getCurrentPlayer().getHits().Count; i++)
-                //{     //check if targeted square is on a hit
-                //    if (targetSquare.SequenceEqual(getCurrentPlayer().getHits()[i]))
-                //    {
-                //        Console.WriteLine("Move " + targetSquare[0] + "," + targetSquare[1] + "is already called (hit), skipping.");
-                //        if (ai_tracking_dir != -1)
-                //        {
-                //            switch (ai_tracking_dir)
-                //            {
-                //                // north
-                //                case 0:
-                //                    targetSquare[1]--;
-                //                    Console.WriteLine("Medium-AI: Tracked north");
-                //                    break;
-                //                // south
-                //                case 1:
-                //                    targetSquare[1]++;
-                //                    Console.WriteLine("Medium-AI: Tracked south");
-                //                    break;
-                //                // east
-                //                case 2:
-                //                    targetSquare[0]++;
-                //                    Console.WriteLine("Medium-AI: Tracked east");
-                //                    break;
-                //                // west
-                //                case 3:
-                //                    targetSquare[0]--;
-                //                    Console.WriteLine("Medium-AI: Tracked west");
-                //                    break;
-                //            }
-                //        }
-                //        //ai_hits.Pop();
-                //        //hitgen_medium();
-                //        //return;
-                //    }
-                //}
-                //for (int i = 0; i < getCurrentPlayer().getMisses().Count; i++)
-                //{
-                //    if (targetSquare.SequenceEqual(getCurrentPlayer().getMisses()[i]))
-                //    {
-                //        Console.WriteLine("Move " + targetSquare[0] + "," + targetSquare[1] + "is already called (miss), skipping.");
-                //        //ai_hits.Pop();
-                //        //hitgen_medium();
-                //        //return;
-                //        if (ai_tracking_dir != -1)
-                //        {
-                //            switch (ai_tracking_dir)
-                //            {
-                //                // north
-                //                case 0:
-                //                    targetSquare[1]--;
-                //                    Console.WriteLine("Medium-AI: Tracked north");
-                //                    break;
-                //                // south
-                //                case 1:
-                //                    targetSquare[1]++;
-                //                    Console.WriteLine("Medium-AI: Tracked south");
-                //                    break;
-                //                // east
-                //                case 2:
-                //                    targetSquare[0]++;
-                //                    Console.WriteLine("Medium-AI: Tracked east");
-                //                    break;
-                //                // west
-                //                case 3:
-                //                    targetSquare[0]--;
-                //                    Console.WriteLine("Medium-AI: Tracked west");
-                //                    break;
-                //            }
-                //        }
-                //    }
-                //}
-
                 fire(targetSquare);
                 playerTurn = 1;
                 Console.WriteLine("Medium-AI firing at X: " + targetSquare[0] + "; Y: " + targetSquare[1]);
@@ -695,8 +645,23 @@ namespace EECS_448___Project_1
             else
             {
                 Console.WriteLine("Medium-AI: ai_hits has " + ai_hits.Count() + " entries; reverting to Easy-AI.");
-                hitgen_easy();
+                
+                if (dbg_ct == -1)
+                {
+                    hitgen_easy();
+                } else if (dbg_ct == 0)
+                {
+                    int[] shot = new int[2];
+                    shot[0] = 0;
+                    shot[1] = 4;
+                    fire(shot);
+                    dbg_ct++;
+                } else
+                {
+                    hitgen_hard();
+                }
             }
+            playerTurn = 1;
         }
 
         public void hitgen_hard()
