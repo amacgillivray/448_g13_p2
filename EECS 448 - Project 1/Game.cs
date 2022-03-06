@@ -168,8 +168,8 @@ namespace EECS_448___Project_1
 
                 if (getCurrentPlayer() == playerTwo && ai_level > 0)
                 {
-                    int x = shotCopy[0];
-                    int y = shotCopy[1];
+                    int x = shotCopy[1];
+                    int y = shotCopy[0];
 
                     if (ai_hits.Count() > 0)
                     {
@@ -255,10 +255,16 @@ namespace EECS_448___Project_1
                                     }
                                 }
                             }
-                            if (ai_tracking_dir == -1)
-                            {
-                                Console.WriteLine("Did not set tracking direction");
-                            }
+                            //if (ai_tracking_dir == -1)
+                            //{
+                            //    continue;
+                            //    //Console.WriteLine("Did not set tracking direction");
+                            //}
+                        }
+
+                        if (ai_tracking_dir == -1)
+                        {
+                            Console.WriteLine("Did not set tracking direction");
                         }
 
                         for (i = sz-1; i >= 0; i--)
@@ -505,10 +511,7 @@ namespace EECS_448___Project_1
                             break;
                     }
 
-                    if (targetSquare[0] < 0 ||
-                        targetSquare[0] > 9 ||
-                        targetSquare[1] < 0 ||
-                        targetSquare[1] > 9)
+                    if (check_cell(targetSquare[0], targetSquare[1]) != cell_status.callable)
                     {
                         if (ai_reverse_ct == 0)
                         {
@@ -528,13 +531,14 @@ namespace EECS_448___Project_1
                                     break;
                             }
                             ai_reverse_ct++;
-                        } else
+                        }
+                        else
                         {
                             ai_tracking_dir = -1;
                             ai_reverse_ct = 0;
                         }
                         Console.WriteLine("Move " + targetSquare[0] + "," + targetSquare[1] + " is out of bounds; skipping.");
-                        //ai_hits.Pop();
+                        ai_hits.Pop();
                         hitgen_medium();
                         return;
                     }
@@ -632,7 +636,7 @@ namespace EECS_448___Project_1
                     if (!chosedir)
                     {
                         Console.WriteLine("Failed to choose direction in hitgen medium");
-                        ai_hits.Pop();
+                        ai_hits.Pop(); // No valid moves are available from the current cell
                         hitgen_medium();
                         return;
                     }
@@ -655,7 +659,7 @@ namespace EECS_448___Project_1
                     shot[0] = 0;
                     shot[1] = 4;
                     fire(shot);
-                    dbg_ct++;
+                    dbg_ct--;
                 } else
                 {
                     hitgen_hard();
