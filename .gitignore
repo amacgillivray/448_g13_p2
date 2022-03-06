@@ -1,0 +1,9 @@
+*.csproj.*
+*.csprojAssemblyReference.cache
+*.exe
+*.pdb
+*.storage.ide
+*.storage.ide-shm
+*.storage.ide-wal
+*.suo
+*db.lock
