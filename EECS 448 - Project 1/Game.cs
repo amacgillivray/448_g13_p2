@@ -29,6 +29,13 @@ namespace EECS_448___Project_1
                 x = argx;
                 y = argy;
             }
+            public ai_hit(
+                ai_hit arg
+            )
+            {
+                x = arg.x;
+                y = arg.y;
+            }
             public int x;
             public int y;
         };
@@ -286,7 +293,8 @@ namespace EECS_448___Project_1
             }
             else
             {
-                if (ai_hits.Count() > 0)
+                getCurrentPlayer().addMiss(shotCopy);
+                if (ai_hits.Count() > 0 && check_cell(shotCopy[0], shotCopy[1]) == cell_status.calledMiss)
                 {
                     // need to do
                     // if (tracking_dir != -1)
@@ -304,7 +312,7 @@ namespace EECS_448___Project_1
                         int i = 0;
                         ai_hit origin;
                         ai_hit[] cache = new ai_hit[ai_hits.Count()];
-                        while (ai_tracked_dist > 0)
+                        while (ai_tracked_dist > 0 && ai_hits.Count() > 1)
                         {
                             cache[i] = ai_hits.Pop();
                             ai_tracked_dist--;
@@ -344,7 +352,6 @@ namespace EECS_448___Project_1
                         ai_tracked_dist = 0;
                     }
                 }
-                getCurrentPlayer().addMiss(shotCopy);
             }
         }
 
@@ -379,6 +386,28 @@ namespace EECS_448___Project_1
             }
         }
 
+        // Determines whether or not the hit coordinate can still yield any valid orthogonal moves
+        private bool hit_has_valid_moves(ai_hit hit)
+        {
+            // check north
+            if (check_cell(hit.x, hit.y - 1) == cell_status.callable)
+                return true;
+
+            // check south
+            if (check_cell(hit.x, hit.y + 1) == cell_status.callable)
+                return true;
+
+            // check east
+            if (check_cell(hit.x + 1, hit.y) == cell_status.callable)
+                return true;
+
+            // check west
+            if (check_cell(hit.x - 1, hit.y) == cell_status.callable)
+                return true;
+
+            return false;
+        }
+
         private string whichShip(int squares) {
             string ship = "";
             switch(squares) {
@@ -404,8 +433,6 @@ namespace EECS_448___Project_1
             else
                 return "Your " + ship + " was destroyed!";
         }
-
-
 
         private int rng()
         {
@@ -443,6 +470,9 @@ namespace EECS_448___Project_1
                 targetSquare[0] = last.x;
                 targetSquare[1] = last.y;
 
+                Console.WriteLine("Medium-AI: Working with hit " + last.x + ", " + last.y);
+                Console.WriteLine("Medium-AI: Tracking Dir  " + ai_tracking_dir + " with dist " + ai_tracked_dist);
+
                 if (ai_tracking_dir != -1)
                 {
                     bool can_fire = false;
@@ -451,24 +481,25 @@ namespace EECS_448___Project_1
                     {
                         switch (ai_tracking_dir)
                         {
-                            // north
+                            // north: y-1
                             case 0:
                                 targetSquare[1]--;
                                 ai_tracked_dist++;
                                 Console.WriteLine("Medium-AI: Tracked north");
                                 break;
-                            // south
+                            // south: y+1 
                             case 1:
                                 targetSquare[1]++;
                                 ai_tracked_dist++;
                                 Console.WriteLine("Medium-AI: Tracked south");
                                 break;
-                            // east
+                            // east: x+1
                             case 2:
                                 targetSquare[0]++;
+                                ai_tracked_dist++;
                                 Console.WriteLine("Medium-AI: Tracked east");
                                 break;
-                            // west
+                            // west: x-1
                             case 3:
                                 targetSquare[0]--;
                                 ai_tracked_dist++;
@@ -478,8 +509,37 @@ namespace EECS_448___Project_1
 
                         if (check_cell(targetSquare[0], targetSquare[1]) != cell_status.callable)
                         {
+                            Console.WriteLine("Cell " + targetSquare[0] + "," + targetSquare[1] + " is not callable. Reversing tracking direction.");
+
                             if (ai_reverse_ct == 0)
                             {
+                                ai_tracked_dist--;
+
+                                // Revert to origin
+                                int restore_len = ai_tracked_dist;
+                                int i = 0;
+                                ai_hit origin;
+                                ai_hit[] cache = new ai_hit[ai_hits.Count()];
+                                while (ai_tracked_dist > 0 && ai_hits.Count() > 1)
+                                {
+                                    cache[i] = ai_hits.Pop();
+                                    ai_tracked_dist--;
+                                }
+                                origin = ai_hits.Pop();
+                                while (restore_len > 0)
+                                {
+                                    ai_hits.Push(cache[restore_len]);
+                                    restore_len--;
+                                }
+                                ai_hits.Push(origin);
+
+                                // Starting with origin, remove hits until there is a valid move
+                                while (!hit_has_valid_moves(ai_hits.Peek()))
+                                {
+                                    ai_hits.Pop();
+                                }
+
+
                                 switch (ai_tracking_dir)
                                 {
                                     case 0:
@@ -495,17 +555,51 @@ namespace EECS_448___Project_1
                                         ai_tracking_dir = 2;
                                         break;
                                 }
+
                                 ai_reverse_ct++;
+                                hitgen_medium();
+
+                                return;
                             }
                             else
                             {
                                 ai_tracking_dir = -1;
+                                //ai_tracked_dist = 0;
+                                ai_tracked_dist--;
+
+                                // Revert to origin
+                                int restore_len = ai_tracked_dist;
+                                int i = 0;
+                                ai_hit origin;
+                                ai_hit[] cache = new ai_hit[ai_hits.Count()];
+                                while (ai_tracked_dist > 0 && ai_hits.Count() > 1)
+                                {
+                                    cache[i] = ai_hits.Pop();
+                                    ai_tracked_dist--;
+                                }
+                                origin = ai_hits.Pop();
+                                while (restore_len > 0)
+                                {
+                                    ai_hits.Push(cache[restore_len]);
+                                    restore_len--;
+                                }
+                                ai_hits.Push(origin);
+                                
+                                // Starting with origin, remove hits until there is a valid move
+                                while (!hit_has_valid_moves(ai_hits.Peek()))
+                                {
+                                    ai_hits.Pop();
+                                }
+
                                 ai_reverse_ct = 0;
                                 Console.WriteLine("Move " + targetSquare[0] + "," + targetSquare[1] + " is invalid; skipping.");
                                 //ai_hits.Pop();
                                 hitgen_medium();
                                 return;
                             }
+                        } else
+                        {
+                            can_fire = true;
                         }
 
                     }
@@ -627,10 +721,7 @@ namespace EECS_448___Project_1
                     shot[1] = 4;
                     fire(shot);
                     dbg_ct--;
-                } //else
-                //{
-                //    hitgen_hard();
-                //}
+                }
             }
             playerTurn = 1;
         }
