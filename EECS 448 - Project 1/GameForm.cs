@@ -248,13 +248,13 @@ namespace EECS_448___Project_1 {
         void AIwin_FormClosed(object sender, FormClosedEventArgs e)
         {
             win1 = null;  //If form is closed make sure reference is set to null
-            Application.Exit();
+            Application.Exit(); //close application when form is closed
         }
 
         void YouWin_FormClosed(object sender, FormClosedEventArgs e)
         {
             win2 = null;  //If form is closed make sure reference is set to null
-            Application.Exit();
+            Application.Exit(); //close application when form is closed
         }
 
         //painth function for opponents picturebox
@@ -263,7 +263,7 @@ namespace EECS_448___Project_1 {
             {
                 win1 = new AIwin();
                 win1.Show();                 //show win screen
-                win1.FormClosed += AIwin_FormClosed;
+                win1.FormClosed += AIwin_FormClosed; //add an event handler for when form is closed
                 this.Close();
             }
             //draw grid lines
@@ -326,7 +326,7 @@ namespace EECS_448___Project_1 {
                 if(game.getCurrentPlayer().getSunk() >= game.getCurrentOpponent().getShips().Count()) {
                     win2 = new YouWin();
                     win2.Show();                 //show win screen
-                    win2.FormClosed += YouWin_FormClosed;
+                    win2.FormClosed += YouWin_FormClosed; //add an event handler for when form is closed
                     this.Close();
                 } else {
                     if (game.ai_level == 0) // for vs player
