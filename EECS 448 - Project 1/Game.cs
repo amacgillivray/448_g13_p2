@@ -42,7 +42,7 @@ namespace EECS_448___Project_1
         private int ai_tracking_dir = -1;
         private int ai_tracked_dist = 0;
         private int ai_reverse_ct = 0;
-        private int dbg_ct = 0;
+        private int dbg_ct = 1;
         private Stack<ai_hit> ai_hits = new Stack<ai_hit>();
         private Stack<ai_hit> ai_dead_hits = new Stack<ai_hit>();
         private bool tried_find_dir_twice = false;
@@ -170,11 +170,15 @@ namespace EECS_448___Project_1
             //check if hit
             if (hitShip != null || check_cell(shotCopy[0], shotCopy[1]) == cell_status.calledHit)
             {
+
                 //add hit
                 getCurrentPlayer().addHit(shotCopy);
 
                 if (getCurrentPlayer() == playerTwo && ai_level > 0)
                 {
+                    if (ai_tracking_dir != -1)
+                        ai_tracked_dist++;
+
                     if (ai_hits.Count()+1 > 1 && ai_tracking_dir == -1)
                         set_ai_tracking_dir(shotCopy[0], shotCopy[1]);
 
@@ -419,6 +423,8 @@ namespace EECS_448___Project_1
 
         private void reset_tracked_ai_hits()
         {
+            Console.WriteLine("Resetting tracked AI hits (" + ai_tracked_dist + ")");
+
             // Revert to origin
             int restore_len = ai_tracked_dist;
             int i = 0;
@@ -434,7 +440,7 @@ namespace EECS_448___Project_1
                 i++;
             }
             origin = ai_hits.Pop();
-            Console.WriteLine("After popping stack: Count = " + ai_hits.Count());
+            Console.WriteLine("After popping tracked AI hits: Count = " + ai_hits.Count());
 
             // i = how many elements we added to the cache
             // restore_len = how many elements we expected
@@ -455,6 +461,7 @@ namespace EECS_448___Project_1
 
         private void prune_ai_hits()
         {
+            Console.WriteLine("Pruning AI hits (" + ai_hits.Count() + ")");
             ai_hit[] cache = new ai_hit[ai_hits.Count()];
             
             int i = 0;
@@ -494,25 +501,25 @@ namespace EECS_448___Project_1
                     // north: y-1
                     case 0:
                         targetSquare[1]--;
-                        ai_tracked_dist++;
+                        //ai_tracked_dist++;
                         Console.WriteLine("Medium-AI: Tracked north");
                         break;
                     // south: y+1 
                     case 1:
                         targetSquare[1]++;
-                        ai_tracked_dist++;
+                        //ai_tracked_dist++;
                         Console.WriteLine("Medium-AI: Tracked south");
                         break;
                     // east: x+1
                     case 2:
                         targetSquare[0]++;
-                        ai_tracked_dist++;
+                        //ai_tracked_dist++;
                         Console.WriteLine("Medium-AI: Tracked east");
                         break;
                     // west: x-1
                     case 3:
                         targetSquare[0]--;
-                        ai_tracked_dist++;
+                        //ai_tracked_dist++;
                         Console.WriteLine("Medium-AI: Tracked west");
                         break;
                 }
@@ -520,7 +527,7 @@ namespace EECS_448___Project_1
                 if (check_cell(targetSquare[0], targetSquare[1]) != cell_status.callable)
                 {
                     Console.WriteLine("Cell " + targetSquare[0] + "," + targetSquare[1] + " is not callable. Reversing tracking direction.");
-                    ai_tracked_dist--;
+                    //ai_tracked_dist--;
 
                     reset_tracked_ai_hits();
                     reverse_ai_tracking_dir();
@@ -631,7 +638,7 @@ namespace EECS_448___Project_1
                     }
                     else
                     {
-                        ai_tracked_dist++;
+                        //ai_tracked_dist++;
                     }
                 }
             }
@@ -681,11 +688,12 @@ namespace EECS_448___Project_1
                     hitgen_easy();
                 } else //if (dbg_ct == 0)
                 {
-                    int[] shot = new int[2];
-                    shot[0] = 0;
-                    shot[1] = 4;
-                    ai_tracked_dist++;
-                    fire(shot);
+                    //int[] shot = new int[2];
+                    //shot[0] = 0;
+                    //shot[1] = 4;
+                    ////ai_tracked_dist++;
+                    //fire(shot);
+                    hitgen_hard();
                     dbg_ct--;
                 }
             }
