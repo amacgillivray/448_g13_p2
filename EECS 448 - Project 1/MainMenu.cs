@@ -51,7 +51,7 @@ namespace EECS_448___Project_1 {
         void credits_FormClosed(object sender, FormClosedEventArgs e)
         {
             credits = null;  //If form is closed make sure reference is set to null
-            Show();
+            Application.Exit();
         }
 
         chooselevelAI choose;
