@@ -17,7 +17,7 @@ Luke McCumber
 2022-03-03 - 5 hours working on fixing orignal teams code and starting the Ai code with Andrew Nhat and Jarrod 
 2022-03-04 - 10 hours working on Ai with Andrew and Nhat
 2022-03-05 - 10 hours working on Ai & special shot addition with Andrew Nhat and Jarrod
-2022-03-05 - ? hours finishing project
+2022-03-06 -  7 hours finishing project
 ```
 Nhat Nguyen
 ```
