@@ -177,7 +177,12 @@ namespace EECS_448___Project_1
                 if (getCurrentPlayer() == playerTwo && ai_level > 0)
                 {
                     if (ai_tracking_dir != -1)
-                        ai_tracked_dist++;
+                    {
+                        if (ai_tracked_dist == 0)
+                            ai_tracked_dist = 2;
+                        else
+                            ai_tracked_dist++;
+                    }
 
                     if (ai_hits.Count()+1 > 1 && ai_tracking_dir == -1)
                         set_ai_tracking_dir(shotCopy[0], shotCopy[1]);
@@ -188,6 +193,8 @@ namespace EECS_448___Project_1
                             shotCopy[1]
                         )
                     );
+
+                    Console.WriteLine("Size of AI_HITS: " + ai_hits.Count());
                 }
 
                 //check if sunk
@@ -325,7 +332,8 @@ namespace EECS_448___Project_1
 
             int i = 0;
             int sz = ai_hits.Count() + ai_dead_hits.Count();
-            
+            int restore = ai_hits.Count();
+
             if (sz == 0)
             {
                 ai_tracking_dir = -1;
@@ -356,6 +364,13 @@ namespace EECS_448___Project_1
             for (i = 0; i < sz; i++)
             {
                 copy = hits[i];
+
+                if (i < restore)
+                    ai_hits.Push(hits[i]);
+                else
+                    ai_dead_hits.Push(hits[i]);
+                
+                
                 if (copy.x == x)
                 {
                     if (copy.y == (y - 1))
@@ -444,10 +459,10 @@ namespace EECS_448___Project_1
 
             // i = how many elements we added to the cache
             // restore_len = how many elements we expected
-            while (restore_len > 0 && i > 0)
+            while (i >= 0)
             {
-                ai_hits.Push(cache[restore_len]);
-                restore_len--;
+                ai_hits.Push(cache[i]);
+                //restore_len--;
                 i--;
             }
             ai_hits.Push(origin);
@@ -501,25 +516,21 @@ namespace EECS_448___Project_1
                     // north: y-1
                     case 0:
                         targetSquare[1]--;
-                        //ai_tracked_dist++;
                         Console.WriteLine("Medium-AI: Tracked north");
                         break;
                     // south: y+1 
                     case 1:
                         targetSquare[1]++;
-                        //ai_tracked_dist++;
                         Console.WriteLine("Medium-AI: Tracked south");
                         break;
                     // east: x+1
                     case 2:
                         targetSquare[0]++;
-                        //ai_tracked_dist++;
                         Console.WriteLine("Medium-AI: Tracked east");
                         break;
                     // west: x-1
                     case 3:
                         targetSquare[0]--;
-                        //ai_tracked_dist++;
                         Console.WriteLine("Medium-AI: Tracked west");
                         break;
                 }
@@ -527,7 +538,6 @@ namespace EECS_448___Project_1
                 if (check_cell(targetSquare[0], targetSquare[1]) != cell_status.callable)
                 {
                     Console.WriteLine("Cell " + targetSquare[0] + "," + targetSquare[1] + " is not callable. Reversing tracking direction.");
-                    //ai_tracked_dist--;
 
                     reset_tracked_ai_hits();
                     reverse_ai_tracking_dir();
@@ -635,10 +645,6 @@ namespace EECS_448___Project_1
                     {
                         i = 0;
                         chosedir = false;
-                    }
-                    else
-                    {
-                        //ai_tracked_dist++;
                     }
                 }
             }
