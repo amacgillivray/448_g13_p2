@@ -344,8 +344,8 @@ namespace EECS_448___Project_1
             ai_hit[] hits = new ai_hit[sz];
 
             // Get all hit cells both dead and live into hits array
-            while (i < sz)
-            {
+            //while (i < sz)
+            //{
                 while (ai_hits.Count() > 0)
                 {
                     hits[i] = ai_hits.Pop();
@@ -356,7 +356,7 @@ namespace EECS_448___Project_1
                     hits[i] = ai_dead_hits.Pop();
                     i++;
                 }
-            }
+            //}
 
             // Check hits for anything adjacent.
             // the first (most recent) hit in an adjacent square will be used 
@@ -369,7 +369,6 @@ namespace EECS_448___Project_1
                     ai_hits.Push(hits[i]);
                 else
                     ai_dead_hits.Push(hits[i]);
-                
                 
                 if (copy.x == x)
                 {
@@ -403,6 +402,16 @@ namespace EECS_448___Project_1
                 }
             }
 
+            if (i < sz)
+            {
+                for (; i < sz; i++)
+                {
+                    if (i < restore)
+                        ai_hits.Push(hits[i]);
+                    else
+                        ai_dead_hits.Push(hits[i]);
+                }
+            }
             if (ai_tracking_dir == -1)
                 Console.WriteLine("Could not find tracking dir.");
         }
@@ -438,34 +447,37 @@ namespace EECS_448___Project_1
 
         private void reset_tracked_ai_hits()
         {
-            Console.WriteLine("Resetting tracked AI hits (" + ai_tracked_dist + ")");
+            //Console.WriteLine("Resetting tracked AI hits (" + ai_tracked_dist + ")");
 
-            // Revert to origin
-            int restore_len = ai_tracked_dist;
-            int i = 0;
-            ai_hit origin;
-            ai_hit[] cache = new ai_hit[ai_hits.Count()];
-            while (ai_tracked_dist > 0 && ai_hits.Count() > 1)
-            {
-                //if (hit_has_valid_moves(ai_hits.Peek()))
-                cache[i] = ai_hits.Pop();
-                //else
-                //    ai_dead_hits.Push(ai_hits.Pop());
-                ai_tracked_dist--;
-                i++;
-            }
-            origin = ai_hits.Pop();
-            Console.WriteLine("After popping tracked AI hits: Count = " + ai_hits.Count());
+            //// Revert to origin
+            //int restore_len = ai_tracked_dist;
+            //int i = 0;
+            //ai_hit origin;
+            //ai_hit[] cache = new ai_hit[ai_hits.Count()];
+            //while (ai_tracked_dist > 0 && ai_hits.Count() > 1)
+            //{
+            //    //if (hit_has_valid_moves(ai_hits.Peek()))
+            //    cache[i] = ai_hits.Pop();
+            //    //else
+            //    //    ai_dead_hits.Push(ai_hits.Pop());
+            //    ai_tracked_dist--;
+            //    i++;
+            //}
+            ////origin = ai_hits.Pop();
+            //Console.WriteLine("After popping tracked AI hits: Count = " + ai_hits.Count());
 
-            // i = how many elements we added to the cache
-            // restore_len = how many elements we expected
-            while (i >= 0)
-            {
-                ai_hits.Push(cache[i]);
-                //restore_len--;
-                i--;
-            }
-            ai_hits.Push(origin);
+            //// i = how many elements we added to the cache
+            //// restore_len = how many elements we expected
+            //while (i >= 0)
+            //{
+            //    ai_hits.Push(cache[i]);
+            //    //restore_len--;
+            //    i--;
+            //}
+            ////ai_hits.Push(origin);
+            ///
+
+            ai_tracking_dir = -1;
 
             // Starting with origin, remove hits until there is a valid move
             while (!hit_has_valid_moves(ai_hits.Peek()))
