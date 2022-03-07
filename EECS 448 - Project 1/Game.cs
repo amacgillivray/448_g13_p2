@@ -210,7 +210,7 @@ namespace EECS_448___Project_1
                     Console.WriteLine("Sank ship of size " + hitShip.Length);
                     
                     // update ai hits for medium ai.
-                    ai_sank_ship(hitShip, shot);
+                    ai_sank_ship(shot);
                 }
 
                 return;
@@ -272,14 +272,17 @@ namespace EECS_448___Project_1
             return cell_status.callable;
         }
 
-        private void ai_sank_ship( int[][] hitShip, int[] shot )
+
+        private void ai_sank_ship(int[] shot)
         {
             // crawl hitShip array, check for matches in stack and pop them
             ai_hit[] cache = new ai_hit[ai_hits.Count()];
             bool[] cache_keep = new bool[ai_hits.Count()];
             int[] targetSquare = new int[2];
-            int i = ai_hits.Count() - 1;
+            // int i = ai_hits.Count() - 1;
             //for (int i = 0; i < ai_hits.Count(); i++)
+            int i = 0;
+            int tmp = ai_hits.Count();
 
             Console.WriteLine("ai_hits count before popping stack: " + ai_hits.Count());
             while (ai_hits.Count() > 0)
@@ -290,13 +293,15 @@ namespace EECS_448___Project_1
                 if (shipHit(targetSquare) == shipHit(shot))
                     cache_keep[i] = false;
                 else
+                {
                     cache_keep[i] = true;
-                i--;
+                }
+                i++;
             }
             Console.WriteLine("ai_hits count after popping stack: " + ai_hits.Count());
 
             //for (i = cache.Length-1; i >= 0; i--)
-            for (i = 0; i < cache.Length; i++)
+            for (i = 0; i < tmp; i++)
             {
                 if (cache_keep[i])
                     ai_hits.Push(cache[i]);
@@ -304,6 +309,7 @@ namespace EECS_448___Project_1
             Console.WriteLine("ai_hits count after restoring stack: " + ai_hits.Count());
             ai_tracking_dir = -1;
         }
+
 
         // Determines whether or not the hit coordinate can still yield any valid orthogonal moves
         private bool hit_has_valid_moves(ai_hit hit)
