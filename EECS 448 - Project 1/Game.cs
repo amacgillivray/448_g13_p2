@@ -45,7 +45,7 @@ namespace EECS_448___Project_1
         private int dbg_ct = 1;
         private Stack<ai_hit> ai_hits = new Stack<ai_hit>();
         private Stack<ai_hit> ai_dead_hits = new Stack<ai_hit>();
-        private bool tried_find_dir_twice = false;
+        //private bool tried_find_dir_twice = false;
         private Random rand = new Random();
         #endregion
 
@@ -404,6 +404,7 @@ namespace EECS_448___Project_1
 
             if (i < sz)
             {
+                i++;
                 for (; i < sz; i++)
                 {
                     if (i < restore)
@@ -449,35 +450,34 @@ namespace EECS_448___Project_1
         {
             //Console.WriteLine("Resetting tracked AI hits (" + ai_tracked_dist + ")");
 
-            //// Revert to origin
-            //int restore_len = ai_tracked_dist;
-            //int i = 0;
-            //ai_hit origin;
-            //ai_hit[] cache = new ai_hit[ai_hits.Count()];
-            //while (ai_tracked_dist > 0 && ai_hits.Count() > 1)
-            //{
-            //    //if (hit_has_valid_moves(ai_hits.Peek()))
-            //    cache[i] = ai_hits.Pop();
-            //    //else
-            //    //    ai_dead_hits.Push(ai_hits.Pop());
-            //    ai_tracked_dist--;
-            //    i++;
-            //}
-            ////origin = ai_hits.Pop();
-            //Console.WriteLine("After popping tracked AI hits: Count = " + ai_hits.Count());
+            // Revert to origin
+            int restore_len = ai_tracked_dist;
+            int i = 0;
+            ai_hit origin;
+            ai_hit[] cache = new ai_hit[ai_hits.Count()];
+            while (ai_tracked_dist > 0 && ai_hits.Count() > 1)
+            {
+                //if (hit_has_valid_moves(ai_hits.Peek()))
+                cache[i] = ai_hits.Pop();
+                //else
+                //    ai_dead_hits.Push(ai_hits.Pop());
+                ai_tracked_dist--;
+                i++;
+            }
+            origin = ai_hits.Pop();
+            Console.WriteLine("After popping tracked AI hits: Count = " + ai_hits.Count());
 
-            //// i = how many elements we added to the cache
-            //// restore_len = how many elements we expected
-            //while (i >= 0)
-            //{
-            //    ai_hits.Push(cache[i]);
-            //    //restore_len--;
-            //    i--;
-            //}
-            ////ai_hits.Push(origin);
-            ///
+            // i = how many elements we added to the cache
+            // restore_len = how many elements we expected
+            while (i >= 0)
+            {
+                ai_hits.Push(cache[i]);
+                //restore_len--;
+                i--;
+            }
+            ai_hits.Push(origin);
 
-            ai_tracking_dir = -1;
+            //ai_tracking_dir = -1;
 
             // Starting with origin, remove hits until there is a valid move
             while (!hit_has_valid_moves(ai_hits.Peek()))
