@@ -71,7 +71,7 @@ namespace EECS_448___Project_1 {
                 int oldWidth = rectangle.Width;
                 rectangle.Width = rectangle.Height;
                 rectangle.Height = oldWidth;
-                if(isRotated && rectangle.Width < rectangle.Height) isRotated = false;
+                if(isRotated) isRotated = false;
                 else isRotated = true;
             }
 
