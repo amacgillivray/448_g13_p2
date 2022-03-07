@@ -42,7 +42,6 @@ namespace EECS_448___Project_1
         private int ai_tracking_dir = -1;
         private int ai_tracked_dist = 0;
         private int ai_reverse_ct = 0;
-        private int dbg_ct = 1;
         private Stack<ai_hit> ai_hits = new Stack<ai_hit>();
         private Stack<ai_hit> ai_dead_hits = new Stack<ai_hit>();
         //private bool tried_find_dir_twice = false;
@@ -588,7 +587,7 @@ namespace EECS_448___Project_1
             targetSquare[0] = last.x;
             targetSquare[1] = last.y;
 
-            int dir = 1; //rng() % 4;
+            int dir = rng() % 4;
             int i = 0;
             bool chosedir = false;
 
@@ -712,20 +711,7 @@ namespace EECS_448___Project_1
             else
             {
                 Console.WriteLine("Medium-AI: ai_hits has " + ai_hits.Count() + " entries; reverting to Easy-AI.");
-                
-                if (dbg_ct == -1)
-                {
-                    hitgen_easy();
-                } else //if (dbg_ct == 0)
-                {
-                    //int[] shot = new int[2];
-                    //shot[0] = 0;
-                    //shot[1] = 4;
-                    ////ai_tracked_dist++;
-                    //fire(shot);
-                    hitgen_hard();
-                    dbg_ct--;
-                }
+                hitgen_easy();
             }
             playerTurn = 1;
         }
