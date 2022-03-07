@@ -44,6 +44,8 @@ namespace EECS_448___Project_1
         private int ai_reverse_ct = 0;
         private int dbg_ct = 0;
         private Stack<ai_hit> ai_hits = new Stack<ai_hit>();
+        private Stack<ai_hit> ai_dead_hits = new Stack<ai_hit>();
+        private bool tried_find_dir_twice = false;
         private Random rand = new Random();
         #endregion
 
@@ -165,8 +167,6 @@ namespace EECS_448___Project_1
             shotCopy[0] = shot[0];
             shotCopy[1] = shot[1];
 
-            ai_hit copy;
-
             //check if hit
             if (hitShip != null)
             {
@@ -175,72 +175,8 @@ namespace EECS_448___Project_1
 
                 if (getCurrentPlayer() == playerTwo && ai_level > 0)
                 {
-                    int x = shotCopy[0];
-                    int y = shotCopy[1];
-
-                    if (ai_hits.Count() > 0 && ai_tracking_dir == -1)
-                    {
-                        ai_hit[] hits = new ai_hit[ai_hits.Count()];
-                        int sz = ai_hits.Count();
-                        int i = 0;
-
-                        //copy = ai_hits.Peek();
-                        while (i < sz)
-                        {
-                            hits[i] = ai_hits.Pop();
-                            i++;
-                        }
-
-                        // Check hits for anything adjacent
-                        // the first (most recent) hit in an adjacent square will be used 
-                        // to determine the direction
-                        for (i = 0; i < sz; i++)
-                        {
-                            copy = hits[i];
-                            if (copy.x == x)
-                            {
-                                if (copy.y == (y - 1))
-                                {
-                                    Console.WriteLine("AI will now track South (1).");
-                                    ai_tracking_dir = 1;
-                                    break;
-                                }
-                                else if (copy.y == (y + 1))
-                                {
-                                    Console.WriteLine("AI will now track North (0).");
-                                    ai_tracking_dir = 0;
-                                    break;
-                                }
-                            }
-                            else if (copy.y == y)
-                            {
-                                if (copy.x == (x - 1))
-                                {
-                                    Console.WriteLine("AI will now track East (2).");
-                                    ai_tracking_dir = 2;
-                                    break;
-                                }
-                                else if (copy.x == (x + 1))
-                                {
-                                    Console.WriteLine("AI will now track West (3).");
-                                    ai_tracking_dir = 0;
-                                    break;
-                                }
-                            }
-                        }
-
-                        if (ai_tracking_dir == -1)
-                        {
-                            Console.WriteLine("Did not set tracking direction");
-                        }
-
-                        // Push the hits back onto the stack,
-                        // starting with the oldest
-                        for (i = sz-1; i >= 0; i--)
-                        {
-                            ai_hits.Push(hits[i]);
-                        }
-                    }
+                    if (ai_hits.Count > 0 && ai_tracking_dir == -1)
+                        set_ai_tracking_dir(shotCopy[0], shotCopy[1]);
 
                     ai_hits.Push(
                         new ai_hit(
@@ -254,41 +190,16 @@ namespace EECS_448___Project_1
                 if (isSunk(shot, hitShip))
                 {
                     //show message box of what you or the AI sank
-                    //if (ai_level == 0 || playerTurn == 1 )
                     MessageBox.Show(whichShip(hitShip.Length));
-                    this.getCurrentPlayer().addSunk(); //increment
+
+                    // increment towards win
+                    getCurrentPlayer().addSunk();
+                    
+                    // console log
                     Console.WriteLine("Sank ship of size " + hitShip.Length);
-
-                    // crawl hitShip array, check for matches in stack and pop them
-                    ai_hit[] cache = new ai_hit[ai_hits.Count()];
-                    bool[] cache_keep = new bool[ai_hits.Count()];
-                    int[] targetSquare = new int[2];
-                    int i = ai_hits.Count() - 1;
-                    //for (int i = 0; i < ai_hits.Count(); i++)
-
-                    Console.WriteLine("ai_hits count before popping stack: " + ai_hits.Count());
-                    while (ai_hits.Count() > 0)
-                    {
-                        cache[i] = ai_hits.Pop();
-                        // may be backwards
-                        targetSquare[0] = cache[i].x;
-                        targetSquare[1] = cache[i].y;
-                        if (shipHit(targetSquare) == shipHit(shot))
-                            cache_keep[i] = false;
-                        else
-                            cache_keep[i] = true;
-                        i--;
-                    }
-                    Console.WriteLine("ai_hits count after popping stack: " + ai_hits.Count());
-
-                    //for (i = cache.Length-1; i >= 0; i--)
-                    for (i = 0; i < cache.Length; i++)
-                    {
-                        if (cache_keep[i])
-                            ai_hits.Push(cache[i]);
-                    }
-                    Console.WriteLine("ai_hits count after restoring stack: " + ai_hits.Count());
-                    ai_tracking_dir = -1;
+                    
+                    // update ai hits for medium ai.
+                    ai_sank_ship(hitShip, shot);
                 }
             }
             else
@@ -324,32 +235,10 @@ namespace EECS_448___Project_1
                             restore_len--;
                         }
                         ai_hits.Push(origin);
-                        if (ai_reverse_ct == 0)
-                        {
-                            switch (ai_tracking_dir)
-                            {
-                                case 0:
-                                    ai_tracking_dir = 1;
-                                    break;
-                                case 1:
-                                    ai_tracking_dir = 0;
-                                    break;
-                                case 2:
-                                    ai_tracking_dir = 3;
-                                    break;
-                                case 3:
-                                    ai_tracking_dir = 2;
-                                    break;
-                            }
-                            ai_reverse_ct++;
-                        } else
-                        {
-                            ai_reverse_ct = 0;
-                            ai_tracking_dir = -1;
-                        }
+                        //reset_ai_hits();
+                        reverse_ai_tracking_dir();
                         Console.WriteLine("ai_hits count after removing hits from stack: " + ai_hits.Count());
                         Console.WriteLine("AI is now tracking in Dir " + ai_tracking_dir);
-                        ai_tracked_dist = 0;
                     }
                 }
             }
@@ -381,9 +270,41 @@ namespace EECS_448___Project_1
                         return cell_status.calledMiss;
                     }
                 }
-
-                return cell_status.callable;
             }
+            return cell_status.callable;
+        }
+
+        private void ai_sank_ship( int[][] hitShip, int[] shot )
+        {
+            // crawl hitShip array, check for matches in stack and pop them
+            ai_hit[] cache = new ai_hit[ai_hits.Count()];
+            bool[] cache_keep = new bool[ai_hits.Count()];
+            int[] targetSquare = new int[2];
+            int i = ai_hits.Count() - 1;
+            //for (int i = 0; i < ai_hits.Count(); i++)
+
+            Console.WriteLine("ai_hits count before popping stack: " + ai_hits.Count());
+            while (ai_hits.Count() > 0)
+            {
+                cache[i] = ai_hits.Pop();
+                targetSquare[0] = cache[i].x;
+                targetSquare[1] = cache[i].y;
+                if (shipHit(targetSquare) == shipHit(shot))
+                    cache_keep[i] = false;
+                else
+                    cache_keep[i] = true;
+                i--;
+            }
+            Console.WriteLine("ai_hits count after popping stack: " + ai_hits.Count());
+
+            //for (i = cache.Length-1; i >= 0; i--)
+            for (i = 0; i < cache.Length; i++)
+            {
+                if (cache_keep[i])
+                    ai_hits.Push(cache[i]);
+            }
+            Console.WriteLine("ai_hits count after restoring stack: " + ai_hits.Count());
+            ai_tracking_dir = -1;
         }
 
         // Determines whether or not the hit coordinate can still yield any valid orthogonal moves
@@ -408,60 +329,142 @@ namespace EECS_448___Project_1
             return false;
         }
 
-        private string whichShip(int squares) {
-            string ship = "";
-            switch(squares) {
-                case 1:
-                    ship = "Patrol Boat";
-                    break;
-                case 2:
-                    ship = "Destroyer";
-                    break;
-                case 3:
-                    ship = "Cruiser";
-                    break;
-                case 4:
-                    ship = "Battleship";
-                    break;
-                case 5:
-                    ship = "Aircraft Carrier";
-                break;
-			}
+        private void set_ai_tracking_dir( int x, int y )
+        {   
 
-            if (ai_level == 0 || playerTurn == 1) 
-                return "You sank " + getCurrentOpponent().getName() + "'s " + ship + "!";
-            else
-                return "Your " + ship + " was destroyed!";
-        }
-
-        private int rng()
-        {
-            return rand.Next(10);
-        }
-
-        public void hitgen_easy()
-        {
-            playerTurn = 2;
-            int[] targetSquare = new int[2];
-
-            bool targeted = false;
-
-            while (!targeted)
+            int i = 0;
+            int sz = ai_hits.Count() + ai_dead_hits.Count();
+            
+            if (sz == 0)
             {
-                targeted = true;
-                targetSquare[0] = rng();
-                targetSquare[1] = rng();
-
-                if (check_cell(targetSquare[0], targetSquare[1]) != cell_status.callable)
-                    targeted = false;
+                ai_tracking_dir = -1;
+                return;
             }
-            Console.WriteLine("Easy-AI Firing at X: " + targetSquare[0] + "; Y: " + targetSquare[1]);
-            fire(targetSquare);
-            playerTurn = 1;
+            
+            ai_hit copy;
+            ai_hit[] hits = new ai_hit[sz];
+
+            // Get all hit cells both dead and live into hits array
+            while (i < sz)
+            {
+                while (ai_hits.Count() > 0)
+                {
+                    hits[i] = ai_hits.Pop();
+                    i++;
+                }
+                while (ai_dead_hits.Count() > 0)
+                {
+                    hits[i] = ai_dead_hits.Pop();
+                    i++;
+                }
+            }
+
+            // Check hits for anything adjacent.
+            // the first (most recent) hit in an adjacent square will be used 
+            // to determine the direction.
+            for (i = 0; i < sz; i++)
+            {
+                copy = hits[i];
+                if (copy.x == x)
+                {
+                    if (copy.y == (y - 1))
+                    {
+                        Console.WriteLine("AI will now track South (1).");
+                        ai_tracking_dir = 1;
+                        break;
+                    }
+                    else if (copy.y == (y + 1))
+                    {
+                        Console.WriteLine("AI will now track North (0).");
+                        ai_tracking_dir = 0;
+                        break;
+                    }
+                }
+                else if (copy.y == y)
+                {
+                    if (copy.x == (x - 1))
+                    {
+                        Console.WriteLine("AI will now track East (2).");
+                        ai_tracking_dir = 2;
+                        break;
+                    }
+                    else if (copy.x == (x + 1))
+                    {
+                        Console.WriteLine("AI will now track West (3).");
+                        ai_tracking_dir = 3;
+                        break;
+                    }
+                }
+            }
+
+            if (ai_tracking_dir == -1)
+                Console.WriteLine("Could not find tracking dir.");
+        }
+
+        private void reverse_ai_tracking_dir()
+        {
+            if (ai_reverse_ct == 0 && ai_tracking_dir != -1)
+            {
+                switch (ai_tracking_dir)
+                {
+                    case 0:
+                        ai_tracking_dir = 1;
+                        break;
+                    case 1:
+                        ai_tracking_dir = 0;
+                        break;
+                    case 2:
+                        ai_tracking_dir = 3;
+                        break;
+                    case 3:
+                        ai_tracking_dir = 2;
+                        break;
+                }
+                ai_reverse_ct++;
+            }
+            else
+            {
+                ai_reverse_ct = 0;
+                ai_tracking_dir = -1;
+                ai_tracked_dist = 0;
+            }
+        }
+
+        private void reset_ai_hits()
+        {
+            // Revert to origin
+            int restore_len = ai_tracked_dist;
+            int i = 0;
+            ai_hit origin;
+            ai_hit[] cache = new ai_hit[ai_hits.Count()];
+            while (ai_tracked_dist > 0 && ai_hits.Count() > 1)
+            {
+                //if (hit_has_valid_moves(ai_hits.Peek()))
+                cache[i] = ai_hits.Pop();
+                //else
+                //    ai_dead_hits.Push(ai_hits.Pop());
+                ai_tracked_dist--;
+            }
+            origin = ai_hits.Pop();
+            while (restore_len > 0)
+            {
+                ai_hits.Push(cache[restore_len]);
+                restore_len--;
+            }
+            ai_hits.Push(origin);
+
+            // Starting with origin, remove hits until there is a valid move
+            while (!hit_has_valid_moves(ai_hits.Peek()))
+            {
+                ai_dead_hits.Push(ai_hits.Pop());
+            }
         }
 
         public void hitgen_medium()
         {
+            Console.WriteLine();
+            Console.WriteLine("AI TURN");
+
             playerTurn = 2;
             if (ai_hits.Count() > 0)
             {
@@ -510,93 +513,13 @@ namespace EECS_448___Project_1
                         if (check_cell(targetSquare[0], targetSquare[1]) != cell_status.callable)
                         {
                             Console.WriteLine("Cell " + targetSquare[0] + "," + targetSquare[1] + " is not callable. Reversing tracking direction.");
+                            ai_tracked_dist--;
 
-                            if (ai_reverse_ct == 0)
-                            {
-                                ai_tracked_dist--;
+                            reset_ai_hits();
+                            reverse_ai_tracking_dir();
+                            hitgen_medium();
 
-                                // Revert to origin
-                                int restore_len = ai_tracked_dist;
-                                int i = 0;
-                                ai_hit origin;
-                                ai_hit[] cache = new ai_hit[ai_hits.Count()];
-                                while (ai_tracked_dist > 0 && ai_hits.Count() > 1)
-                                {
-                                    cache[i] = ai_hits.Pop();
-                                    ai_tracked_dist--;
-                                }
-                                origin = ai_hits.Pop();
-                                while (restore_len > 0)
-                                {
-                                    ai_hits.Push(cache[restore_len]);
-                                    restore_len--;
-                                }
-                                ai_hits.Push(origin);
-
-                                // Starting with origin, remove hits until there is a valid move
-                                while (!hit_has_valid_moves(ai_hits.Peek()))
-                                {
-                                    ai_hits.Pop();
-                                }
-
-
-                                switch (ai_tracking_dir)
-                                {
-                                    case 0:
-                                        ai_tracking_dir = 1;
-                                        break;
-                                    case 1:
-                                        ai_tracking_dir = 0;
-                                        break;
-                                    case 2:
-                                        ai_tracking_dir = 3;
-                                        break;
-                                    case 3:
-                                        ai_tracking_dir = 2;
-                                        break;
-                                }
-
-                                ai_reverse_ct++;
-                                hitgen_medium();
-
-                                return;
-                            }
-                            else
-                            {
-                                ai_tracking_dir = -1;
-                                //ai_tracked_dist = 0;
-                                ai_tracked_dist--;
-
-                                // Revert to origin
-                                int restore_len = ai_tracked_dist;
-                                int i = 0;
-                                ai_hit origin;
-                                ai_hit[] cache = new ai_hit[ai_hits.Count()];
-                                while (ai_tracked_dist > 0 && ai_hits.Count() > 1)
-                                {
-                                    cache[i] = ai_hits.Pop();
-                                    ai_tracked_dist--;
-                                }
-                                origin = ai_hits.Pop();
-                                while (restore_len > 0)
-                                {
-                                    ai_hits.Push(cache[restore_len]);
-                                    restore_len--;
-                                }
-                                ai_hits.Push(origin);
-                                
-                                // Starting with origin, remove hits until there is a valid move
-                                while (!hit_has_valid_moves(ai_hits.Peek()))
-                                {
-                                    ai_hits.Pop();
-                                }
-
-                                ai_reverse_ct = 0;
-                                Console.WriteLine("Move " + targetSquare[0] + "," + targetSquare[1] + " is invalid; skipping.");
-                                //ai_hits.Pop();
-                                hitgen_medium();
-                                return;
-                            }
+                            return;
                         } else
                         {
                             can_fire = true;
@@ -606,7 +529,7 @@ namespace EECS_448___Project_1
                 }
                 else
                 {
-                    int dir = rng() % 4;
+                    int dir =  rng() % 4;
                     int i = 0;
                     bool chosedir = false;
 
@@ -697,15 +620,16 @@ namespace EECS_448___Project_1
                     if (!chosedir)
                     {
                         Console.WriteLine("Failed to choose direction in hitgen medium");
-                        ai_hits.Pop(); // No valid moves are available from the current cell
+                        reset_ai_hits();
                         hitgen_medium();
                         return;
                     }
                 }
 
+                Console.WriteLine("Medium-AI firing at X: " + targetSquare[0] + "; Y: " + targetSquare[1]);
                 fire(targetSquare);
                 playerTurn = 1;
-                Console.WriteLine("Medium-AI firing at X: " + targetSquare[0] + "; Y: " + targetSquare[1]);
+                return;
             }
             else
             {
@@ -756,6 +680,60 @@ namespace EECS_448___Project_1
                 }
             }
             playerTurn = 1;
+        }
+
+        public void hitgen_easy()
+        {
+            playerTurn = 2;
+            int[] targetSquare = new int[2];
+
+            bool targeted = false;
+
+            while (!targeted)
+            {
+                targeted = true;
+                targetSquare[0] = rng();
+                targetSquare[1] = rng();
+
+                if (check_cell(targetSquare[0], targetSquare[1]) != cell_status.callable)
+                    targeted = false;
+            }
+            Console.WriteLine("Easy-AI Firing at X: " + targetSquare[0] + "; Y: " + targetSquare[1]);
+            fire(targetSquare);
+            playerTurn = 1;
+        }
+
+        private string whichShip(int squares)
+        {
+            string ship = "";
+            switch (squares)
+            {
+                case 1:
+                    ship = "Patrol Boat";
+                    break;
+                case 2:
+                    ship = "Destroyer";
+                    break;
+                case 3:
+                    ship = "Cruiser";
+                    break;
+                case 4:
+                    ship = "Battleship";
+                    break;
+                case 5:
+                    ship = "Aircraft Carrier";
+                    break;
+            }
+
+            if (ai_level == 0 || playerTurn == 1)
+                return "You sank " + getCurrentOpponent().getName() + "'s " + ship + "!";
+            else
+                return "Your " + ship + " was destroyed!";
+        }
+
+        private int rng()
+        {
+            return rand.Next(10);
         }
 
 
