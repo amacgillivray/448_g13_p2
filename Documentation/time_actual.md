@@ -1,6 +1,8 @@
 Actual Time
 ===========
 
+**Total:** 141
+
 Andrew MacGillivray
 ```
 2022-02-23 - 1 hour examining group 3's code with Luke
@@ -8,7 +10,9 @@ Andrew MacGillivray
 2022-03-03 - 5 hours working on fixing orignal teams code and starting the Ai code with Luke Nhat and Jarrod
 2022-03-04 - 10 hours working on Ai with Luke and Nhat
 2022-03-05 - 10 hours working on Ai & special shot addition with Luke Nhat and Jarrod 
-2022-03-05 - ? hours finishing project
+2022-03-05 - 10 hours finishing project
+
+Total:       37
 ```
 
 Luke McCumber
@@ -18,6 +22,8 @@ Luke McCumber
 2022-03-04 - 10 hours working on Ai with Andrew and Nhat
 2022-03-05 - 10 hours working on Ai & special shot addition with Andrew Nhat and Jarrod
 2022-03-06 -  7 hours finishing project
+
+Total:       33
 ```
 Nhat Nguyen
 ```
@@ -25,8 +31,9 @@ Nhat Nguyen
 2022-03-03 - 1 hour Ai screen for each level difficulty
 2022-03-04 - 10 hours working on Ai with Luke and Andrew
 2022-03-05 - 10 hours working on Ai & special shot addition with Luke Andrew and Jarrod
-2022-03-05 - ? hours finishing project
+2022-03-05 - 10 hours finishing project
 
+Total:       36
 ```
 
 Jarrod Grothusen
@@ -35,10 +42,14 @@ Jarrod Grothusen
 2022-03-03 - 3 hours working on Ai with Luke Nhat and Andrew
 2022-03-04 - 5 hours working on Ai & special shot addition with Luke Nhat and Andrew
 2022-03-05 - 10 hours
-2022-03-06 - ? hours finishing project
+2022-03-06 - 10 hours finishing project
+
+Total:       33
 ```
 
 Brian
 ```
-2022-03-06 - ??? 
+2022-03-06 - 2
+
+Total:       2
 ```
