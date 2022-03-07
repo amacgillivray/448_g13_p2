@@ -475,14 +475,16 @@ namespace EECS_448___Project_1
 
             // i = how many elements we added to the cache
             // restore_len = how many elements we expected
-            while (i >= 0)
+            //while (i >= 0)
+            //{
+            for (int e = 0; e < i; e++)
             {
-                ai_hits.Push(cache[i]);
+                ai_hits.Push(cache[e]);
                 //restore_len--;
-                i--;
+                //i--;
             }
             ai_hits.Push(origin);
-
+            Console.WriteLine("After restoring tracked AI hits: Count = " + ai_hits.Count());
             //ai_tracking_dir = -1;
 
             // Starting with origin, remove hits until there is a valid move
@@ -490,6 +492,7 @@ namespace EECS_448___Project_1
             {
                 ai_dead_hits.Push(ai_hits.Pop());
             }
+            Console.WriteLine("After removing dead AI hits: Count = " + ai_hits.Count());
         }
 
         private void prune_ai_hits()
