@@ -264,7 +264,7 @@ namespace EECS_448___Project_1 {
                 win1 = new AIwin();
                 win1.Show();                 //show win screen
                 win1.FormClosed += AIwin_FormClosed; //add an event handler for when form is closed
-                this.Close();
+                this.Hide();
             }
             //draw grid lines
             drawGridLines(sender, e, oppBoardPictureBox);
@@ -327,7 +327,7 @@ namespace EECS_448___Project_1 {
                     win2 = new YouWin();
                     win2.Show();                 //show win screen
                     win2.FormClosed += YouWin_FormClosed; //add an event handler for when form is closed
-                    this.Close();
+                    this.Hide();
                 } else {
                     if (game.ai_level == 0) // for vs player
                     { 

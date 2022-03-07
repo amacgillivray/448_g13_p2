@@ -339,7 +339,7 @@ namespace EECS_448___Project_1 {
                         game.getPlayerTwo().addShip(saveGameCoords(ship2.getGameCoordinates()));
                     }
                     GameForm gameForm = new GameForm(ref game);
-                    gameForm.FormClosed += GameForm_FormClosed;
+                    gameForm.FormClosed += GameForm_FormClosed; //add an event handler for when form is closed
                     gameForm.Show(); // show the game form
                     this.Close();    // close this form
                 }
@@ -349,7 +349,7 @@ namespace EECS_448___Project_1 {
                     game.getPlayerTwo().addShip(saveGameCoords(ship.getGameCoordinates()));
                 }
                 gameForm = new GameForm(ref game);
-                gameForm.FormClosed += GameForm_FormClosed;
+                gameForm.FormClosed += GameForm_FormClosed; //add an event handler for when form is closed
                 gameForm.Show(); //show the game form
                 this.Close();
 
@@ -359,7 +359,7 @@ namespace EECS_448___Project_1 {
         void GameForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             gameForm = null;  //If form is closed make sure reference is set to null
-            Application.Exit();
+            Application.Exit(); //exit the application
         }
 
         //key down event
