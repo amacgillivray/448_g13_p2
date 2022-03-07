@@ -249,7 +249,9 @@ namespace EECS_448___Project_1 {
 
 
         }
-        
+
+        GameForm gameForm;
+
         //reset button click
         private void button1_Click(object sender, EventArgs e)
         {
@@ -337,6 +339,7 @@ namespace EECS_448___Project_1 {
                         game.getPlayerTwo().addShip(saveGameCoords(ship2.getGameCoordinates()));
                     }
                     GameForm gameForm = new GameForm(ref game);
+                    gameForm.FormClosed += GameForm_FormClosed;
                     gameForm.Show(); // show the game form
                     this.Close();    // close this form
                 }
@@ -345,11 +348,18 @@ namespace EECS_448___Project_1 {
                 foreach(Ship ship in ships) {
                     game.getPlayerTwo().addShip(saveGameCoords(ship.getGameCoordinates()));
                 }
-                GameForm gameForm = new GameForm(ref game);
+                gameForm = new GameForm(ref game);
+                gameForm.FormClosed += GameForm_FormClosed;
                 gameForm.Show(); //show the game form
                 this.Close();
 
             }
+        }
+
+        void GameForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            gameForm = null;  //If form is closed make sure reference is set to null
+            Application.Exit();
         }
 
         //key down event
