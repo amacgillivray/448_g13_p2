@@ -443,6 +443,7 @@ namespace EECS_448___Project_1
                         break;
                 }
                 ai_reverse_ct++;
+                ai_tracked_dist = 0;
             }
             else
             {
@@ -479,6 +480,8 @@ namespace EECS_448___Project_1
             //{
             for (int e = 0; e < i; e++)
             {
+                if (e == restore_len)
+                    break;
                 ai_hits.Push(cache[e]);
                 //restore_len--;
                 //i--;
